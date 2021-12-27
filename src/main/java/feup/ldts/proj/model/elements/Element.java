@@ -12,7 +12,7 @@ public abstract class Element {
         return position;
     }
 
-    public void setPosition() {
+    public void setPosition(Position position) {
         this.position = position;
     }
 }
