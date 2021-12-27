@@ -1,3 +1,4 @@
+import feup.ldts.proj.model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,6 @@ public class PositionTest {
     @BeforeEach
     public void setUpPosition() {
         position = new Position(5, 4);
-
     }
 
     @Test

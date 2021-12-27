@@ -1,3 +1,5 @@
+package feup.ldts.proj;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyType;
