@@ -11,27 +11,44 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.TerminalFactory;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.util.Scanner;
 
 public class Game {
-    List<List<Character>> roomLayout;
+    List<String> roomLayout;
 
     public Game() {
-        roomLayout = new ArrayList<>();
+        roomLayout = new ArrayList<String>();
         //TerminalSize terminalSize = new TerminalSize(20, 20);
         //DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
     }
 
-    public void loadRoom(int roomNum, int depth) {
-        File file = new File("depth" + depth, "room" + roomNum);
+    public void loadRoom(int roomNum, int depthNum) throws URISyntaxException {
+        String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
+        URL resource = getClass().getClassLoader().getResource(roomPath);
+        File roomLayoutFile = new File(resource.toURI());
+
+        try {
+            Scanner fileReader = new Scanner(roomLayoutFile);
+            while (fileReader.hasNextLine()) {
+                String roomRow = fileReader.nextLine();
+                System.out.println(roomRow); //for debugging purposes
+                roomLayout.add(roomRow);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+            e.printStackTrace();
+        }
     }
 
-    public List<List<Character>> getRoomLayout() {
+    public List<String> getRoomLayout() {
         return roomLayout;
     }
-
 
 }
