@@ -8,48 +8,30 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.terminal.TerminalFactory;
+
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
 
 public class Game {
-    Screen screen;
-    private int x = 10;
-    private int y = 10;
+    List<List<Character>> roomLayout;
 
-    public Game() throws IOException {
-        TerminalSize terminalSize = new TerminalSize(40, 20);
-        DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
-        Terminal terminal = terminalFactory.createTerminal();
-        screen = new TerminalScreen(terminal);
-
-        screen.setCursorPosition(null);
-        screen.startScreen();
-        screen.doResizeIfNecessary();
+    public Game() {
+        roomLayout = new ArrayList<>();
+        //TerminalSize terminalSize = new TerminalSize(20, 20);
+        //DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
     }
 
-    private void draw() throws IOException {
-        screen.clear();
-        screen.setCharacter(x, y, TextCharacter.fromCharacter('X')[0]);
-        screen.refresh();
+    public void loadRoom(int roomNum, int depth) {
+        File file = new File("depth" + depth, "room" + roomNum);
     }
 
-    public void run() throws IOException {
-        while (true) {
-            draw();
-            KeyStroke key = screen.readInput();
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q' || key.getKeyType() == KeyType.EOF) {
-                break;
-            } else {
-                processKey(key);
-            }
-        }
-        screen.close();
+    public List<List<Character>> getRoomLayout() {
+        return roomLayout;
     }
 
-    private void processKey(KeyStroke key) {
-        if (key.getKeyType() == KeyType.ArrowUp) y--;
-        else if (key.getKeyType() == KeyType.ArrowDown) y++;
-        else if (key.getKeyType() == KeyType.ArrowLeft) x--;
-        else if (key.getKeyType() == KeyType.ArrowRight) x++;
-    }
+
 }
