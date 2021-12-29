@@ -1,6 +1,6 @@
 package feup.ldts.proj.model.elements;
 
-public abstract class Monster extends Element {
+public class Monster extends Element {
     final int baseHP = 5;
     int HP;
 
