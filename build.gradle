@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainClass.set("Application")
+    mainClass.set("feup.ldts.proj.model.Application")
 }
 
 group 'com.pedroramalho.ldts'

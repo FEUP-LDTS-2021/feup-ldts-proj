@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="GameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-28T22:21:03" hostname="ramalhocas" time="0.018">
+<testsuite name="GameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-29T00:00:47" hostname="ramalhocas" time="0.012">
   <properties/>
-  <testcase name="loadRoomTest()" classname="GameTest" time="0.018"/>
+  <testcase name="loadRoomTest()" classname="GameTest" time="0.012"/>
   <system-out><![CDATA[####################
 #     #  ######    #
 #             #    #

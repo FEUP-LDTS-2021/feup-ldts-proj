@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\feup-proj-ldts-1.0-SNAPSHOT.jar;%APP_HOME%\lib\lant
 
 
 @rem Execute feup-proj-ldts
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FEUP_PROJ_LDTS_OPTS%  -classpath "%CLASSPATH%" Application %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FEUP_PROJ_LDTS_OPTS%  -classpath "%CLASSPATH%" feup.ldts.proj.model.Application %*
 
 :end
 @rem End local scope for the variables with windows NT shell

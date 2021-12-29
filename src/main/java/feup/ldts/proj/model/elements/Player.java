@@ -1,7 +1,15 @@
 package feup.ldts.proj.model.elements;
 
+import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
+
+import java.io.IOException;
 
 public class Player extends Element {
     private int hp;
@@ -30,22 +38,30 @@ public class Player extends Element {
     }
 
     public void movePlayerLeft() {
-
+        movePlayer(position.getLeft());
     }
 
     public void movePlayerRight() {
-
+        movePlayer(position.getRight());
     }
 
     public void movePlayerUp() {
-
+        movePlayer(position.getUp());
     }
 
     public void movePlayerDown() {
-
+        movePlayer(position.getDown());
     }
 
     public void movePlayer(Position position) {
+        setPosition(position);
+    }
 
+    public void draw(Screen screen) throws IOException {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setForegroundColor(TextColor.Factory.fromString("#017727"));
+        graphics.enableModifiers(SGR.BOLD);
+        graphics.putString(new TerminalPosition(position.getX(), position.getY()), "X");
+        screen.refresh();
     }
 }

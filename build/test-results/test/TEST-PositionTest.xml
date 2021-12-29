@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PositionTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-12-28T22:21:03" hostname="ramalhocas" time="0.02">
+<testsuite name="PositionTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-12-29T00:00:46" hostname="ramalhocas" time="0.019">
   <properties/>
-  <testcase name="getRightTest()" classname="PositionTest" time="0.015"/>
+  <testcase name="getRightTest()" classname="PositionTest" time="0.014"/>
   <testcase name="getDownTest()" classname="PositionTest" time="0.0"/>
   <testcase name="getLeftTest()" classname="PositionTest" time="0.0"/>
-  <testcase name="getUpTest()" classname="PositionTest" time="0.001"/>
-  <testcase name="getXTest()" classname="PositionTest" time="0.001"/>
+  <testcase name="getUpTest()" classname="PositionTest" time="0.0"/>
+  <testcase name="getXTest()" classname="PositionTest" time="0.0"/>
   <testcase name="getYTest()" classname="PositionTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
