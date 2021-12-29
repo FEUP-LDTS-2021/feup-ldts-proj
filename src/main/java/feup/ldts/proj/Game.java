@@ -12,10 +12,15 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.TerminalFactory;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import feup.ldts.proj.model.elements.Player;
 import org.w3c.dom.Text;
 
 
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,11 +34,35 @@ public class Game {
     List<String> roomLayout;
     Screen screen;
     Player player;
+    private final int NUM_ROWS = 20;
+    private final int NUM_COLS = 20;
 
     public Game() {
         roomLayout = new ArrayList<String>();
         try {
-            Terminal terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(20, 20)).createTerminal();
+            URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
+            File fontFile = new File(resource.toURI());
+            Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(font);
+
+            DefaultTerminalFactory factory = new DefaultTerminalFactory();
+
+            Font loadedFont = font.deriveFont(Font.PLAIN, 25);
+            AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
+            factory.setTerminalEmulatorFontConfiguration(fontConfig);
+            factory.setForceAWTOverSwing(true);
+            factory.setInitialTerminalSize(new TerminalSize(NUM_COLS, NUM_ROWS));
+
+            Terminal terminal = factory.createTerminal();
+            ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    e.getWindow().dispose();
+                }
+            });
+
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
@@ -42,10 +71,14 @@ public class Game {
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
         }
     }
 
-    public void loadRoom(int roomNum, int depthNum) throws URISyntaxException {
+    public void loadRoom(int roomNum, int depthNum) throws URISyntaxException, IOException {
         String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
         URL resource = getClass().getClassLoader().getResource(roomPath);
         File roomLayoutFile = new File(resource.toURI());
@@ -61,13 +94,27 @@ public class Game {
             System.out.println("File not found!");
             e.printStackTrace();
         }
+
+        screen.clear();
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#003366"));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(NUM_COLS, NUM_ROWS), ' ');
+        screen.refresh();
+        for (int i = 0; i < NUM_ROWS; i++) {
+            for (int j = 0; j < NUM_COLS; j++) {
+                if (roomLayout.get(i).charAt(j) != ' ') {
+                    screen.setCharacter(j, i, TextCharacter.fromCharacter(roomLayout.get(i).charAt(j))[0]);
+                }
+            }
+        }
     }
 
     public List<String> getRoomLayout() {
         return roomLayout;
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, URISyntaxException {
+        loadRoom(1, 0);
         while (true) {
             draw();
             KeyStroke key = screen.readInput();
@@ -78,10 +125,6 @@ public class Game {
     }
 
     private void draw() throws IOException {
-        screen.clear();
-        screen.newTextGraphics().setBackgroundColor(TextColor.Factory.fromString("#C9F4DA"));
-        screen.newTextGraphics().fillRectangle(new TerminalPosition(0, 0), new TerminalSize(20, 20), ' ');
-        screen.refresh();
         player.draw(screen);
     }
 

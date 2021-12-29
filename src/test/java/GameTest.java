@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class GameTest {
     }
 
     @Test
-    public void loadRoomTest() throws URISyntaxException {
+    public void loadRoomTest() throws URISyntaxException, IOException {
         game.loadRoom(roomNum, depth);
         Assertions.assertEquals(numRows, game.getRoomLayout().size()); //the roomLayout has numRows rows
         for (int i = 0; i < 20; i++)
