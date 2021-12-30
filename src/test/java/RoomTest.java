@@ -17,6 +17,7 @@ public class RoomTest {
     public void setUp() throws FileNotFoundException, URISyntaxException {
         depthNum = 0;
         roomNum = 1;
+        player = new Player(10, 10);
         room = new Room(depthNum, roomNum, player);
     }
 
@@ -27,7 +28,7 @@ public class RoomTest {
 
     @Test
     public void numWallsTest() {
-        Assertions.assertEquals(164, room.getWalls().size()); //The number of walls is correct
+        Assertions.assertEquals(165, room.getWalls().size()); //The number of walls is correct
     }
 
     @Test

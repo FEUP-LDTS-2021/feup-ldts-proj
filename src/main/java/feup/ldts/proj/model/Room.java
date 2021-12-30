@@ -45,8 +45,13 @@ public class Room {
     }
 
     private List<String> readRoomFile(File filePath) throws FileNotFoundException {
+        List<String> fileContent = new ArrayList<>();
+        Scanner fileReader = new Scanner(filePath);
 
-        return null;
+        while (fileReader.hasNextLine())
+            fileContent.add(fileReader.nextLine());
+
+        return fileContent;
     }
 
     public List<Wall> getWalls() {return walls;}
@@ -58,10 +63,25 @@ public class Room {
     public Player getPlayer() {return player;}
 
     private void loadRoom(int depthNum, List<String> roomLayout, Player player) {
-
+        for (int row = 0; row < roomLayout.size(); row++) {
+            String currentRow = roomLayout.get(row);
+            for (int col = 0; col < currentRow.length(); col++)
+                switch (currentRow.charAt(col)) {
+                    case '#': walls.add(new Wall(col, row)); break;
+                    case 'M': monsters.add(new Monster(col, row, depthNum)); break;
+                    case 'O': gate = new Position(col, row); break;
+                    case 'X': player.setPosition(new Position(col, row)); break;
+                }
+        }
     }
 
     public void draw(TextGraphics graphics) throws IOException {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(Game.Colors.get("LightGreen")));
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(20, 20), ' ');
+        graphics.putString(new TerminalPosition(gate.getY(), gate.getX()), "O");
+        player.draw(graphics);
 
+        for (Wall wall : walls) wall.draw(graphics);
+        for (Monster monster : monsters) monster.draw(graphics);
     }
 }
