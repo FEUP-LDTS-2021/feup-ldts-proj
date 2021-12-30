@@ -5,6 +5,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
+import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
 import org.w3c.dom.Text;
@@ -12,25 +13,26 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 
 public class Player extends Element {
-    private int hp;
+    final String PLAYER_COLOR = Game.Colors.get("DarkGreen");
+    private int HP;
     private Weapon weapon;
 
     public Player(int x, int y) {
         super(x, y);
-        this.hp = 10;
+        this.HP = 10;
         this.weapon = new Weapon(2, 3);
     }
 
-    public int getHp() {
-        return hp;
+    public int getHP() {
+        return HP;
     }
 
     public Weapon getWeapon() {
         return weapon;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setHP(int HP) {
+        this.HP = HP;
     }
 
     public void setWeapon(Weapon weapon) {
@@ -57,9 +59,13 @@ public class Player extends Element {
         setPosition(position);
     }
 
+    public void decreaseHP(int damageAmount) {
+        HP -= damageAmount;
+    }
+
     @Override
     public void draw(TextGraphics graphics) throws IOException {
-        graphics.setForegroundColor(TextColor.Factory.fromString("#017727"));
+        graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR));
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(position.getX(), position.getY()), "X");
     }

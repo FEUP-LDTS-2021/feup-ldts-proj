@@ -24,6 +24,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class Game {
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
         put("LightGreen", "#C9F4DA");
         put("Red", "#D20F23");
+        put("DarkGreen","#017727");
+        put("Blurple", "#5D5CAF");
     }};
     int depth;
 
@@ -76,7 +79,7 @@ public class Game {
 
             player = new Player(10, 10);
             depth = 0;
-            currentRoom = new Room(depth, 1, player);
+            currentRoom = new Room(constructRoomFileURI(depth, 1), 1); //COMEÇAR NO 0 !! MUDAR O depthNum para ser depth em vez de uma constantef
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -87,12 +90,37 @@ public class Game {
     }
 
     public void run() throws IOException {
+        //code extracted from Professor Andre Restivo's hero-solid repository, might be changed later if needed
+        int FPS = 20;
+        int frameTime = 1000 / FPS;
+        long lastMonsterMovement = 0;
+
         while (true) {
+            long startTime = System.currentTimeMillis();
+
             draw();
-            KeyStroke key = screen.readInput();
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
-            if (key.getKeyType() == KeyType.EOF) break;
-            processKey(key);
+
+            KeyStroke key = screen.pollInput();
+            if (key != null) {
+                if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
+                if (key.getKeyType() == KeyType.EOF) break;
+                currentRoom.processKey(key);
+            }
+
+            if (startTime - lastMonsterMovement > 500) {
+                currentRoom.moveMonsters();
+                lastMonsterMovement = startTime;
+            }
+
+
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            long sleepTime = frameTime - elapsedTime;
+
+            if (sleepTime > 0) try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -102,10 +130,27 @@ public class Game {
         screen.refresh();
     }
 
-    private void processKey(KeyStroke key) {
-        if (key.getKeyType() == KeyType.ArrowLeft) player.movePlayerLeft();
-        else if (key.getKeyType() == KeyType.ArrowRight) player.movePlayerRight();
-        else if (key.getKeyType() == KeyType.ArrowDown) player.movePlayerDown();
-        else if (key.getKeyType() == KeyType.ArrowUp) player.movePlayerUp();
+    public static URI constructRoomFileURI() {
+        try {
+            URL resource = Game.class.getClassLoader().getResource("rooms/test/testRoom.txt");
+            return resource.toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
+    public URI constructRoomFileURI(int depthNum, int roomNum) {
+        try {
+        String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
+        URL resource = getClass().getClassLoader().getResource(roomPath);
+        return resource.toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 }
