@@ -19,12 +19,12 @@ public class GameTest {
         numCols = 20;
     }
 
-    @Test
+/*    @Test
     public void loadRoomTest() throws URISyntaxException, IOException {
         game.loadRoom(roomNum, depth);
         Assertions.assertEquals(numRows, game.getRoomLayout().size()); //the roomLayout has numRows rows
         for (int i = 0; i < 20; i++)
             Assertions.assertEquals(numCols, game.getRoomLayout().get(i).length()); //the room has numCols cols at every row;
-    }
+    }*/
 
 }

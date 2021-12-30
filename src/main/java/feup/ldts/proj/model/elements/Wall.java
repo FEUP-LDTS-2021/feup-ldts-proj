@@ -13,14 +13,10 @@ public class Wall extends Element {
         super(x, y);
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void draw(Screen screen) throws IOException {
-        TextGraphics graphics = screen.newTextGraphics();
-        graphics.setForegroundColor(TextColor.Factory.fromString("#C9F4DA"));
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#5DCA5F"));
+    @Override
+    public void draw(TextGraphics graphics) throws IOException {
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#C9F4DA"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#5D5CAF"));
         graphics.putString(new TerminalPosition(position.getX(), position.getY()), "#");
     }
 }

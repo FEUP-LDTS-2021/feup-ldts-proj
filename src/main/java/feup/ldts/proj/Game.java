@@ -14,6 +14,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.TerminalFactory;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import feup.ldts.proj.model.Room;
 import feup.ldts.proj.model.elements.Player;
 import org.w3c.dom.Text;
 
@@ -26,19 +27,24 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.io.File;
 import java.util.Scanner;
 
 public class Game {
-    List<String> roomLayout;
+    Room currentRoom;
     Screen screen;
     Player player;
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
+    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
+        put("LightGreen", "#C9F4DA");
+        put("Red", "#D20F23");
+    }};
+    int depth;
 
     public Game() {
-        roomLayout = new ArrayList<String>();
         try {
             URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
             File fontFile = new File(resource.toURI());
@@ -67,8 +73,10 @@ public class Game {
             screen.setCursorPosition(null);
             screen.startScreen();
             screen.doResizeIfNecessary();
-            player = new Player(10, 10);
 
+            player = new Player(10, 10);
+            depth = 0;
+            currentRoom = new Room(depth, 1, player);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -78,43 +86,7 @@ public class Game {
         }
     }
 
-    public void loadRoom(int roomNum, int depthNum) throws URISyntaxException, IOException {
-        String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
-        URL resource = getClass().getClassLoader().getResource(roomPath);
-        File roomLayoutFile = new File(resource.toURI());
-
-        try {
-            Scanner fileReader = new Scanner(roomLayoutFile);
-            while (fileReader.hasNextLine()) {
-                String roomRow = fileReader.nextLine();
-                System.out.println(roomRow); //for debugging purposes
-                roomLayout.add(roomRow);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-            e.printStackTrace();
-        }
-
-        screen.clear();
-        TextGraphics graphics = screen.newTextGraphics();
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#003366"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(NUM_COLS, NUM_ROWS), ' ');
-        screen.refresh();
-        for (int i = 0; i < NUM_ROWS; i++) {
-            for (int j = 0; j < NUM_COLS; j++) {
-                if (roomLayout.get(i).charAt(j) != ' ') {
-                    screen.setCharacter(j, i, TextCharacter.fromCharacter(roomLayout.get(i).charAt(j))[0]);
-                }
-            }
-        }
-    }
-
-    public List<String> getRoomLayout() {
-        return roomLayout;
-    }
-
-    public void run() throws IOException, URISyntaxException {
-        loadRoom(1, 0);
+    public void run() throws IOException {
         while (true) {
             draw();
             KeyStroke key = screen.readInput();
@@ -125,7 +97,9 @@ public class Game {
     }
 
     private void draw() throws IOException {
-        player.draw(screen);
+        screen.clear();
+        currentRoom.draw(screen.newTextGraphics());
+        screen.refresh();
     }
 
     private void processKey(KeyStroke key) {
@@ -134,5 +108,4 @@ public class Game {
         else if (key.getKeyType() == KeyType.ArrowDown) player.movePlayerDown();
         else if (key.getKeyType() == KeyType.ArrowUp) player.movePlayerUp();
     }
-
 }

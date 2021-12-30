@@ -2,12 +2,12 @@ package feup.ldts.proj.model.elements;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -57,11 +57,10 @@ public class Player extends Element {
         setPosition(position);
     }
 
-    public void draw(Screen screen) throws IOException {
-        TextGraphics graphics = screen.newTextGraphics();
+    @Override
+    public void draw(TextGraphics graphics) throws IOException {
         graphics.setForegroundColor(TextColor.Factory.fromString("#017727"));
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(position.getX(), position.getY()), "X");
-        screen.refresh();
     }
 }

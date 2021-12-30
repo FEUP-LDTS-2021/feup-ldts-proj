@@ -1,5 +1,9 @@
 package feup.ldts.proj.model.elements;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.model.Position;
+
+import java.io.IOException;
 
 public abstract class Element {
     protected Position position;
@@ -15,4 +19,6 @@ public abstract class Element {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public abstract void draw(TextGraphics graphics) throws IOException;
 }
