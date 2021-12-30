@@ -128,6 +128,20 @@ public class Room {
     //----------- movement and collision down below
 
     public boolean canExecuteMovement(Position position) {
-        return false;
+        for (Wall wall : walls)
+            if (wall.getPosition().equals(position))
+                return false;
+
+        for (Monster monster : monsters)
+            if (monster.getPosition().equals(position)) {
+                if (player.getPosition().equals(position))
+                    player.decreaseHP(monster.getDamage());
+                return false;
+            }
+
+        if (player.getPosition().equals(position))
+            return false;
+
+        return true;
     }
 }
