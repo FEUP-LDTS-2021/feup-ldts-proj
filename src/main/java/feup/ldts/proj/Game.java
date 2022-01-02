@@ -27,11 +27,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.io.File;
-import java.util.Scanner;
+import java.util.List;
 
 public class Game {
     Room currentRoom;
@@ -89,7 +87,7 @@ public class Game {
         }
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, URISyntaxException {
         //code extracted from Professor Andre Restivo's hero-solid repository, might be changed later if needed
         int FPS = 20;
         int frameTime = 1000 / FPS;
@@ -105,6 +103,19 @@ public class Game {
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
                 if (key.getKeyType() == KeyType.EOF) break;
                 currentRoom.processKey(key);
+            }
+
+            int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
+            //notice that if the file name is roomX then the map has X monsters
+            if (currentRoom.gateCollision()) {
+                depth++;
+                updateRoom(depth, newRoomNum);
+                /*
+                    if (depth == 3) {
+                        ...
+                        depth 3 is the final depth so we must load the bossroom - to be designed later
+                    }
+                 */
             }
 
             if (startTime - lastMonsterMovement > 500) {
@@ -151,6 +162,8 @@ public class Game {
         return null;
     }
 
-
+    private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
+        this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), 1);
+    }
 
 }

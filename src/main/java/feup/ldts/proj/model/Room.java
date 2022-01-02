@@ -144,4 +144,9 @@ public class Room {
 
         return true;
     }
+
+    public boolean gateCollision() {
+        return player.getPosition().equals(gate);
+    }
+
 }
