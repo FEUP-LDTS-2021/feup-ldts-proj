@@ -6,22 +6,23 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
+import com.googlecode.lanterna.input.MouseAction;
+import com.googlecode.lanterna.input.MouseActionType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import com.googlecode.lanterna.terminal.MouseCaptureMode;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.TerminalFactory;
+import com.googlecode.lanterna.terminal.swing.AWTTerminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import feup.ldts.proj.model.Room;
-import feup.ldts.proj.model.elements.Player;
 import org.w3c.dom.Text;
-
-
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
@@ -34,7 +35,6 @@ import java.util.List;
 public class Game {
     Room currentRoom;
     Screen screen;
-    Player player;
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
@@ -42,7 +42,23 @@ public class Game {
         put("Red", "#D20F23");
         put("DarkGreen","#017727");
         put("Blurple", "#5D5CAF");
+        put("Golden", "#FFD966");
+        put("Rust", "#291e00");
+        put("Dirt", "#634220");
+        put("SlightRust", "#94751B");
+        put("Black", "#000000");
+        put("White", "#FFFFFF");
+        put("Gray", "#4D5D53");
+        put("DarkGray", "#3B463F");
+        put("Pink", "#B01549");
+        put("Purple", "#691b51");
     }};
+    public static enum Direction {
+        UP,
+        RIGHT,
+        DOWN,
+        LEFT
+    }
     int depth;
 
     public Game() {
@@ -62,7 +78,9 @@ public class Game {
             factory.setForceAWTOverSwing(true);
             factory.setInitialTerminalSize(new TerminalSize(NUM_COLS, NUM_ROWS));
 
+            factory.setMouseCaptureMode(MouseCaptureMode.CLICK);
             Terminal terminal = factory.createTerminal();
+
             ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
@@ -75,7 +93,6 @@ public class Game {
             screen.startScreen();
             screen.doResizeIfNecessary();
 
-            player = new Player(10, 10);
             depth = 0;
             currentRoom = new Room(constructRoomFileURI(depth, 1), 1); //COMEÇAR NO 0 !! MUDAR O depthNum para ser depth em vez de uma constantef
         } catch (IOException e) {
@@ -94,31 +111,36 @@ public class Game {
         long lastMonsterMovement = 0;
 
         while (true) {
+
             long startTime = System.currentTimeMillis();
 
             draw();
 
             KeyStroke key = screen.pollInput();
+            System.out.println(key);
             if (key != null) {
+
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
                 if (key.getKeyType() == KeyType.EOF) break;
                 currentRoom.processKey(key);
+
             }
 
             int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
             //notice that if the file name is roomX then the map has X monsters
-            if (currentRoom.gateCollision()) {
+            if (currentRoom.gateCollision() && currentRoom.getMonsters().isEmpty()) {
                 depth++;
                 updateRoom(depth, newRoomNum);
                 /*
                     if (depth == 3) {
                         ...
-                        depth 3 is the final depth so we must load the bossroom - to be designed later
+                        depth 3 is the final depth, so we must load the Boss room - to be designed later
                     }
                  */
             }
 
             if (startTime - lastMonsterMovement > 500) {
+                currentRoom.moveBullets();
                 currentRoom.moveMonsters();
                 lastMonsterMovement = startTime;
             }
@@ -136,6 +158,7 @@ public class Game {
     }
 
     private void draw() throws IOException {
+        screen.doResizeIfNecessary();
         screen.clear();
         currentRoom.draw(screen.newTextGraphics());
         screen.refresh();
@@ -161,7 +184,7 @@ public class Game {
         }
         return null;
     }
-
+    
     private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
         this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), 1);
     }
