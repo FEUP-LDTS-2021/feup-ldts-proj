@@ -117,7 +117,6 @@ public class Game {
             draw();
 
             KeyStroke key = screen.pollInput();
-            System.out.println(key);
             if (key != null) {
 
                 if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();

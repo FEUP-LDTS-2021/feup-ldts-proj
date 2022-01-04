@@ -100,7 +100,7 @@ public class Room {
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(20, 20), ' ');
         if (monsters.size() > 0) graphics.setForegroundColor(TextColor.Factory.fromString(BG_COLOR));
         else graphics.setForegroundColor(TextColor.Factory.fromString(Game.Colors.get("Black")));
-        graphics.putString(new TerminalPosition(gate.getY(), gate.getX()), "O");
+        graphics.putString(new TerminalPosition(gate.getX(), gate.getY()), "O");
 
         for (Wall wall : walls) wall.draw(graphics);
         for (Monster monster : monsters) monster.draw(graphics);
