@@ -149,10 +149,10 @@ public class Game {
                 if (depth == 3) {
                     depth = 0;
                     updateRoom(depth, 1);
+                } else {
+                    int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
+                    updateRoom(depth, newRoomNum);
                 }
-                int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
-                updateRoom(depth, newRoomNum);
-
             }
 
             if (startTime - lastMonsterMovement > 500) {
