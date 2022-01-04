@@ -94,7 +94,7 @@ public class Game {
             screen.doResizeIfNecessary();
 
             depth = 0;
-            currentRoom = new Room(constructRoomFileURI(depth, 1), 1); //COMEÇAR NO 0 !! MUDAR O depthNum para ser depth em vez de uma constantef
+            currentRoom = new Room(constructRoomFileURI(depth, 1), depth);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -126,17 +126,18 @@ public class Game {
 
             }
 
-            int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
             //notice that if the file name is roomX then the map has X monsters
             if (currentRoom.gateCollision() && currentRoom.getMonsters().isEmpty()) {
                 depth++;
+
+                //temporary, we must load the Boss room (to be designed later)
+                if (depth == 3) {
+                    depth = 0;
+                    updateRoom(depth, 1);
+                }
+                int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
                 updateRoom(depth, newRoomNum);
-                /*
-                    if (depth == 3) {
-                        ...
-                        depth 3 is the final depth, so we must load the Boss room - to be designed later
-                    }
-                 */
+
             }
 
             if (startTime - lastMonsterMovement > 500) {
