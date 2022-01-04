@@ -200,6 +200,9 @@ public class Room {
 
     private void shoot() {
         if (bullets.size() >= player.getWeapon().getCapacity()) return; //player can't shoot yet
+        for (Bullet bullet : bullets) {
+            if (bullet.getPosition().equals(player.getPosition())) return; //player is trying to shoot inside another bullet
+        }
         bullets.add(player.createBullet());
     }
 
