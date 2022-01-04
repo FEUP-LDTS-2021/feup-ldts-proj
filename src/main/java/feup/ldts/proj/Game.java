@@ -106,9 +106,9 @@ public class Game {
 
     public void run() throws IOException, URISyntaxException {
         //code extracted from Professor Andre Restivo's hero-solid repository, might be changed later if needed
-        int FPS = 20;
+        int FPS = 60;
         int frameTime = 1000 / FPS;
-        long lastMonsterMovement = 0;
+        long lastMonsterMovement = 0, lastBulletMovement = 0;
 
         while (true) {
 
@@ -140,9 +140,13 @@ public class Game {
             }
 
             if (startTime - lastMonsterMovement > 500) {
-                currentRoom.moveBullets();
                 currentRoom.moveMonsters();
                 lastMonsterMovement = startTime;
+            }
+
+            if (startTime - lastBulletMovement > 250) {
+                currentRoom.moveBullets();
+                lastBulletMovement = startTime;
             }
 
 
