@@ -52,9 +52,6 @@ public class Monster extends Element {
     @Override
     public void draw(TextGraphics graphics) {
         double percentage = ((double) HP / (double) maxHP);
-        System.out.println("HP = " + HP);
-        System.out.println("MAXHP = " + maxHP);
-        System.out.println("Percentage = " + percentage);
         if (percentage >= 0.66) graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_100));
         else if (percentage >= 0.33) graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_66));
         else graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_33));

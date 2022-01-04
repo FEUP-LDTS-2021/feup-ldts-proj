@@ -38,20 +38,31 @@ public class Game {
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
+        //others or non used
         put("LightGreen", "#C9F4DA");
-        put("Red", "#D20F23");
-        put("DarkGreen","#017727");
         put("Blurple", "#5D5CAF");
-        put("Golden", "#FFD966");
-        put("Rust", "#291e00");
         put("Dirt", "#634220");
-        put("SlightRust", "#94751B");
         put("Black", "#000000");
         put("White", "#FFFFFF");
         put("Gray", "#4D5D53");
         put("DarkGray", "#3B463F");
+
+        //bullet colors
+        put("Golden", "#FFD966");
+        put("SlightRust", "#94751B");
+        put("Rust", "#291e00");
+
+        //monster colors
+        put("Red", "#D20F23");
         put("Pink", "#B01549");
         put("Purple", "#691b51");
+
+        //player colors
+        put("HealthyGreen", "#02f751");
+        put("Green", "#19b33a");
+        put("DarkGreen", "#1d871a");
+        put("WoundedGreen", "#1a610e");
+        put("DyingGreen", "#103d02");
     }};
     public static enum Direction {
         UP,
@@ -114,6 +125,11 @@ public class Game {
 
             long startTime = System.currentTimeMillis();
 
+            if (currentRoom.getPlayer().getHP() == 0) {
+                depth = 0;
+                updateRoom(depth, 1); //depth 0 only has 1 room;
+            }
+            
             draw();
 
             KeyStroke key = screen.pollInput();

@@ -14,14 +14,16 @@ import java.io.IOException;
 
 public class Player extends Element {
     
-    final String PLAYER_COLOR = Game.Colors.get("DarkGreen");
-    private int HP;
+    final String PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen"), PLAYER_COLOR_80 = Game.Colors.get("Green"), PLAYER_COLOR_60 = Game.Colors.get("DarkGreen"),
+    PLAYER_COLOR_40 = Game.Colors.get("WoundedGreen"), PLAYER_COLOR_20 = Game.Colors.get("DyingGreen");
+    private int HP, maxHP;
     private Weapon weapon;
     private Game.Direction facingDirection;
     
     public Player(int x, int y) {
         super(x, y);
         this.HP = 10;
+        maxHP = HP;
         this.weapon = new Weapon(2, 5, 5);
         this.facingDirection = Game.Direction.DOWN;
     }
@@ -86,7 +88,13 @@ public class Player extends Element {
 
     @Override
     public void draw(TextGraphics graphics) throws IOException {
-        graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR));
+        float healthPercentage = (float) HP / (float) maxHP;
+        if (healthPercentage > 0.8) graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR_100));
+        else if (healthPercentage > 0.6) graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR_80));
+        else if (healthPercentage > 0.4) graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR_60));
+        else if (healthPercentage > 0.2) graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR_40));
+        else graphics.setForegroundColor(TextColor.Factory.fromString(PLAYER_COLOR_20));
+
         graphics.enableModifiers(SGR.BOLD);
         graphics.putString(new TerminalPosition(position.getX(), position.getY()), "X");
     }
