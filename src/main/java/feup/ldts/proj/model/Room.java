@@ -146,7 +146,22 @@ public class Room {
                 if (player.getPosition().equals(monsterPos))
                     player.decreaseHP(monster.getDamage());
             }
+            for (int i = 0; i < bullets.size(); i++) {
+                if (monster.getPosition().equals(bullets.get(i).getPosition())) {
+                    monster.decreaseHP(bullets.get(i).getDamage());
+                    bullets.remove(i);
+                    break;
+                }
+            }
         }
+
+        for (int i = 0; i < monsters.size(); i++) {
+            if (monsters.get(i).getHP() == 0) {
+                monsters.remove(i);
+                i--;
+            }
+        }
+
     }
 
     public void moveBullets() { //to be checked later

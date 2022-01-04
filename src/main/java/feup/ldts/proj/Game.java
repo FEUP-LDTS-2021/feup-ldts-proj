@@ -129,7 +129,7 @@ public class Game {
                 depth = 0;
                 updateRoom(depth, 1); //depth 0 only has 1 room;
             }
-            
+
             draw();
 
             KeyStroke key = screen.pollInput();
