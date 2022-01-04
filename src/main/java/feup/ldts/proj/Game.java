@@ -206,7 +206,7 @@ public class Game {
     }
     
     private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
-        this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), 1);
+        this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), newDepth);
     }
 
 }
