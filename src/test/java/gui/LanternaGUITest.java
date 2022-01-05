@@ -13,6 +13,7 @@ public class LanternaGUITest {
     private Screen screen;
     private LanternaGUI GUI;
     private TextGraphics textGraphics;
+    private Position position;
 
     @BeforeEach
     public void setUp() {
@@ -20,6 +21,7 @@ public class LanternaGUITest {
         screen = Mockito.mock(Screen.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(textGraphics);
         GUI = new LanternaGUI(screen);
+        position = new Position(5, 5);
     }
 
     @Test
@@ -29,14 +31,16 @@ public class LanternaGUITest {
 
     @Test
     public void drawWall() {
-        GUI.drawWall(new Position(5, 5));
+        GUI.drawWall(position);
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Blurple")));
-        Mockito.verify(textGraphics, Mockito.times(1)).putString(5, 5, "#");
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "#");
     }
 
     @Test
     public void drawMonster() {
-
+        GUI.drawMonster(position, LanternaGUI.Colors.get("Red"));
+        Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Red")));
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "M");
     }
 
     @Test
