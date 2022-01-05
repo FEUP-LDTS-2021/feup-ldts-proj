@@ -108,7 +108,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawPlayer(Position position, String color) {
-
+        drawCharacter(position.getX(), position.getY(), 'X', color);
     }
 
 
