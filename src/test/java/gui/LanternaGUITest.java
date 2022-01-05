@@ -25,31 +25,38 @@ public class LanternaGUITest {
     }
 
     @Test
-    public void drawPlayer() {
+    public void drawPlayerTest() {
         GUI.drawPlayer(position, LanternaGUI.Colors.get("HealthyGreen"));
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("HealthyGreen")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "X");
     }
 
     @Test
-    public void drawWall() {
+    public void drawWallTest() {
         GUI.drawWall(position);
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Blurple")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "#");
     }
 
     @Test
-    public void drawMonster() {
+    public void drawMonsterTest() {
         GUI.drawMonster(position, LanternaGUI.Colors.get("Red"));
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Red")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "M");
     }
 
     @Test
-    public void drawBullet() {
+    public void drawBulletTest() {
         GUI.drawBullet(position, LanternaGUI.Colors.get("Golden"));
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Golden")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "*");
+    }
+
+    @Test
+    public void drawTextTest() {
+        GUI.drawText(position, "Example Text", LanternaGUI.Colors.get("Black"));
+        Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Black")));
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "Example Text");
     }
 
 }

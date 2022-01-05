@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class LanternaGUI implements GUI {
     private final Screen screen;
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
-        //others or non used
+        //others or not used
         put("LightGreen", "#C9F4DA"); //idk
         put("Blurple", "#5D5CAF"); //walls
         put("Dirt", "#634220"); //floor
@@ -129,7 +129,9 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawText(Position position, String text, String color) {
-
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
+        textGraphics.putString(position.getX(), position.getY(), text);
     }
 
     public void drawCharacter(int x, int y, char c, String color) {
@@ -141,16 +143,16 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void clear() {
-
+        screen.clear();
     }
 
     @Override
     public void refresh() throws IOException {
-
+        screen.refresh();
     }
 
     @Override
     public void close() throws IOException {
-
+        screen.close();
     }
 }
