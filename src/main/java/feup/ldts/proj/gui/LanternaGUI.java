@@ -114,7 +114,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawBullet(Position position, String color) {
-
+        drawCharacter(position.getX(), position.getY(), '*', color);
     }
 
     @Override

@@ -45,7 +45,9 @@ public class LanternaGUITest {
 
     @Test
     public void drawBullet() {
-
+        GUI.drawBullet(position, LanternaGUI.Colors.get("Golden"));
+        Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Golden")));
+        Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "*");
     }
 
 }
