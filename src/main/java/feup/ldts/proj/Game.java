@@ -89,15 +89,15 @@ public class Game {
             factory.setForceAWTOverSwing(true);
             factory.setInitialTerminalSize(new TerminalSize(NUM_COLS, NUM_ROWS));
 
-            factory.setMouseCaptureMode(MouseCaptureMode.CLICK);
+            //factory.setMouseCaptureMode(MouseCaptureMode.CLICK);
             Terminal terminal = factory.createTerminal();
 
-            ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
+            /*((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     e.getWindow().dispose();
                 }
-            });
+            });*/
 
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
