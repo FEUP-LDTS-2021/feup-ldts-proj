@@ -1,6 +1,9 @@
 package feup.ldts.proj.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
@@ -116,7 +119,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawWall(Position position) {
-        
+        drawCharacter(position.getX(), position.getY(), '#', LanternaGUI.Colors.get("Blurple"));
     }
 
     @Override
@@ -127,6 +130,13 @@ public class LanternaGUI implements GUI {
     @Override
     public void drawText(Position position, String text, String color) {
 
+    }
+
+    public void drawCharacter(int x, int y, char c, String color) {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Dirt")));
+        textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
+        textGraphics.putString(x, y, "" + c);
     }
 
     @Override

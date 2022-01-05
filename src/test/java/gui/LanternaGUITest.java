@@ -30,7 +30,6 @@ public class LanternaGUITest {
     @Test
     public void drawWall() {
         GUI.drawWall(new Position(5, 5));
-
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Blurple")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(5, 5, "#");
     }
