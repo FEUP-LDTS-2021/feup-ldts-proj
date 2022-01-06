@@ -11,6 +11,11 @@ public class BulletViewer implements ElementViewer<Bullet> {
             BULLET_COLOR_END = Game.Colors.get("Rust");
     @Override
     public void draw(Bullet element, GUI gui) {
-        
+        if (element.isAtLimit())
+            gui.drawBullet(element.getPosition(), BULLET_COLOR_END);
+        else if (element.getDistanceTravelled() == element.getMaxRange() - 1)
+            gui.drawBullet(element.getPosition(), BULLET_COLOR_MED);
+        else
+            gui.drawBullet(element.getPosition(), BULLET_COLOR_INI);
     }
 }
