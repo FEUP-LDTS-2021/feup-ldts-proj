@@ -24,20 +24,18 @@ public class Game {
     Screen screen;
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
-    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
-        //others or non used
-        put("LightGreen", "#C9F4DA");
-        put("Blurple", "#5D5CAF");
-        put("Dirt", "#634220");
-        put("Black", "#000000");
-        put("White", "#FFFFFF");
-        put("Gray", "#4D5D53");
-        put("DarkGray", "#3B463F");
+
+    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{ //should probably be somewhere else?
+        //others or not used
+        put("LightGreen", "#C9F4DA"); //idk
+        put("Blurple", "#5D5CAF"); //walls
+        put("Dirt", "#634220"); //floor
+        put("Black", "#000000"); //gate
 
         //bullet colors
         put("Golden", "#FFD966");
         put("SlightRust", "#94751B");
-        put("Rust", "#291E00");
+        put("Rust", "#291e00");
 
         //monster colors
         put("Red", "#D20F23");

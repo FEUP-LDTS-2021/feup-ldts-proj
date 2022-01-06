@@ -1,5 +1,7 @@
 package feup.ldts.proj.model.elements;
 
+import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.Terminal;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
@@ -15,7 +17,9 @@ public class Player extends Element {
     private int HP, maxHP;
     private Weapon weapon;
     private Element.Direction facingDirection;
-    
+
+    //constructors
+
     public Player(int x, int y) {
         super(x, y);
         this.maxHP = 10;
@@ -32,6 +36,8 @@ public class Player extends Element {
         this.maxHP = maxHP;
     }
 
+    //getters
+
     public String getColor() {
         if ((float) HP/maxHP == 1.0) return PLAYER_COLOR_100;
         if ((float) HP/maxHP >= 0.80) return PLAYER_COLOR_80;
@@ -40,8 +46,6 @@ public class Player extends Element {
         if ((float) HP/maxHP >= 0.20) return PLAYER_COLOR_20;
         return null;
     }
-
-    //getters
 
     public int getHP() {
         return HP;
@@ -71,7 +75,15 @@ public class Player extends Element {
         this.maxHP = maxHP;
     }
 
-    //movement functions will stay inside the model while there's no controller
+    //other functions
+
+    public void decreaseHP(int damageAmount) {
+        HP -= damageAmount;
+    }
+
+    //----------------------------------------------------------------------------------
+
+    //movement related methods, will be moved to its respective controller at another time
 
     public void movePlayerLeft() {
         movePlayer(position.getLeft());
@@ -91,12 +103,6 @@ public class Player extends Element {
 
     public void movePlayer(Position position) {
         setPosition(position);
-    }
-
-    //health related methods
-
-    public void decreaseHP(int damageAmount) {
-        HP -= damageAmount;
     }
 
 }

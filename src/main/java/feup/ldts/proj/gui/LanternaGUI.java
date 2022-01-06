@@ -11,6 +11,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
 
 import java.awt.*;
@@ -22,30 +23,6 @@ import java.util.HashMap;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
-    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
-        //others or not used
-        put("LightGreen", "#C9F4DA"); //idk
-        put("Blurple", "#5D5CAF"); //walls
-        put("Dirt", "#634220"); //floor
-        put("Black", "#000000"); //gate
-
-        //bullet colors
-        put("Golden", "#FFD966");
-        put("SlightRust", "#94751B");
-        put("Rust", "#291e00");
-
-        //monster colors
-        put("Red", "#D20F23");
-        put("Pink", "#B01549");
-        put("Purple", "#691b51");
-
-        //player colors
-        put("HealthyGreen", "#02f751");
-        put("Green", "#19b33a");
-        put("DarkGreen", "#1d871a");
-        put("WoundedGreen", "#1a610e");
-        put("DyingGreen", "#103d02");
-    }};
 
     public LanternaGUI(Screen screen) {
         this.screen = screen;
@@ -69,6 +46,7 @@ public class LanternaGUI implements GUI {
         if (keyStroke.getKeyType() == KeyType.ArrowDown) return ACTION.DOWN;
         if (keyStroke.getKeyType() == KeyType.ArrowRight) return ACTION.RIGHT;
         if (keyStroke.getKeyType() == KeyType.ArrowLeft) return ACTION.LEFT;
+        if (keyStroke.getKeyType() == KeyType.Character && keyStroke.getCharacter() == 'x') return ACTION.SHOOT;
 
         return ACTION.NONE;
     }
@@ -111,7 +89,6 @@ public class LanternaGUI implements GUI {
         drawCharacter(position.getX(), position.getY(), 'X', color);
     }
 
-
     @Override
     public void drawBullet(Position position, String color) {
         drawCharacter(position.getX(), position.getY(), '*', color);
@@ -119,7 +96,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawWall(Position position) {
-        drawCharacter(position.getX(), position.getY(), '#', LanternaGUI.Colors.get("Blurple"));
+        drawCharacter(position.getX(), position.getY(), '#', Game.Colors.get("Blurple"));
     }
 
     @Override
@@ -136,7 +113,7 @@ public class LanternaGUI implements GUI {
 
     public void drawCharacter(int x, int y, char c, String color) {
         TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString(LanternaGUI.Colors.get("Dirt")));
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString(Game.Colors.get("Dirt")));
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
         textGraphics.putString(x, y, "" + c);
     }

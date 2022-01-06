@@ -1,7 +1,6 @@
 package feup.ldts.proj.model.room;
 
 import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.Weapon;
 import feup.ldts.proj.model.elements.Monster;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.elements.Wall;

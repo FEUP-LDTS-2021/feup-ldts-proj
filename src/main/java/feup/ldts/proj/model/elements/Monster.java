@@ -19,12 +19,16 @@ public class Monster extends Element {
     int HP, maxHP;
     int damage;
 
+    //constructors
+
     public Monster(int x, int y, int depth) {
         super(x, y);
         maxHP = baseHP * depth;
         HP = maxHP;
         damage = baseDamage * depth;
     }
+
+    //getters
 
     public int getHP() {
         return HP;
@@ -42,6 +46,8 @@ public class Monster extends Element {
 
     public int getMaxHP() { return maxHP; }
 
+    //setters
+
     public void setHP(int HP) {
         this.HP = HP;
     }
@@ -49,6 +55,16 @@ public class Monster extends Element {
     public void setDamage(int damage) { this.damage = damage; }
 
     public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
+
+    //other functions
+
+    public void decreaseHP(int damageAmount) {
+        HP -= damageAmount;
+    }
+
+    //----------------------------------------------------------------------------------
+
+    //movement related methods, will be moved to its respective controller
 
     public Position moveMonster() {
         switch (new Random().nextInt(4)) {
@@ -58,10 +74,6 @@ public class Monster extends Element {
             case 3: return new Position(position.getX(), position.getY() + 1);
         }
         return new Position(position.getX(), position.getY());
-    }
-
-    public void decreaseHP(int damageAmount) {
-        HP -= damageAmount;
     }
 }
 

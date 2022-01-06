@@ -10,6 +10,8 @@ public class Weapon {
         this.capacity = capacity;
     }
 
+    //getters
+
     public int getDamage() {
         return damage;
     }
@@ -20,6 +22,8 @@ public class Weapon {
 
     public int getCapacity() { return capacity; }
 
+    //setters
+
     public void setDamage(int damage) {
         this.damage = damage;
     }
@@ -29,6 +33,4 @@ public class Weapon {
     }
 
     public void setCapacity(int capacity) { this.capacity = capacity; }
-
-
 }

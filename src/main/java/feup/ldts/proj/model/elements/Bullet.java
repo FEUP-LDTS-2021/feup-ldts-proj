@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import feup.ldts.proj.Game;
+import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.Position;
 
 import java.io.IOException;
@@ -15,6 +16,8 @@ public class Bullet extends Element {
             BULLET_COLOR_END = Game.Colors.get("Rust");
     int maxRange, distanceTravelled, damage;
     Element.Direction facingDirection;
+
+    //constructors
 
     public Bullet(int x, int y, int maxRange, int damage, Element.Direction facingDirection) {
         super(x, y);
@@ -54,7 +57,7 @@ public class Bullet extends Element {
         this.distanceTravelled = distanceTravelled;
     }
 
-    //movement related methods
+    //other functions
 
     public boolean isAtLimit() {
         return (distanceTravelled >= maxRange);
@@ -63,6 +66,10 @@ public class Bullet extends Element {
     public void incrementDistanceTravelled() {
         distanceTravelled++;
     }
+
+    //----------------------------------------------------------------------------------
+
+    //movement related methods, will be moved to its respective controller at another time
 
     public Position moveBullet() {
         switch (facingDirection) {

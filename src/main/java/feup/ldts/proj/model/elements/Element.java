@@ -4,9 +4,11 @@ import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.model.Position;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public abstract class Element {
     protected Position position;
+
     public static enum Direction {UP, RIGHT, DOWN, LEFT}
 
     public Element(int x, int y) {
