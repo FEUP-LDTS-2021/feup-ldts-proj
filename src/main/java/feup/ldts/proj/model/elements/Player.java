@@ -33,11 +33,12 @@ public class Player extends Element {
     }
 
     public String getColor() {
-        if ((float) HP/maxHP <= 0.2) return PLAYER_COLOR_20;
-        else if ((float) HP/maxHP * 100 < 0.4) return PLAYER_COLOR_40;
-        else if ((float) HP/maxHP * 100 < 0.6) return PLAYER_COLOR_60;
-        else if ((float) HP/maxHP * 100 < 0.8) return PLAYER_COLOR_80;
-        return PLAYER_COLOR_100;
+        if ((float) HP/maxHP == 1.0) return PLAYER_COLOR_100;
+        if ((float) HP/maxHP >= 0.80) return PLAYER_COLOR_80;
+        if ((float) HP/maxHP >= 0.60) return PLAYER_COLOR_60;
+        if ((float) HP/maxHP >= 0.40) return PLAYER_COLOR_40;
+        if ((float) HP/maxHP >= 0.20) return PLAYER_COLOR_20;
+        return null;
     }
 
     //getters

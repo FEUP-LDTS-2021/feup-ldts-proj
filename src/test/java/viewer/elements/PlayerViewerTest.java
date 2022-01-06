@@ -24,22 +24,22 @@ public class PlayerViewerTest {
     @Test
     public void drawPlayerTest() {
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(5, 5), Game.Colors.get("HealthyGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("HealthyGreen"));
 
         player.setHP(8);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(5, 5), Game.Colors.get("Green"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("Green"));
 
         player.setHP(6);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(5, 5), Game.Colors.get("DarkGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("DarkGreen"));
 
         player.setHP(4);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(5, 5), Game.Colors.get("WoundedGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("WoundedGreen"));
 
         player.setHP(2);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(5, 5), Game.Colors.get("DyingGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("DyingGreen"));
     }
 }
