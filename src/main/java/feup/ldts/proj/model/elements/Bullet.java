@@ -42,6 +42,12 @@ public class Bullet extends Element {
         return damage;
     }
 
+    public String getColor() {
+        if (isAtLimit()) return BULLET_COLOR_END;
+        else if (distanceTravelled == maxRange - 1) return BULLET_COLOR_MED;
+        return BULLET_COLOR_INI;
+    }
+
     //setters
 
     public void setDistanceTravelled(int distanceTravelled) {

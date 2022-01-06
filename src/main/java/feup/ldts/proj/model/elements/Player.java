@@ -32,6 +32,14 @@ public class Player extends Element {
         this.maxHP = maxHP;
     }
 
+    public String getColor() {
+        if (HP/maxHP * 100 < 20) return PLAYER_COLOR_20;
+        else if (HP/maxHP * 100 < 40) return PLAYER_COLOR_40;
+        else if (HP/maxHP * 100 < 60) return PLAYER_COLOR_60;
+        else if (HP/maxHP * 100 < 80) return PLAYER_COLOR_80;
+        return PLAYER_COLOR_100;
+    }
+
     //getters
 
     public int getHP() {

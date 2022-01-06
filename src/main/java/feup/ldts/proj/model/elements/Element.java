@@ -7,12 +7,7 @@ import java.io.IOException;
 
 public abstract class Element {
     protected Position position;
-    public static enum Direction {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT
-    }
+    public static enum Direction {UP, RIGHT, DOWN, LEFT}
 
     public Element(int x, int y) {
         this.position = new Position(x, y);
@@ -25,4 +20,6 @@ public abstract class Element {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public abstract String getColor();
 }

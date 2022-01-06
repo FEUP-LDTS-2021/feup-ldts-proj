@@ -14,4 +14,8 @@ public class Wall extends Element {
     public Wall(int x, int y) {
         super(x, y);
     }
+
+    public String getColor() {
+        return WALL_COLOR;
+    }
 }

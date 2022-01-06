@@ -34,6 +34,12 @@ public class Monster extends Element {
         return damage;
     }
 
+    public String getColor() {
+        if ((float) HP/maxHP <= 0.33) return MONSTER_COLOR_33;
+        if ((float) HP/maxHP <= 0.66) return MONSTER_COLOR_66;
+        return MONSTER_COLOR_100;
+    }
+
     public int getMaxHP() { return maxHP; }
 
     public void setHP(int HP) {
