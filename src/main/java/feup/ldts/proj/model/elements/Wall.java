@@ -14,10 +14,4 @@ public class Wall extends Element {
     public Wall(int x, int y) {
         super(x, y);
     }
-
-    @Override
-    public void draw(TextGraphics graphics) throws IOException {
-        graphics.setForegroundColor(TextColor.Factory.fromString(WALL_COLOR));
-        graphics.putString(new TerminalPosition(position.getX(), position.getY()), "#");
-    }
 }

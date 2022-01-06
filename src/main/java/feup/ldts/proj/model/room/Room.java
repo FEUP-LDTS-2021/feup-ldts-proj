@@ -1,4 +1,4 @@
-package feup.ldts.proj.model;
+package feup.ldts.proj.model.room;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -6,27 +6,20 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.Game;
-import feup.ldts.proj.model.elements.Bullet;
-import feup.ldts.proj.model.elements.Monster;
-import feup.ldts.proj.model.elements.Player;
-import feup.ldts.proj.model.elements.Wall;
-import org.w3c.dom.Text;
+import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.elements.*;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Room {
-    private final int depthNum;
+    private final int depth;
     private final String BG_COLOR = Game.Colors.get("Dirt");
 
     Player player;
@@ -35,29 +28,11 @@ public class Room {
     private List<Bullet> bullets;
     Position gate;
 
-    public Room(URI roomURI, int depthNum) throws URISyntaxException, FileNotFoundException {
-        this.depthNum = depthNum;
-        File roomLayoutFile = new File(roomURI);
-
-        walls = new ArrayList<Wall>();
-        monsters = new ArrayList<Monster>();
-        bullets = new ArrayList<Bullet>();
-
-
-        List<String> roomLayout = readRoomFile(roomLayoutFile);
-        loadRoom(depthNum, roomLayout);
+    public Room(int depth) {
+        this.depth = depth;
     }
 
-    private List<String> readRoomFile(File file) throws FileNotFoundException {
-        List<String> fileContent = new ArrayList<>();
-        Scanner fileReader = new Scanner(file);
-
-        while (fileReader.hasNextLine())
-            fileContent.add(fileReader.nextLine());
-
-        return fileContent;
-    }
-
+    //getters
     public List<Wall> getWalls() {
         return walls;
     }
@@ -66,36 +41,26 @@ public class Room {
         return monsters;
     }
 
-    public Position getGate() {
-        return gate;
-    }
+    public Position getGate() { return gate; }
 
     public Player getPlayer() {
         return player;
     }
 
-    private void loadRoom(int depthNum, List<String> roomLayout) {
-        for (int row = 0; row < roomLayout.size(); row++) {
-            String currentRow = roomLayout.get(row);
-            for (int col = 0; col < currentRow.length(); col++)
-                switch (currentRow.charAt(col)) {
-                    case '#':
-                        walls.add(new Wall(col, row));
-                        break;
-                    case 'M':
-                        monsters.add(new Monster(col, row, depthNum));
-                        break;
-                    case 'O':
-                        gate = new Position(col, row);
-                        break;
-                    case 'X':
-                        player = new Player(col, row);
-                        break;
-                }
-        }
-    }
+    public List<Bullet> getBullets() { return bullets; }
 
-    public void draw(TextGraphics graphics) throws IOException {
+    //setters
+    public void setWalls(List<Wall> walls) { this.walls = walls; }
+
+    public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
+
+    public void setBullets(List<Bullet> bullets) { this.bullets = bullets; }
+
+    public void setGate(Position gate) { this.gate = gate; }
+
+    public void setPlayer(Player player) { this.player = player; }
+
+    /*public void draw(TextGraphics graphics) throws IOException {
         graphics.setBackgroundColor(TextColor.Factory.fromString(BG_COLOR));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(20, 20), ' ');
         if (monsters.size() > 0) graphics.setForegroundColor(TextColor.Factory.fromString(BG_COLOR));
@@ -106,21 +71,21 @@ public class Room {
         for (Monster monster : monsters) monster.draw(graphics);
         for (Bullet bullet : bullets) bullet.draw(graphics);
         player.draw(graphics);
-    }
+    }*/
 
     public void processKey(KeyStroke key) {
         if (key.getKeyType() == KeyType.ArrowLeft) {
-            player.setFacingDirection(Game.Direction.LEFT);
+            player.setFacingDirection(Element.Direction.LEFT);
             movePlayer(player.getPosition().getLeft());
         } else if (key.getKeyType() == KeyType.ArrowRight) {
-            player.setFacingDirection(Game.Direction.RIGHT);
+            player.setFacingDirection(Element.Direction.RIGHT);
             movePlayer(player.getPosition().getRight());
 
         } else if (key.getKeyType() == KeyType.ArrowDown) {
-            player.setFacingDirection(Game.Direction.DOWN);
+            player.setFacingDirection(Element.Direction.DOWN);
             movePlayer(player.getPosition().getDown());
         } else if (key.getKeyType() == KeyType.ArrowUp) {
-            player.setFacingDirection(Game.Direction.UP);
+            player.setFacingDirection(Element.Direction.UP);
             movePlayer(player.getPosition().getUp());
         } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'x') {
             shoot();
@@ -191,8 +156,8 @@ public class Room {
                     continue BULLET_LOOP;
                 }
             }
-        bullets.get(i).setPosition(bulletPos);
-        bullets.get(i).incrementDistanceTravelled();
+            bullets.get(i).setPosition(bulletPos);
+            bullets.get(i).incrementDistanceTravelled();
         }
     }
 
@@ -201,9 +166,14 @@ public class Room {
     private void shoot() {
         if (bullets.size() >= player.getWeapon().getCapacity()) return; //player can't shoot yet
         for (Bullet bullet : bullets) {
-            if (bullet.getPosition().equals(player.getPosition())) return; //player is trying to shoot inside another bullet
+            if (bullet.getPosition().equals(player.getPosition()))
+                return; //player is trying to shoot inside another bullet
         }
-        bullets.add(player.createBullet());
+        bullets.add(createBullet());
+    }
+
+    private Bullet createBullet() {
+        return new Bullet(player.getPosition().getX(), player.getPosition().getY(), player.getWeapon().getRange(), player.getWeapon().getDamage(), player.getFacingDirection());
     }
 
     //----------- movement and collision down below

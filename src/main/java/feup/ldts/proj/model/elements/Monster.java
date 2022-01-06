@@ -10,16 +10,19 @@ import feup.ldts.proj.model.Position;
 import java.util.Random;
 
 public class Monster extends Element {
-    final String MONSTER_COLOR_100 = Game.Colors.get("Red"), MONSTER_COLOR_66 = Game.Colors.get("Pink"), MONSTER_COLOR_33 = Game.Colors.get("Purple");
+    final String
+            MONSTER_COLOR_100 = Game.Colors.get("Red"),
+            MONSTER_COLOR_66 = Game.Colors.get("Pink"),
+            MONSTER_COLOR_33 = Game.Colors.get("Purple");
     final int baseHP = 5;
-    int HP, maxHP;
     final int baseDamage = 1;
+    int HP, maxHP;
     int damage;
 
     public Monster(int x, int y, int depth) {
         super(x, y);
-        HP = baseHP * depth;
-        maxHP = HP;
+        maxHP = baseHP * depth;
+        HP = maxHP;
         damage = baseDamage * depth;
     }
 
@@ -31,9 +34,15 @@ public class Monster extends Element {
         return damage;
     }
 
+    public int getMaxHP() { return maxHP; }
+
     public void setHP(int HP) {
         this.HP = HP;
     }
+
+    public void setDamage(int damage) { this.damage = damage; }
+
+    public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
 
     public Position moveMonster() {
         switch (new Random().nextInt(4)) {
@@ -46,16 +55,7 @@ public class Monster extends Element {
     }
 
     public void decreaseHP(int damageAmount) {
-        HP = Math.max(HP - damageAmount, 0);
-    }
-
-    @Override
-    public void draw(TextGraphics graphics) {
-        double percentage = ((double) HP / (double) maxHP);
-        if (percentage >= 0.66) graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_100));
-        else if (percentage >= 0.33) graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_66));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(MONSTER_COLOR_33));
-        graphics.putString(new TerminalPosition(position.getX(), position.getY()), "M");
+        HP -= damageAmount;
     }
 }
 

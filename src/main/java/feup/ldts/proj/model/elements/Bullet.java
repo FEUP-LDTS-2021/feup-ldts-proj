@@ -9,12 +9,14 @@ import feup.ldts.proj.model.Position;
 import java.io.IOException;
 
 public class Bullet extends Element {
-    final String BULLET_COLOR_INI = Game.Colors.get("Golden"), BULLET_COLOR_MED = Game.Colors.get("SlightRust"), BULLET_COLOR_END = Game.Colors.get("Rust");
-
+    final String
+            BULLET_COLOR_INI = Game.Colors.get("Golden"),
+            BULLET_COLOR_MED = Game.Colors.get("SlightRust"),
+            BULLET_COLOR_END = Game.Colors.get("Rust");
     int maxRange, distanceTravelled, damage;
-    Game.Direction facingDirection;
+    Element.Direction facingDirection;
 
-    public Bullet(int x, int y, int maxRange, int damage, Game.Direction facingDirection) {
+    public Bullet(int x, int y, int maxRange, int damage, Element.Direction facingDirection) {
         super(x, y);
         this.maxRange = maxRange;
         this.facingDirection = facingDirection;
@@ -24,7 +26,7 @@ public class Bullet extends Element {
 
     //getters
 
-    public Game.Direction getFacingDirection() {
+    public Element.Direction getFacingDirection() {
         return facingDirection;
     }
 
@@ -41,7 +43,6 @@ public class Bullet extends Element {
     }
 
     //setters
-
 
     public void setDistanceTravelled(int distanceTravelled) {
         this.distanceTravelled = distanceTravelled;
@@ -69,15 +70,5 @@ public class Bullet extends Element {
                 return new Position(position.getX(), position.getY() + 1);
         }
         return new Position(position.getX(), position.getY());
-    }
-
-    //drawing related methods
-
-    @Override
-    public void draw(TextGraphics graphics) throws IOException {
-        if (isAtLimit()) graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_END));
-        else if (distanceTravelled == (maxRange - 1)) graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_MED));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_INI));
-        graphics.putString(new TerminalPosition(position.getX(), position.getY()), "*");
     }
 }

@@ -1,28 +1,16 @@
 package feup.ldts.proj;
 
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.input.MouseAction;
-import com.googlecode.lanterna.input.MouseActionType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.MouseCaptureMode;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.terminal.TerminalFactory;
-import com.googlecode.lanterna.terminal.swing.AWTTerminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import feup.ldts.proj.model.Room;
-import org.w3c.dom.Text;
-import javax.swing.event.MouseInputListener;
+import feup.ldts.proj.model.room.Room;
+
 import java.awt.*;
-import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
@@ -30,7 +18,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.io.File;
-import java.util.List;
 
 public class Game {
     Room currentRoom;
@@ -64,12 +51,7 @@ public class Game {
         put("WoundedGreen", "#1a610e");
         put("DyingGreen", "#103d02");
     }};
-    public static enum Direction {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT
-    }
+
     int depth;
 
     public Game() {
@@ -177,6 +159,11 @@ public class Game {
         }
     }
 
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        Game game = new Game();
+        game.run();
+    }
+
     private void draw() throws IOException {
         screen.doResizeIfNecessary();
         screen.clear();
@@ -184,26 +171,6 @@ public class Game {
         screen.refresh();
     }
 
-    public static URI constructRoomFileURI() {
-        try {
-            URL resource = Game.class.getClassLoader().getResource("rooms/test/testRoom.txt");
-            return resource.toURI();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public URI constructRoomFileURI(int depthNum, int roomNum) {
-        try {
-        String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
-        URL resource = getClass().getClassLoader().getResource(roomPath);
-        return resource.toURI();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
     
     private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
         this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), newDepth);

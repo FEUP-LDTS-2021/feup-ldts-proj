@@ -1,16 +1,14 @@
 import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.Room;
+import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.elements.Monster;
 import feup.ldts.proj.model.elements.Player;
-import feup.ldts.proj.model.elements.Wall;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 public class RoomTest {
     private int depthNum, roomNum;
