@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 
 public class RoomTest {
-    private int depthNum, roomNum;
+/*    private int depthNum, roomNum;
     private Room room;
 
     @BeforeEach
@@ -47,5 +47,5 @@ public class RoomTest {
         Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getRight()));
         Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getUp()));
         Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getDown()));
-    }
+    }*/
 }

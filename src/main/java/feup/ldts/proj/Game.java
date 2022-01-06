@@ -37,7 +37,7 @@ public class Game {
         //bullet colors
         put("Golden", "#FFD966");
         put("SlightRust", "#94751B");
-        put("Rust", "#291e00");
+        put("Rust", "#291E00");
 
         //monster colors
         put("Red", "#D20F23");
@@ -87,7 +87,7 @@ public class Game {
             screen.doResizeIfNecessary();
 
             depth = 0;
-            currentRoom = new Room(constructRoomFileURI(depth, 1), depth);
+            /*currentRoom = new Room(constructRoomFileURI(depth, 1), depth);*/
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -97,13 +97,13 @@ public class Game {
         }
     }
 
-    public void run() throws IOException, URISyntaxException {
+/*    public void run() throws IOException, URISyntaxException {
         //code extracted from Professor Andre Restivo's hero-solid repository, might be changed later if needed
         int FPS = 60;
         int frameTime = 1000 / FPS;
-        long lastMonsterMovement = 0, lastBulletMovement = 0;
+        long lastMonsterMovement = 0, lastBulletMovement = 0;*/
 
-        while (true) {
+/*        while (true) {
 
             long startTime = System.currentTimeMillis();
 
@@ -157,23 +157,23 @@ public class Game {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         Game game = new Game();
-        game.run();
+        /*game.run();*/
     }
 
-    private void draw() throws IOException {
+/*    private void draw() throws IOException {
         screen.doResizeIfNecessary();
         screen.clear();
         currentRoom.draw(screen.newTextGraphics());
         screen.refresh();
-    }
+    }*/
 
     
-    private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
+/*    private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
         this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), newDepth);
-    }
+    }*/
 
 }
