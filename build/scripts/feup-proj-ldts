@@ -180,6 +180,6 @@ save () {
 APP_ARGS=`save "$@"`
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
-eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $FEUP_PROJ_LDTS_OPTS -classpath "\"$CLASSPATH\"" feup.ldts.proj.model.Application "$APP_ARGS"
+eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $FEUP_PROJ_LDTS_OPTS -classpath "\"$CLASSPATH\"" feup.ldts.proj.Game "$APP_ARGS"
 
 exec "$JAVACMD" "$@"

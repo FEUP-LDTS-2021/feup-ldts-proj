@@ -2,6 +2,7 @@ package feup.ldts.proj.gui;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -36,7 +37,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public ACTION getAction() throws IOException {
-        KeyStroke keyStroke = screen.pollInput();
+        KeyStroke keyStroke = screen.readInput();
         if (keyStroke == null) return ACTION.NONE;
 
         if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.EXIT;
@@ -115,7 +116,7 @@ public class LanternaGUI implements GUI {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString(Game.Colors.get("Dirt")));
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
-        textGraphics.putString(x, y, "" + c);
+        textGraphics.putString(y, x, "" + c);
     }
 
     @Override

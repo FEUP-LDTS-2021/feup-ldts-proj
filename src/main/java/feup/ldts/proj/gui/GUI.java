@@ -14,6 +14,7 @@ public interface GUI {
     void drawMonster(Position position, String color);
     void drawBullet(Position position, String color);
     void drawText(Position position, String text, String color);
+    void drawCharacter(int x, int y, char c, String color);
 
     void clear();
     void refresh() throws IOException;
