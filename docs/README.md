@@ -23,6 +23,7 @@ the current implemented features are:
 <li><b>Keyboard control</b> - the user interacts with the game screen through the keyboard, every action is interpreted through a keyboard input made by the user.</li>
 
 <li><b>Player movement</b> - the player is allowed to move with the keyboard, using the arrow keys. If the user enters (collides) the Gate a new Room is loaded.</li>
+<br>
 <p align="center">
 <img src="gifs/controls/PlayerMovementFirstRoom.gif">
 </p>
@@ -30,6 +31,7 @@ the current implemented features are:
 
 
 <li><b>Player combat</b> - the player shoots Bullets off of his Weapon if he presses <b>x</b>, damaging and killing the Monsters he hits.</li>
+<br>
 <p align="center">
 <img src="">
 </p>
@@ -38,6 +40,7 @@ the current implemented features are:
 
 
 <li><b>Monster movement</b> - the monsters are constantly moving in random directions.</li>
+<br>
 <p align="center">
 <img src="">
 </p>
@@ -45,6 +48,7 @@ the current implemented features are:
 
 
 <li><b>Monster combat</b> - the monsters are also capable of damaging the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
+<br>
 <p align="center">
 <img src="gifs/controls/PlayerDeath.gif">
 </p>
@@ -52,6 +56,7 @@ the current implemented features are:
 
 
 <li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters have slightly more health in lower depths.</li>
+<br>
 <p align="center">
 <img src="other/Rooms.png">
 </p>
