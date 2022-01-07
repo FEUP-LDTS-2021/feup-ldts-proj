@@ -2,7 +2,13 @@
 
 ## Game description
 
-The game is based off the Hero project developed in the practical Labs, with some additional tweaks. The player spawns in a Room with Walls and Monsters and must use its Weapon to kill the Monsters. Once the Player has killed every single Monster, a Gate opens up. If the player goes through the Gate, he advances to the next Room, untill he encounters the Final Boss which he must defeat in order to win the game.
+The game is based on the Hero project developed in the practical Labs, with some additional tweaks. 
+Initially, the Player, spawns in an empty Room with Walls and a Gate, and has a default Weapon and health stats. Every X (to be defined) seconds the Player dies, respawning inside the first Room. 
+The Player has a <b>maximum HP</b> stat which limits the possible current HP. If the Player dies, he respawns in the initial Room with full HP.
+The maximum HP can be increased through some Potions.
+
+Upon entering the Gate, the Player enters a new Room which has Monsters in it. In order to open the Gate and
+progress to the next Room, the Player must kill every single Monster, until it eventually encounters the Final Boss, which he must defeat in order to beat the game.
 
 This project was designed by:
 <ul>
@@ -75,12 +81,40 @@ Therefore, the current features we have at the moment which are tested and worki
 The features we would like to add to our game are the following:
 <ul>
 <li>A new and improved color scheme and a custom font, designed specifically for our game</li>
-<li>New Weapons for the Player which will increase the diversity of combat techniques</li>
-<li>Different types of Monsters with different attributes (different health, damage, attack movement, ...)</li>
-<li>Potions and Effects which will boost the Player in various ways</li>
-<li>A challenging Boss Fight</li>
+<li>New Weapon upgrades for the Player which will increase the diversity of combat techniques</li>
+<br>
+<p align="center">
+<img src="screenshots/mockups/WeaponMockup.png">
+<b><i>Fig. 6 - Weapon pickup mockup</i></b>
+<br>
+<img src="screenshots/mockups/WeaponsMenuMockup.png">
+<b><i>Fig. 7 - Weapon pickup menu mockup</i></b>
+</p>
+
+<li>Different types of Monsters with different attributes (different health, damage, attack strategies, ...)</li>
+<br>
+<p align="center">
+<img src="screenshots/mockups/MonstersMockup.png">
+<b><i>Fig. 8 - Different monsters mockup</i></b>
+</p>
+
+<li>Potions and Effects which will aid the Player in various ways</li>
+<br>
+<p align="center">
+<img src="screenshots/mockups/PotionsAndEffectsMockup.png">
+<b><i>Fig. 9 - Potions and Effects mockup</i></b>
+</p>
+
+<li>A challenging Boss Fight (to be defined)</li>
+
 <li>A menu which will allow the Player to Play, read the game Instructions or Exit</li>
 </ul>
+<br>
+<p align="center">
+<img src="screenshots/mockups/MainMenuMockup.png">
+<b><i>Fig. 10 - Main Menu mockup</i></b>
+</p>
+
 
 ## Design
 
@@ -92,7 +126,7 @@ Design-wise our first concern was how to efficiently structure the project. Sinc
 
 ##### The Pattern
 
-The pattern which we are currently following is the <b>Architectural Pattern</b>, more specifically the <b>Model-View-Controller</b> style, which is commonly used in a GUI.
+We are currently following the <b>Model-View-Controller Architectural Pattern</b>, which is commonly used in programs with a GUI.
 
 ##### Implementation
 
@@ -103,8 +137,51 @@ the visual effects on screen (Viewers). The logic of the game will be handled by
     <img src="screenshots/mvc/ModelsAndViewers.png">
 </p>
 
-<p align="center"> <b><i>Fig. 6 - Model and Viewer pattern design</i></b>
+<p align="center"> <b><i>Fig. 11 - Model and Viewer pattern design</i></b>
 
 ##### Consequences
 
-The use of the Model and View pattern for our objects makes it possible for our code to acknowledge the <b><i>Single Responsibility Principle</b></i> and also makes it very easy to add new features throughout the future development of our game.
+The use of the Model and View pattern for our objects makes it possible for our code to acknowledge the <b><i>Single Responsibility Principle</b></i> and also makes it easier to add new features throughout the future development of our game.
+
+### Room Builder
+
+#### Problem in Context
+
+Our game will take place in various rooms, which are read from a text file. 
+A room is a complex object, composed of various objects of different Classes. 
+As such, we need to find a flexible and simple way of assembling and building each room.
+
+#### The Pattern
+
+The pattern chosen for this problem is the Builder Pattern.
+The intent of the Builder design pattern is to separate the construction of a complex object from its representation. By doing so, the same construction process can create different representations (rooms).
+
+#### Implementation
+
+In our project, the RoomBuilder Class is responsible for reading text files, constructing the elements which compose the room and finally assembling the Room itself. It applies the Builder pattern, since
+it divides the building of the room in simpler and smaller steps (createWalls(), createMonsters(), ...).
+
+#### Consequences
+
+By following this pattern we are avoiding tight relationships between the creation and the concrete product of a Room,
+by encapsulating the creating and assembling process within a different Class. 
+
+### GUI
+
+#### Problem in Context
+
+Displaying the game through the Lanterna library is a complex task, which
+our game shouldn't be affected by. Therefore, we need to find a simplified way of fulfilling
+our game displaying needs.
+
+#### The Pattern
+
+By applying the Facade Pattern, we get a simple interface of a complex subsystem (Lanterna), which allows us
+to only include the necessary features.
+
+#### Implementation
+
+The simplified <b>GUI</b> Interface contains the necessary methods to display our game,
+which are implemented by the <b>LanternaGUI</b> Class. This Class then goes on to use
+the necessary methods from the Lanterna library.
+
