@@ -99,15 +99,16 @@ The features we would like to add to our game are the following:
 <br>
 <p align="center">
 <img src="screenshots/mockups/MonstersMockup.png">
-<b><i>Fig. 8 - Different monsters mockup</i></b>
 </p>
+<p align="center"><b><i>Fig. 8 - Different monsters mockup</i></b></p>
 
 <li>Potions and Effects which will aid the Player in various ways</li>
 <br>
 <p align="center">
 <img src="screenshots/mockups/PotionsAndEffectsMockup.png">
-<b><i>Fig. 9 - Potions and Effects mockup</i></b>
 </p>
+<p align="center"><b><i>Fig. 9 - Potions and Effects mockup</i></b></p>
+<br>
 
 <li>A challenging Boss Fight (to be defined)</li>
 
@@ -116,9 +117,8 @@ The features we would like to add to our game are the following:
 <br>
 <p align="center">
 <img src="screenshots/mockups/MainMenuMockup.png">
-<b><i>Fig. 10 - Main Menu mockup</i></b>
 </p>
-
+<p align="center"><b><i>Fig. 10 - Main Menu mockup</i></b></p>
 
 ## Design
 
