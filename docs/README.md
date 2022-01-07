@@ -85,11 +85,15 @@ The features we would like to add to our game are the following:
 <br>
 <p align="center">
 <img src="screenshots/mockups/WeaponMockup.png">
-<b><i>Fig. 6 - Weapon pickup mockup</i></b>
-<br>
-<img src="screenshots/mockups/WeaponsMenuMockup.png">
-<b><i>Fig. 7 - Weapon pickup menu mockup</i></b>
 </p>
+<p align="center"><b><i>Fig.6 - Weapon pickup mock</i></b></p>
+<br>
+
+<p align="center">
+<img src="screenshots/mockups/WeaponsMenuMockup.png">
+</p>
+<p align="center"><b><i>Fig. 7 - Weapon pickup menu mockup</i></b></p> 
+<br>
 
 <li>Different types of Monsters with different attributes (different health, damage, attack strategies, ...)</li>
 <br>
