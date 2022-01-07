@@ -21,9 +21,43 @@ the game is there - moving the Player, moving the Monster, shooting the Bullets.
 the current implemented features are:
 <ul>
 <li><b>Keyboard control</b> - the user interacts with the game screen through the keyboard, every action is interpreted through a keyboard input made by the user.</li>
-<li><b>Player movement</b> - the player is allowed to move with the keyboard, using the arrow keys.</li>
+
+<li><b>Player movement</b> - the player is allowed to move with the keyboard, using the arrow keys. If the user enters (collides) the Gate a new Room is loaded.</li>
+<p align="center">
+<img src="gifs/controls/PlayerMovementFirstRoom.gif">
+</p>
+<p align="center"> <b><i>Fig. 1 - Player movement and Gate collision</i></b>
+
+
+<li><b>Player combat</b> - the player shoots Bullets off of his Weapon if he presses <b>x</b>, damaging and killing the Monsters he hits.</li>
+<p align="center">
+<img src="">
+</p>
+
+<p align="center"> <b><i>Fig. 2 - Player combat, shooting Bullets, damaging and killing a Monster</i></b>
+
+
 <li><b>Monster movement</b> - the monsters are constantly moving in random directions.</li>
-<li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters have slightly more health in lower depths</li>
+<p align="center">
+<img src="">
+</p>
+<p align="center"> <b><i>Fig. 3 - Monsters constantly moving in random directions</i></b>
+
+
+<li><b>Monster combat</b> - the monsters are also capable of damaging the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
+<p align="center">
+<img src="gifs/controls/PlayerDeath.gif">
+</p>
+<p align="center"> <b><i>Fig. 4 - Monsters damaging and killing a Player</i></b>
+
+
+<li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters have slightly more health in lower depths.</li>
+<p align="center">
+<img src="other/Rooms.png">
+</p>
+<p align="center"> <b><i>Fig. 5 - Different levels available in our game</i></b>
+
+
 <li><b>Collision detection</b> - collisions between different objects are verified (e.g. Player and Wall collisions)</li>
 </ul>
 
@@ -64,7 +98,7 @@ the visual effects on screen (Viewers). The logic of the game will be handled by
     <img src="screenshots/mvc/ModelsAndViewers.png">
 </p>
 
-<p align="center"> <b><i>Fig.1 - Model and Viewer pattern design</i></b>
+<p align="center"> <b><i>Fig. 6 - Model and Viewer pattern design</i></b>
 
 ##### Consequences
 
