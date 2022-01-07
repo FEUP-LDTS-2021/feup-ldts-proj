@@ -37,7 +37,7 @@ public class RoomViewerTest {
     void drawTest() throws IOException {
         roomViewer.draw(room);
         Mockito.verify(gui, Mockito.times(4)).drawWall(Mockito.any(Position.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(10, 10), Mockito.any(String.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(Mockito.any(Position.class), Mockito.any(String.class));
         Mockito.verify(gui, Mockito.times(4)).drawMonster(Mockito.any(Position.class), Mockito.any(String.class));
     }
 
