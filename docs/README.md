@@ -1,6 +1,6 @@
-#LDTS_G0806
+# LDTS_G0806
 
-##Game description
+## Game description
 
 The game is based off the Hero project developed in the practical Labs, with some additional tweaks. The player spawns in a Room with Walls and Monsters and must use its Weapon to kill the Monsters. Once the Player has killed every single Monster, a Gate opens up. If the player goes through the Gate, he advances to the next Room, untill he encounters the Final Boss which he must defeat in order to win the game.
 
@@ -11,7 +11,7 @@ This project was designed by:
 <li>Pedro Miguel Ramalho, up202004715@fe.up.pt</li>
 </ul>
 
-##Implemented Features
+## Implemented Features
 
 Before we talk about the implemented features we must explain the state of our project.
 Currently we have 2 important branches, <b><i>master</i></b> and <b><i>refactoring</i></b>.
@@ -31,7 +31,7 @@ The <b><i>refactoring</i></b> branch, as the name suggests, is where we're refac
 We're still using TDD, but our tests are new and improved. At the moment, no entity is allowed to move. We have completed the <b>Model</b> and the <b>View</b> portion of each entity, but none of them moves yet. This will be implemented in the future.
 Therefore, the current features we have at the moment which are tested and working are the creating and displaying on screen of every element in our game.
 
-##Planned features
+## Planned features
 
 The features we would like to add to our game are the following:
 <ul>
@@ -43,19 +43,19 @@ The features we would like to add to our game are the following:
 <li>A menu which will allow the Player to Play, read the game Instructions or Exit</li>
 </ul>
 
-##Design
+## Design
 
-###General Structure
+### General Structure
 
-#####Problem in Context
+##### Problem in Context
 
 Design-wise our first concern was how to efficiently structure the project. Since we are dealing with a GUI and our game has different elements which need to be displayed on screen, we chose some patterns in order to fulfill our goals in the best way possible.
 
-#####The Pattern
+##### The Pattern
 
 The pattern which we are currently following is the <b>Architectural Pattern</b>, more specifically the <b>Model-View-Controller</b> style, which is commonly used in a GUI.
 
-#####Implementation
+##### Implementation
 
 Regarding the implementation, we now have classes which main purpose is to store data (Models) and classes that are responsible for
 the visual effects on screen (Viewers). The logic of the game will be handled by the Controllers.
@@ -66,6 +66,6 @@ the visual effects on screen (Viewers). The logic of the game will be handled by
 
 <p align="center"> <b><i>Fig.1 - Model and Viewer pattern design</i></b>
 
-#####Consequences
+##### Consequences
 
 The use of the Model and View pattern for our objects makes it possible for our code to acknowledge the <b><i>Single Responsibility Principle</b></i> and also makes it very easy to add new features throughout the future development of our game.
