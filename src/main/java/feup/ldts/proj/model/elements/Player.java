@@ -105,4 +105,8 @@ public class Player extends Element {
         setPosition(position);
     }
 
+    public Bullet createBullet() {
+        return new Bullet(position.getX(), position.getY(), weapon.getRange(), weapon.getDamage(), facingDirection);
+    }
+
 }

@@ -2,7 +2,6 @@ package feup.ldts.proj.gui;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
@@ -37,7 +35,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public ACTION getAction() throws IOException {
-        KeyStroke keyStroke = screen.readInput();
+        KeyStroke keyStroke = screen.pollInput();
+        System.out.println(keyStroke);
         if (keyStroke == null) return ACTION.NONE;
 
         if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.EXIT;
@@ -106,6 +105,12 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public void drawPassage(Position position, String color) {
+        System.out.println("Entrei no draw passage do lanternaGUI com a cor " + color);
+        drawCharacter(position.getX(), position.getY(), 'O', color);
+    }
+
+    @Override
     public void drawText(Position position, String text, String color) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
@@ -116,7 +121,7 @@ public class LanternaGUI implements GUI {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString(Game.Colors.get("Dirt")));
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));
-        textGraphics.putString(y, x, "" + c);
+        textGraphics.putString(x, y, "" + c);
     }
 
     @Override
@@ -132,5 +137,9 @@ public class LanternaGUI implements GUI {
     @Override
     public void close() throws IOException {
         screen.close();
+    }
+
+    public Screen getScreen() {
+        return screen;
     }
 }

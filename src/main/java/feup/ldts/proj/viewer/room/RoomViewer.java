@@ -15,6 +15,7 @@ import java.util.List;
 public class RoomViewer {
     private final GUI gui;
 
+
     public RoomViewer(GUI gui) {
         this.gui = gui;
     }
@@ -25,9 +26,15 @@ public class RoomViewer {
         drawBackground();
         drawElements(room.getWalls(), new WallViewer());
         drawElements(room.getMonsters(), new MonsterViewer());
-        //drawElements(room.getBullets(), new BulletViewer());
+        drawElements(room.getBullets(), new BulletViewer());
         drawElement(room.getPlayer(), new PlayerViewer());
-        gui.drawText(new Position(0, 20), "HP: " + room.getPlayer().getHP(), Game.Colors.get("White"));
+        if (room.getMonsters().isEmpty())
+            drawElement(room.getPassage(), new PassageViewer());
+        String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
+        String CapacityString = " C:" + room.getBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
+        gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
+        gui.drawText(new Position(HpString.length()+1, 20), CapacityString, Game.Colors.get("Golden"));
+
 
         gui.refresh();
     }
@@ -43,6 +50,10 @@ public class RoomViewer {
 
     GUI.ACTION getAction() throws IOException {
         return gui.getAction();
+    }
+
+    public void drawPassage(Room room) {
+        drawElement(room.getPassage(), new PassageViewer());
     }
 
     public void drawBackground() {

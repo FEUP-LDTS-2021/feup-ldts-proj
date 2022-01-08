@@ -2,6 +2,7 @@ package feup.ldts.proj.model.room;
 
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Monster;
+import feup.ldts.proj.model.elements.Passage;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.elements.Wall;
 
@@ -50,10 +51,10 @@ public class RoomBuilder {
     public List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
 
-        for (int col = 0; col < lines.size(); col++) {
-            String line = lines.get(col);
-            for (int row = 0; row < line.length(); row++)
-                if (line.charAt(row) == '#') walls.add(new Wall(col, row));
+        for (int row = 0; row < lines.size(); row++) {
+            String line = lines.get(row);
+            for (int col = 0; col < line.length(); col++)
+                if (line.charAt(col) == '#') walls.add(new Wall(col, row));
         }
         return walls;
     }
@@ -61,28 +62,28 @@ public class RoomBuilder {
     public List<Monster> createMonsters() {
         List<Monster> monsters = new ArrayList<>();
 
-        for (int col = 0; col < lines.size(); col++) {
-            String line = lines.get(col);
-            for (int row = 0; row < line.length(); row++)
-                if (line.charAt(row) == 'M') monsters.add(new Monster(col, row, depth));
+        for (int row = 0; row < lines.size(); row++) {
+            String line = lines.get(row);
+            for (int col = 0; col < line.length(); col++)
+                if (line.charAt(col) == 'M') monsters.add(new Monster(col, row, depth));
         }
         return monsters;
     }
 
     public Player createPlayer() {
-        for (int col = 0; col < lines.size(); col++) {
-            String line = lines.get(col);
-            for (int row = 0; row < line.length(); row++)
-                if (line.charAt(row) == 'X') return new Player(col, row);
+        for (int row = 0; row < lines.size(); row++) {
+            String line = lines.get(row);
+            for (int col = 0; col < line.length(); col++)
+                if (line.charAt(col) == 'X') return new Player(col, row);
         }
         return null;
     }
 
-    public Position createGate() {
-        for (int col = 0; col < lines.size(); col++) {
-            String line = lines.get(col);
-            for (int row = 0; row < line.length(); row++)
-                if (line.charAt(row) == 'O') return new Position(col, row);
+    public Passage createPassage() {
+        for (int row = 0; row < lines.size(); row++) {
+            String line = lines.get(row);
+            for (int col = 0; col < line.length(); col++)
+                if (line.charAt(col) == 'O') return new Passage(col, row);
         }
         return null;
     }
@@ -92,7 +93,7 @@ public class RoomBuilder {
         room.setWalls(createWalls());
         room.setMonsters(createMonsters());
         room.setPlayer(createPlayer());
-        room.setGate(createGate());
+        room.setPassage(createPassage());
 
         room.getPlayer().setWeapon(player.getWeapon());
         room.getPlayer().setMaxHP(player.getMaxHP());

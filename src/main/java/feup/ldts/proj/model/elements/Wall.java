@@ -10,12 +10,13 @@ import feup.ldts.proj.model.Position;
 import java.io.IOException;
 
 public class Wall extends Element {
-    final String WALL_COLOR = Game.Colors.get("DarkGray");
+    final String color;
     public Wall(int x, int y) {
         super(x, y);
+        color = Game.Colors.get("DarkGray");
     }
 
     public String getColor() {
-        return WALL_COLOR;
+        return color;
     }
 }
