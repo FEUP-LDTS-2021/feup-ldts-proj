@@ -1,6 +1,5 @@
 package feup.ldts.proj.model;
 
-
 public class Weapon {
     private int damage, range, capacity;
 

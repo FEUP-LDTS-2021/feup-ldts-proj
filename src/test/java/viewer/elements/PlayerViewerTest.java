@@ -24,22 +24,22 @@ public class PlayerViewerTest {
     @Test
     public void drawPlayerTest() {
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("HealthyGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("HealthyGreen"));
 
-        player.setHP(8);
+        player.setHP(7);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("Green"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("Green"));
 
-        player.setHP(6);
+        player.setHP(5);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("DarkGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("DarkGreen"));
 
-        player.setHP(4);
+        player.setHP(3);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("WoundedGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("WoundedGreen"));
 
-        player.setHP(2);
+        player.setHP(1);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(new Position(5, 5), Game.Colors.get("DyingGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("DyingGreen"));
     }
 }

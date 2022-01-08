@@ -2,11 +2,9 @@ package viewer.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Bullet;
 import feup.ldts.proj.model.elements.Element;
 import feup.ldts.proj.viewer.elements.BulletViewer;
-import feup.ldts.proj.viewer.elements.ElementViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

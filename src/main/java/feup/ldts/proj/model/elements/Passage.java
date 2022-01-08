@@ -3,15 +3,15 @@ package feup.ldts.proj.model.elements;
 import feup.ldts.proj.Game;
 
 public class Passage extends Element {
-    private final String color;
+    private final String PASSAGE_COLOR;
 
     public Passage(int x, int y) {
         super(x, y);
-        color = Game.Colors.get("Black");
+        PASSAGE_COLOR = Game.Colors.get("Black");
     }
 
     @Override
     public String getColor() {
-        return color;
+        return PASSAGE_COLOR;
     }
 }

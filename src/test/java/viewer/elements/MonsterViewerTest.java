@@ -2,7 +2,6 @@ package viewer.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Monster;
 import feup.ldts.proj.viewer.elements.MonsterViewer;

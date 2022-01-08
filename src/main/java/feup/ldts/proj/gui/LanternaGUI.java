@@ -1,6 +1,5 @@
 package feup.ldts.proj.gui;
 
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -36,7 +35,6 @@ public class LanternaGUI implements GUI {
     @Override
     public ACTION getAction() throws IOException {
         KeyStroke keyStroke = screen.pollInput();
-        System.out.println(keyStroke);
         if (keyStroke == null) return ACTION.NONE;
 
         if (keyStroke.getKeyType() == KeyType.EOF) return ACTION.EXIT;
@@ -106,7 +104,6 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawPassage(Position position, String color) {
-        System.out.println("Entrei no draw passage do lanternaGUI com a cor " + color);
         drawCharacter(position.getX(), position.getY(), 'O', color);
     }
 

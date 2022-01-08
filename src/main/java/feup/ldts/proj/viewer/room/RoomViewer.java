@@ -1,11 +1,9 @@
 package feup.ldts.proj.viewer.room;
 
-import com.googlecode.lanterna.TextColor;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Element;
-import feup.ldts.proj.model.elements.Monster;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.viewer.elements.*;
 

@@ -1,7 +1,5 @@
 package feup.ldts.proj;
 
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.elements.Player;
@@ -9,27 +7,11 @@ import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
 import feup.ldts.proj.viewer.room.RoomViewer;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.BreakIterator;
 import java.util.*;
-
-//-----------------------------------------------------------------------------------------------------------//
-//                                                                                                           //
-// This first portion of the game was heavily inspired by the Hero project developed in the Labs.            //
-// We were also guided by Professor Andre Restivo, following a lot of his principles and work at hero-solid. //
-// Check the code report for more details.                                                                   //
-// Features to implement in the future:                                                                      //
-//  - Add a controller for each entity that needs one                                                        //
-//  - Add different types of Weapons for our Player                                                          //
-//  - Add various items which will boost the Player in different ways                                        //
-//  - Modify the coloring scheme and also edit the current font so it looks more RPG                         //
-//  - Implement the Boss Fight                                                                               //
-//                                                                                                           //
-//-----------------------------------------------------------------------------------------------------------//
 
 public class Game {
     private final int NUM_ROWS = 20;
@@ -97,8 +79,6 @@ public class Game {
 
             viewer.draw(room);
 
-            System.out.println(room.getMonsters().isEmpty());
-            System.out.println(room.getPassage().getPosition());
             if (room.getMonsters().isEmpty())
                 viewer.drawPassage(room);
 

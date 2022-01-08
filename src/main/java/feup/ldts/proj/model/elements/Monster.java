@@ -1,9 +1,5 @@
 package feup.ldts.proj.model.elements;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
 
@@ -11,9 +7,9 @@ import java.util.Random;
 
 public class Monster extends Element {
     final String
-            MONSTER_COLOR_100 = Game.Colors.get("Red"),
-            MONSTER_COLOR_66 = Game.Colors.get("Pink"),
-            MONSTER_COLOR_33 = Game.Colors.get("Purple");
+            MONSTER_COLOR_100,
+            MONSTER_COLOR_66,
+            MONSTER_COLOR_33;
     final int baseHP = 5;
     final int baseDamage = 1;
     int HP, maxHP;
@@ -26,6 +22,10 @@ public class Monster extends Element {
         maxHP = baseHP * depth;
         HP = maxHP;
         damage = baseDamage * depth;
+
+        MONSTER_COLOR_33 = Game.Colors.get("Purple");
+        MONSTER_COLOR_66 = Game.Colors.get("Pink");
+        MONSTER_COLOR_100 = Game.Colors.get("Red");
     }
 
     //getters
@@ -59,7 +59,7 @@ public class Monster extends Element {
     //other functions
 
     public void decreaseHP(int damageAmount) {
-        HP -= damageAmount;
+        HP = Math.max(0, HP - damageAmount);
     }
 
     //----------------------------------------------------------------------------------

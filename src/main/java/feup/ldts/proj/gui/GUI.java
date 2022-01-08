@@ -4,7 +4,6 @@ import com.googlecode.lanterna.screen.Screen;
 import feup.ldts.proj.model.Position;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public interface GUI {
     ACTION getAction() throws IOException;

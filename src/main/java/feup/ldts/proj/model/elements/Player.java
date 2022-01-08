@@ -8,12 +8,7 @@ import feup.ldts.proj.model.Weapon;
 
 
 public class Player extends Element {
-    final String
-            PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen"),
-            PLAYER_COLOR_80 = Game.Colors.get("Green"),
-            PLAYER_COLOR_60 = Game.Colors.get("DarkGreen"),
-            PLAYER_COLOR_40 = Game.Colors.get("WoundedGreen"),
-            PLAYER_COLOR_20 = Game.Colors.get("DyingGreen");
+    private final String PLAYER_COLOR_20, PLAYER_COLOR_40, PLAYER_COLOR_60, PLAYER_COLOR_80, PLAYER_COLOR_100;
     private int HP, maxHP;
     private Weapon weapon;
     private Element.Direction facingDirection;
@@ -26,6 +21,12 @@ public class Player extends Element {
         this.weapon = new Weapon(2, 5, 3);
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
+
+        PLAYER_COLOR_20 = Game.Colors.get("DyingGreen");
+        PLAYER_COLOR_40 = Game.Colors.get("WoundedGreen");
+        PLAYER_COLOR_60 = Game.Colors.get("DarkGreen");
+        PLAYER_COLOR_80 = Game.Colors.get("Green");
+        PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen");
     }
 
     public Player(int x, int y, int maxHP, int HP, Weapon weapon) {
@@ -34,17 +35,22 @@ public class Player extends Element {
         this.weapon = weapon;
         this.facingDirection = Element.Direction.DOWN;
         this.maxHP = maxHP;
+
+        PLAYER_COLOR_20 = Game.Colors.get("DyingGreen");
+        PLAYER_COLOR_40 = Game.Colors.get("WoundedGreen");
+        PLAYER_COLOR_60 = Game.Colors.get("DarkGreen");
+        PLAYER_COLOR_80 = Game.Colors.get("Green");
+        PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen");
     }
 
     //getters
 
     public String getColor() {
-        if ((float) HP/maxHP == 1.0) return PLAYER_COLOR_100;
-        if ((float) HP/maxHP >= 0.80) return PLAYER_COLOR_80;
-        if ((float) HP/maxHP >= 0.60) return PLAYER_COLOR_60;
-        if ((float) HP/maxHP >= 0.40) return PLAYER_COLOR_40;
-        if ((float) HP/maxHP >= 0.20) return PLAYER_COLOR_20;
-        return null;
+        if ((float) HP/maxHP <= 0.20) return PLAYER_COLOR_20;
+        if ((float) HP/maxHP <= 0.40) return PLAYER_COLOR_40;
+        if ((float) HP/maxHP <= 0.60) return PLAYER_COLOR_60;
+        if ((float) HP/maxHP <= 0.80) return PLAYER_COLOR_80;
+        return PLAYER_COLOR_100;
     }
 
     public int getHP() {
