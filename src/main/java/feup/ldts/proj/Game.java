@@ -1,51 +1,32 @@
 package feup.ldts.proj;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.input.MouseAction;
-import com.googlecode.lanterna.input.MouseActionType;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.MouseCaptureMode;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.terminal.TerminalFactory;
-import com.googlecode.lanterna.terminal.swing.AWTTerminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import feup.ldts.proj.model.Room;
-import org.w3c.dom.Text;
-import javax.swing.event.MouseInputListener;
+import feup.ldts.proj.gui.GUI;
+import feup.ldts.proj.gui.LanternaGUI;
+import feup.ldts.proj.model.elements.Player;
+import feup.ldts.proj.model.room.Room;
+import feup.ldts.proj.model.room.RoomBuilder;
+import feup.ldts.proj.viewer.room.RoomViewer;
+
 import java.awt.*;
-import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.*;
-import java.io.File;
-import java.util.List;
 
 public class Game {
-    Room currentRoom;
-    Screen screen;
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
-    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{
-        //others or non used
+    int depth;
+    GUI gui;
+    Room room;
+    RoomViewer viewer;
+
+    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{ //should probably be somewhere else?
+        //others or not used
         put("LightGreen", "#C9F4DA");
-        put("Blurple", "#5D5CAF");
-        put("Dirt", "#634220");
-        put("Black", "#000000");
-        put("White", "#FFFFFF");
-        put("Gray", "#4D5D53");
-        put("DarkGray", "#3B463F");
+        put("Blurple", "#5D5CAF"); //walls
+        put("Dirt", "#634220"); //floor
+        put("Black", "#000000"); //passage
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -64,59 +45,25 @@ public class Game {
         put("WoundedGreen", "#1a610e");
         put("DyingGreen", "#103d02");
     }};
-    public static enum Direction {
-        UP,
-        RIGHT,
-        DOWN,
-        LEFT
+
+    public Game() throws IOException, URISyntaxException, FontFormatException {
+        this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
+        this.room = new RoomBuilder(0, 1).createRoom(new Player(10, 10));
+        this.viewer = new RoomViewer(gui);
     }
-    int depth;
 
-    public Game() {
+
+    public static void main(String[] args) throws URISyntaxException, FontFormatException {
         try {
-            URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
-            File fontFile = new File(resource.toURI());
-            Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
-
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(font);
-
-            DefaultTerminalFactory factory = new DefaultTerminalFactory();
-
-            Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-            AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-            factory.setTerminalEmulatorFontConfiguration(fontConfig);
-            factory.setForceAWTOverSwing(true);
-            factory.setInitialTerminalSize(new TerminalSize(NUM_COLS, NUM_ROWS));
-
-            factory.setMouseCaptureMode(MouseCaptureMode.CLICK);
-            Terminal terminal = factory.createTerminal();
-
-            ((AWTTerminalFrame)terminal).addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    e.getWindow().dispose();
-                }
-            });
-
-            screen = new TerminalScreen(terminal);
-            screen.setCursorPosition(null);
-            screen.startScreen();
-            screen.doResizeIfNecessary();
-
-            depth = 0;
-            currentRoom = new Room(constructRoomFileURI(depth, 1), depth);
+            Game game = new Game();
+            game.run();
+            if (game.gui.getAction() == GUI.ACTION.EXIT) game.gui.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (FontFormatException e) {
             e.printStackTrace();
         }
     }
 
     public void run() throws IOException, URISyntaxException {
-        //code extracted from Professor Andre Restivo's hero-solid repository, might be changed later if needed
         int FPS = 60;
         int frameTime = 1000 / FPS;
         long lastMonsterMovement = 0, lastBulletMovement = 0;
@@ -125,46 +72,44 @@ public class Game {
 
             long startTime = System.currentTimeMillis();
 
-            if (currentRoom.getPlayer().getHP() == 0) {
+            if (room.getPlayer().getHP() == 0) {
                 depth = 0;
-                updateRoom(depth, 1); //depth 0 only has 1 room;
+                updateRoom(depth, 1);
             }
 
-            draw();
+            viewer.draw(room);
 
-            KeyStroke key = screen.pollInput();
-            if (key != null) {
+            if (room.getMonsters().isEmpty())
+                viewer.drawPassage(room);
 
-                if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') screen.close();
-                if (key.getKeyType() == KeyType.EOF) break;
-                currentRoom.processKey(key);
 
+            GUI.ACTION nextAction = gui.getAction();
+            if (nextAction == GUI.ACTION.EXIT) {
+                gui.close();
+                break;
             }
+            room.processKey(nextAction);
 
-            //notice that if the file name is roomX then the map has X monsters
-            if (currentRoom.gateCollision() && currentRoom.getMonsters().isEmpty()) {
+            if (room.passageCollision() && room.getMonsters().isEmpty()) {
                 depth++;
 
-                //temporary, we must load the Boss room (to be designed later)
                 if (depth == 3) {
                     depth = 0;
                     updateRoom(depth, 1);
-                } else {
-                    int newRoomNum = new Random().nextInt(3) + 1; //random number between 1 and 3, indicating the room number
-                    updateRoom(depth, newRoomNum);
                 }
+                int newRoom = new Random().nextInt(3) + 1;
+                updateRoom(depth, newRoom);
             }
 
             if (startTime - lastMonsterMovement > 500) {
-                currentRoom.moveMonsters();
+                room.moveMonsters();
                 lastMonsterMovement = startTime;
             }
 
             if (startTime - lastBulletMovement > 250) {
-                currentRoom.moveBullets();
+                room.moveBullets();
                 lastBulletMovement = startTime;
             }
-
 
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
@@ -177,36 +122,7 @@ public class Game {
         }
     }
 
-    private void draw() throws IOException {
-        screen.doResizeIfNecessary();
-        screen.clear();
-        currentRoom.draw(screen.newTextGraphics());
-        screen.refresh();
+    private void updateRoom(int depth, int roomNum) throws FileNotFoundException, URISyntaxException {
+        this.room = new RoomBuilder(depth, roomNum).createRoom(new Player(10, 10));
     }
-
-    public static URI constructRoomFileURI() {
-        try {
-            URL resource = Game.class.getClassLoader().getResource("rooms/test/testRoom.txt");
-            return resource.toURI();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public URI constructRoomFileURI(int depthNum, int roomNum) {
-        try {
-        String roomPath = "rooms/depth" + depthNum + '/' + "room" + roomNum + ".txt";
-        URL resource = getClass().getClassLoader().getResource(roomPath);
-        return resource.toURI();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    private void updateRoom(int newDepth, int newRoomNum) throws FileNotFoundException, URISyntaxException {
-        this.currentRoom = new Room(constructRoomFileURI(newDepth, newRoomNum), newDepth);
-    }
-
 }

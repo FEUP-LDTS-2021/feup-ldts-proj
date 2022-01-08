@@ -1,30 +1,30 @@
 package feup.ldts.proj.model.elements;
 
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.model.Position;
 
-import java.io.IOException;
-
 public class Bullet extends Element {
-    final String BULLET_COLOR_INI = Game.Colors.get("Golden"), BULLET_COLOR_MED = Game.Colors.get("SlightRust"), BULLET_COLOR_END = Game.Colors.get("Rust");
-
+    final String BULLET_COLOR_INI, BULLET_COLOR_MED, BULLET_COLOR_END;
     int maxRange, distanceTravelled, damage;
-    Game.Direction facingDirection;
+    Element.Direction facingDirection;
 
-    public Bullet(int x, int y, int maxRange, int damage, Game.Direction facingDirection) {
+    //constructors
+
+    public Bullet(int x, int y, int maxRange, int damage, Element.Direction facingDirection) {
         super(x, y);
         this.maxRange = maxRange;
         this.facingDirection = facingDirection;
         this.damage = damage;
         distanceTravelled = 0;
+
+        BULLET_COLOR_INI = Game.Colors.get("Golden");
+        BULLET_COLOR_MED = Game.Colors.get("SlightRust");
+        BULLET_COLOR_END = Game.Colors.get("Rust");
     }
 
     //getters
 
-    public Game.Direction getFacingDirection() {
+    public Element.Direction getFacingDirection() {
         return facingDirection;
     }
 
@@ -40,14 +40,19 @@ public class Bullet extends Element {
         return damage;
     }
 
-    //setters
+    public String getColor() {
+        if (isAtLimit()) return BULLET_COLOR_END;
+        else if (distanceTravelled == maxRange - 1) return BULLET_COLOR_MED;
+        return BULLET_COLOR_INI;
+    }
 
+    //setters
 
     public void setDistanceTravelled(int distanceTravelled) {
         this.distanceTravelled = distanceTravelled;
     }
 
-    //movement related methods
+    //other functions
 
     public boolean isAtLimit() {
         return (distanceTravelled >= maxRange);
@@ -56,6 +61,10 @@ public class Bullet extends Element {
     public void incrementDistanceTravelled() {
         distanceTravelled++;
     }
+
+    //----------------------------------------------------------------------------------
+
+    //movement related methods, will be moved to its respective controller at another time
 
     public Position moveBullet() {
         switch (facingDirection) {
@@ -69,15 +78,5 @@ public class Bullet extends Element {
                 return new Position(position.getX(), position.getY() + 1);
         }
         return new Position(position.getX(), position.getY());
-    }
-
-    //drawing related methods
-
-    @Override
-    public void draw(TextGraphics graphics) throws IOException {
-        if (isAtLimit()) graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_END));
-        else if (distanceTravelled == (maxRange - 1)) graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_MED));
-        else graphics.setForegroundColor(TextColor.Factory.fromString(BULLET_COLOR_INI));
-        graphics.putString(new TerminalPosition(position.getX(), position.getY()), "*");
     }
 }

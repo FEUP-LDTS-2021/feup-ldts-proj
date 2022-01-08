@@ -4,7 +4,7 @@ plugins {
 }
 
 application {
-    mainClass.set("feup.ldts.proj.model.Application")
+    mainClass.set("feup.ldts.proj.Game")
 }
 
 group 'com.pedroramalho.ldts'
