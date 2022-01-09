@@ -59,6 +59,3 @@ This project was designed by:
 <b><i>Gif 5. - Player slaying a monster</i></b>
 </p>
 <br/>
-
-The following screenshots and gifs illustrate the general look of our game in its current state:
-
