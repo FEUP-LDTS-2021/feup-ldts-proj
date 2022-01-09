@@ -18,7 +18,7 @@ public class Player extends Element {
     public Player(int x, int y) {
         super(x, y);
         this.maxHP = 10;
-        this.weapon = new Weapon(2, 5, 3);
+        this.weapon = new Weapon(50, 10, 10);
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
 

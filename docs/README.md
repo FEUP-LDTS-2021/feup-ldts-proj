@@ -3,11 +3,11 @@
 ## Game description
 
 The game is based on the Hero project developed in the practical Labs, with some additional tweaks. 
-Initially, the Player, spawns in an empty Room with Walls and a Gate, and has a default Weapon and health stats. Every X (to be defined) seconds the Player dies, respawning inside the first Room. 
+Initially, the Player, spawns in an empty Room with Walls and a Passage, and has a default Weapon and health stats. Every X (to be defined) seconds the Player dies, respawning inside the first Room. 
 The Player has a <b>maximum HP</b> stat which limits the possible current HP. If the Player dies, he respawns in the initial Room with full HP.
 The maximum HP can be increased through some Potions.
 
-Upon entering the Gate, the Player enters a new Room which has Monsters in it. In order to open the Gate and
+Upon entering the Passage, the Player enters a new Room which has Monsters in it. In order to open the Passage and
 progress to the next Room, the Player must kill every single Monster, until it eventually encounters the Final Boss, which he must defeat in order to beat the game.
 
 This project was designed by:
@@ -19,24 +19,15 @@ This project was designed by:
 
 ## Implemented Features
 
-Before we talk about the implemented features we must explain the state of our project.
-Currently we have 2 important branches, <b><i>master</i></b> and <b><i>refactoring</i></b>.
-
-On the <b><i>master</i></b> branch we followed TDD with no real design or architectural pattern in mind - we wrote tests and some hardcode to make them pass. However, the logic behind
-the game is there - moving the Player, moving the Monster, shooting the Bullets... the logic is all there. So, in our <b><i>master</i></b> branch
-the current implemented features are:
+The current implemented features are:
 <ul>
 <li><b>Keyboard control</b> - the user interacts with the game screen through the keyboard, every action is interpreted through a keyboard input made by the user.</li>
 <li><b>Player combat</b> - the player shoots Bullets off of his Weapon if he presses <b>x</b>, damaging and killing the Monsters he hits.</li>
 <li><b>Monster movement</b> - the monsters are constantly moving in random directions.</li>
 <li><b>Monster combat</b> - the monsters are also capable of damaging the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
-<li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters have slightly more health in lower depths.</li>
+<li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters' health and damage scale with the room's depth depth).</li>
 <li><b>Collision detection</b> - collisions between different objects are verified (e.g. Player and Wall collisions)</li>
 </ul>
-
-The <b><i>refactoring</i></b> branch, as the name suggests, is where we're refactoring our code to make it cleaner, bug free and also more sustainable.
-We're still using TDD, but our tests are new and improved. At the moment, no entity is allowed to move. We have completed the <b>Model</b> and the <b>View</b> portion of each entity, but none of them moves yet. This will be implemented in the future.
-Therefore, the current features we have at the moment which are tested and working are the creating and displaying on screen of every element in our game.
 
 ## Planned features
 
@@ -81,10 +72,17 @@ The features we would like to add to our game are the following:
 <img src="screenshots/mockups/MainMenuMockup.png">
 </p>
 <p align="center"><b><i>Fig. 5 - Main Menu mockup</i></b></p>
+<br>
 
 ## Design
 
 ### General Structure
+
+<p align="center">
+<img src="screenshots/other/GeneralStructure.png">
+</p>
+<p align="center"><b><i>Fig. 6 - General Structure of the project</i></b></p>
+<br>
 
 ##### Problem in Context
 
@@ -100,10 +98,11 @@ Regarding the implementation, we now have classes which main purpose is to store
 the visual effects on screen (Viewers). The logic of the game will be handled by the Controllers.
 
 <p align="center">
-    <img src="screenshots/mvc/ModelsAndViewers.png">
+    <img src="screenshots/uml/MVC.png">
 </p>
 
-<p align="center"> <b><i>Fig. 6 - Model and Viewer pattern design</i></b>
+<p align="center"> <b><i>Fig. 7 - Model and Viewer pattern design</i></b></p>
+<br>
 
 ##### Consequences
 
@@ -126,6 +125,13 @@ The intent of the Builder design pattern is to separate the construction of a co
 
 In our project, the RoomBuilder Class is responsible for reading text files, constructing the elements which compose the room and finally assembling the Room itself. It applies the Builder pattern, since
 it divides the building of the room in simpler and smaller steps (createWalls(), createMonsters(), ...).
+
+<p align="center">
+    <img src="screenshots/uml/BuilderPattern.png">
+</p>
+
+<p align="center"> <b><i>Fig. 8 - Builder pattern design</i></b></p>
+<br>
 
 #### Consequences
 
@@ -151,3 +157,42 @@ The simplified <b>GUI</b> Interface contains the necessary methods to display ou
 which are implemented by the <b>LanternaGUI</b> Class. This Class then goes on to use
 the necessary methods from the Lanterna library.
 
+<p align="center">
+    <img src="screenshots/uml/GUI.png">
+</p>
+
+<p align="center"> <b><i>Fig. 9 - Simplified LanternaGUI design</i></b></p>
+<br>
+
+## Testing
+
+### Test Coverage
+
+<p align="center">
+<img src="screenshots/testing/TestCoverage.png">
+</p>
+<p align="center"> <b><i>Fig. 10 - Test coverage </i></b>
+<br>
+
+### Self-evaluation
+
+The work was divided in a mutual way and we all contributed our best.
+
+<ul>
+<li>João Paulo Luís: 33.3%</li>
+<li>Guilherme Soares Sequeira: 33.3%</li>
+<li>Pedro Miguel Ramalho: 33.3%</li>
+</ul>
+
+### Important mentions
+
+It is important to mention that some portions of code developed
+in the practical Labs were reused in our project.
+
+We were also guided by professor <a href="https://github.com/arestivo"> André Restivo </a> and his projects and work, more remarkably:
+<ul>
+<li> <a href="https://github.com/arestivo/hero-solid"> Hero SOLID</a></li>
+<li> <a href="https://github.com/arestivo/designpatterns-hero"> Hero Design Patterns</a></li>
+<li> <a href="https://web.fe.up.pt/~arestivo/presentation/solid/#1"> SOLID Principles Slides</a></li>
+<li> <a href="https://web.fe.up.pt/~arestivo/presentation/gamepatterns/#1"> Design Patterns for Game Development</a></li>
+</ul>

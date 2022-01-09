@@ -10,6 +10,8 @@ The maximum HP can be increased through some Potions.
 Upon entering the Gate, the Player enters a new Room which has Monsters in it. In order to open the Gate and
 progress to the next Room, the Player must kill every single Monster, until it eventually encounters the Final Boss, which he must defeat in order to beat the game.
 
+For a more detailed explanation of our game please click <a href="docs/README.md"> here. </a>
+
 This project was designed by:
 <ul>
 <li>João Paulo Luís, up201805032@fc.up.pt</li>
@@ -17,7 +19,46 @@ This project was designed by:
 <li>Pedro Miguel Ramalho, up202004715@fe.up.pt</li>
 </ul>
 
-## Screenshots
+## Screenshots and GIFS
+<p align="center">
+<img src="docs/gifs/controls/PlayerMovement.gif">
+</p>
+<p align="center">
+<b><i>Gif 1. - Player moving and colliding with walls </i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/gifs/controls/PlayerShooting.gif">
+</p>
+<p align="center">
+<b><i>Gif 2. - Player shooting bullets that vanish because they reached max range</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/gifs/controls/OpeningCrossingPassage.gif">
+</p>
+<p align="center">
+<b><i>Gif 3. - Player opening and crossing a passage (to a different depth)</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/gifs/controls/PlayerDeathAndRespawn.gif">
+</p>
+<p align="center">
+<b><i>Gif 4. - Player dying and respawning </i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/gifs/controls/KillingMonster.gif">
+</p>
+<p align="center">
+<b><i>Gif 5. - Player slaying a monster</i></b>
+</p>
+<br/>
 
 The following screenshots and gifs illustrate the general look of our game in its current state:
 

@@ -96,9 +96,10 @@ public class Game {
                 if (depth == 3) {
                     depth = 0;
                     updateRoom(depth, 1);
+                } else {
+                    int newRoom = new Random().nextInt(3) + 1;
+                    updateRoom(depth, newRoom);
                 }
-                int newRoom = new Random().nextInt(3) + 1;
-                updateRoom(depth, newRoom);
             }
 
             if (startTime - lastMonsterMovement > 500) {
