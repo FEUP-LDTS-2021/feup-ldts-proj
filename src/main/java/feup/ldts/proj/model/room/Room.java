@@ -45,6 +45,10 @@ public class Room {
 
     public List<Bullet> getBullets() { return bullets; }
 
+    public int getDepth() {
+        return depth;
+    }
+
     //setters
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
@@ -87,105 +91,6 @@ public class Room {
 
     //temporary methods to move the game entities
 
-    public void processKey(GUI.ACTION action) {
-        if (action == GUI.ACTION.LEFT) {
-            movePlayer(player.getPosition().getLeft());
-            player.setFacingDirection(Element.Direction.LEFT);
-        }
-        else if (action == GUI.ACTION.RIGHT) {
-            movePlayer(player.getPosition().getRight());
-            player.setFacingDirection(Element.Direction.RIGHT);
-        }
-        else if (action == GUI.ACTION.DOWN) {
-            movePlayer(player.getPosition().getDown());
-            player.setFacingDirection(Element.Direction.DOWN);
-        }
-        else if (action == GUI.ACTION.UP) {
-            movePlayer(player.getPosition().getUp());
-            player.setFacingDirection(Element.Direction.UP);
-        }
-        else if (action == GUI.ACTION.SHOOT) {
-            shoot();
-        }
-    }
-
-    private void movePlayer(Position position) {
-        if (canExecuteMovement(position))
-            player.setPosition(position);
-        else {
-            for (Monster monster : monsters)
-                if (position.equals(monster.getPosition()))
-                    player.decreaseHP(monster.getDamage());
-        }
-    }
-
-    public void moveMonsters() {
-        for (Monster monster : monsters) {
-            Position monsterPos = monster.moveMonster();
-            if (canExecuteMovement(monsterPos))
-                monster.setPosition(monsterPos);
-            else {
-                if (player.getPosition().equals(monsterPos))
-                    player.decreaseHP(monster.getDamage());
-            }
-            for (int i = 0; i < bullets.size(); i++) {
-                if (monster.getPosition().equals(bullets.get(i).getPosition())) {
-                    monster.decreaseHP(bullets.get(i).getDamage());
-                    bullets.remove(i);
-                    break;
-                }
-            }
-        }
-
-        for (int i = 0; i < monsters.size(); i++) {
-            if (monsters.get(i).getHP() == 0) {
-                monsters.remove(i);
-                i--;
-            }
-        }
-
-    }
-
-
-    public void moveBullets() { //to be checked later
-
-        BULLET_LOOP:
-        for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isAtLimit()) {
-                bullets.remove(i);
-                continue;
-            }
-            Position bulletPos = bullets.get(i).moveBullet();
-            if (checkWallCollision(bulletPos)) {
-                bullets.remove(i);
-                i--;
-                continue;
-            }
-            for (int j = 0; j < monsters.size(); j++) {
-                if (monsters.get(j).getPosition().equals(bulletPos)) {
-                    monsters.get(j).decreaseHP(bullets.get(i).getDamage());
-                    if (monsters.get(j).getHP() == 0) {
-                        monsters.remove(j);
-                        j--;
-                    }
-                    bullets.remove(i);
-                    i--;
-                    //goes on to the next bullet
-                    continue BULLET_LOOP;
-                }
-            }
-            bullets.get(i).setPosition(bulletPos);
-            bullets.get(i).incrementDistanceTravelled();
-        }
-    }
-
-    private void shoot() {
-        if (bullets.size() >= player.getWeapon().getCapacity()) return; //player can't shoot yet
-        for (Bullet bullet : bullets) {
-            if (bullet.getPosition().equals(player.getPosition())) return; //player is trying to shoot inside another bullet
-        }
-        bullets.add(player.createBullet());
-    }
 
     //----------- movement and collision down below
 
@@ -207,12 +112,11 @@ public class Room {
         return player.getPosition().equals(position);
     }
 
+    public boolean passageCollision() {
+        return player.getPosition().equals(passage.getPosition());
+    }
 
     public boolean canExecuteMovement(Position position) {
         return (!(checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position)));
-    }
-
-    public boolean passageCollision() {
-        return player.getPosition().equals(passage.getPosition());
     }
 }

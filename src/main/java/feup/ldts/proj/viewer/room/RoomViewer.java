@@ -28,6 +28,7 @@ public class RoomViewer {
         drawElement(room.getPlayer(), new PlayerViewer());
         if (room.getMonsters().isEmpty())
             drawElement(room.getPassage(), new PassageViewer());
+
         String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
         String CapacityString = " C:" + room.getBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
         gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));

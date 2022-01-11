@@ -1,5 +1,7 @@
 package feup.ldts.proj.model;
 
+import java.util.Random;
+
 public class Position {
     private final int x;
     private final int y;
@@ -20,6 +22,16 @@ public class Position {
     public Position getUp() {return new Position(x, y - 1);}
 
     public Position getDown() {return new Position(x, y+1);}
+
+    public Position getRandomPosition() {
+        switch (new Random().nextInt(4)) {
+            case 0: return new Position(x - 1, y);
+            case 1: return new Position(x + 1, y);
+            case 2: return new Position(x, y - 1);
+            case 3: return new Position(x, y + 1);
+        }
+        return null;
+    }
 
     @Override
     public boolean equals(Object o) {

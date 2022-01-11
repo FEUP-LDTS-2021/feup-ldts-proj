@@ -1,10 +1,14 @@
 package feup.ldts.proj;
 
+import feup.ldts.proj.controller.Controller;
+import feup.ldts.proj.controller.room.RoomController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
+import feup.ldts.proj.states.GameState;
+import feup.ldts.proj.states.State;
 import feup.ldts.proj.viewer.room.RoomViewer;
 
 import java.awt.*;
@@ -19,7 +23,9 @@ public class Game {
     int depth;
     GUI gui;
     Room room;
-    RoomViewer viewer;
+
+    private State state;
+    private Player player;
 
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{ //should probably be somewhere else?
         //others or not used
@@ -48,8 +54,8 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        this.room = new RoomBuilder(0, 1).createRoom(new Player(10, 10));
-        this.viewer = new RoomViewer(gui);
+        this.player = new Player(-1, -1);
+        this.state = new GameState(new RoomBuilder(0, 1).createRoom(player));
     }
 
 
@@ -63,67 +69,29 @@ public class Game {
         }
     }
 
-    public void run() throws IOException, URISyntaxException {
+    private void run() throws IOException, URISyntaxException {
         int FPS = 60;
         int frameTime = 1000 / FPS;
-        long lastMonsterMovement = 0, lastBulletMovement = 0;
 
-        while (true) {
-
+        while (this.state != null) {
             long startTime = System.currentTimeMillis();
 
-            if (room.getPlayer().getHP() == 0) {
-                depth = 0;
-                updateRoom(depth, 1);
-            }
-
-            viewer.draw(room);
-
-            if (room.getMonsters().isEmpty())
-                viewer.drawPassage(room);
-
-
-            GUI.ACTION nextAction = gui.getAction();
-            if (nextAction == GUI.ACTION.EXIT) {
-                gui.close();
-                break;
-            }
-            room.processKey(nextAction);
-
-            if (room.passageCollision() && room.getMonsters().isEmpty()) {
-                depth++;
-
-                if (depth == 3) {
-                    depth = 0;
-                    updateRoom(depth, 1);
-                } else {
-                    int newRoom = new Random().nextInt(3) + 1;
-                    updateRoom(depth, newRoom);
-                }
-            }
-
-            if (startTime - lastMonsterMovement > 500) {
-                room.moveMonsters();
-                lastMonsterMovement = startTime;
-            }
-
-            if (startTime - lastBulletMovement > 250) {
-                room.moveBullets();
-                lastBulletMovement = startTime;
-            }
+            state.step(this, gui, startTime);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;
 
-            if (sleepTime > 0) try {
-                Thread.sleep(sleepTime);
+            try {
+                if (sleepTime > 0) Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+        gui.close();
     }
 
-    private void updateRoom(int depth, int roomNum) throws FileNotFoundException, URISyntaxException {
-        this.room = new RoomBuilder(depth, roomNum).createRoom(new Player(10, 10));
+    public void setState(State state) {
+        this.state = state;
     }
 }
