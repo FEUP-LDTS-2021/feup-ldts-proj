@@ -58,7 +58,7 @@ public class PlayerController extends GameController {
         for (Bullet bullet : getModel().getBullets())
             if (bullet.getPosition().equals(getModel().getPlayer().getPosition())) return;
 
-        getModel().getBullets().add(getModel().getPlayer().createBullet());
+        getModel().addBullet(getModel().getPlayer().createBullet());
     }
 
     @Override

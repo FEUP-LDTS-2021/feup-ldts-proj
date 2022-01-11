@@ -20,10 +20,8 @@ public class MonsterController extends GameController {
     private void moveMonsters() {
         for (Monster monster : getModel().getMonsters()) {
             Position monsterPos = monster.getPosition().getRandomPosition();
-            if (getModel().canExecuteMovement(monsterPos))
+            if (!getModel().isWall(monsterPos) && !getModel().isMonster(monsterPos))
                 monster.setPosition(monsterPos);
-            else if (getModel().isPlayer(monsterPos))
-                getModel().getPlayer().decreaseHP(monster.getDamage());
         }
     }
 

@@ -3,8 +3,11 @@ package feup.ldts.proj.model.elements;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.Terminal;
 import feup.ldts.proj.Game;
+import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
+
+import java.util.List;
 
 
 public class Player extends Element {
@@ -79,6 +82,24 @@ public class Player extends Element {
 
     public void setMaxHP(int maxHP) {
         this.maxHP = maxHP;
+    }
+
+    public void setObservers(List<Monster> monsters) {
+        for (Monster monster : monsters) {
+            monster.addMonsterObserver(new MonsterObserver() {
+                @Override
+                public void hpChanged(Monster monster) {
+                    //do nothing
+                }
+
+                @Override
+                public void positionChanged(Monster monster) {
+                    if (monster.getPosition().equals(position)) {
+                        decreaseHP(monster.getDamage());
+                    }
+                }
+            });
+        }
     }
 
     //other functions

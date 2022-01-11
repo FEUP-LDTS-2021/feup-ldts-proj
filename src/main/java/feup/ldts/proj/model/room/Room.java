@@ -1,6 +1,8 @@
 package feup.ldts.proj.model.room;
 
 import feup.ldts.proj.Game;
+import feup.ldts.proj.controller.elements.observers.BulletObserver;
+import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.*;
@@ -53,13 +55,46 @@ public class Room {
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 
-    public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
+    public void setMonsters(List<Monster> monsters) {
+        this.monsters = monsters;
+        setObservers();
+    }
 
     public void setBullets(List<Bullet> bullets) { this.bullets = bullets; }
 
     public void setPassage(Passage passage) { this.passage = passage; }
 
     public void setPlayer(Player player) { this.player = player; }
+
+    private void setObservers() {
+        for (Monster monster : monsters) {
+            monster.addMonsterObserver(new MonsterObserver() {
+                @Override
+                public void hpChanged(Monster monster) {
+                    if (monster.getHP() <= 0)
+                        monsters.remove(monster);
+                }
+
+                @Override
+                public void positionChanged(Monster monster) {
+                    //do nothing
+                }
+            });
+        }
+    }
+
+    //other functions
+
+    public void addBullet (Bullet bullet) {
+        bullets.add(bullet);
+        bullet.addBulletObserver(new BulletObserver() {
+            @Override
+            public void decayed(Bullet bullet) {
+                bullets.remove(bullet);
+            }
+        });
+    }
+
 
     //collision detection methods
 

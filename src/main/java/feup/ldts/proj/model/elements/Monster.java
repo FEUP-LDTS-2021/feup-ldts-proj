@@ -1,8 +1,12 @@
 package feup.ldts.proj.model.elements;
 
 import feup.ldts.proj.Game;
+import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.model.Position;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Monster extends Element {
@@ -10,6 +14,7 @@ public class Monster extends Element {
             MONSTER_COLOR_100,
             MONSTER_COLOR_66,
             MONSTER_COLOR_33;
+    List<MonsterObserver> observers;
     final int baseHP = 5;
     final int baseDamage = 1;
     int HP, maxHP;
@@ -26,6 +31,7 @@ public class Monster extends Element {
         MONSTER_COLOR_33 = Game.Colors.get("Purple");
         MONSTER_COLOR_66 = Game.Colors.get("Pink");
         MONSTER_COLOR_100 = Game.Colors.get("Red");
+        observers = new ArrayList<MonsterObserver>();
     }
 
     //getters
@@ -56,11 +62,25 @@ public class Monster extends Element {
 
     public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
 
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
+        for (MonsterObserver observer : observers)
+            observer.positionChanged(this);
+    }
+
     //other functions
 
     public void decreaseHP(int damageAmount) {
         HP = Math.max(0, HP - damageAmount);
+        for (MonsterObserver observer : observers)
+            observer.hpChanged(this);
     }
+
+    public void addMonsterObserver(MonsterObserver observer) {
+        this.observers.add(observer);
+    }
+
 
     //----------------------------------------------------------------------------------
 

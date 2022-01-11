@@ -98,6 +98,7 @@ public class RoomBuilder {
         room.getPlayer().setMaxHP(player.getMaxHP());
         room.getPlayer().setHP(player.getHP());
 
+        room.getPlayer().setObservers(room.getMonsters());
         return room;
     }
 }

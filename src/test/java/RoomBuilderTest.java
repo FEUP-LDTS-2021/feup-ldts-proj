@@ -19,12 +19,12 @@ public class RoomBuilderTest {
 
     @Test
     public void numMonstersTest() {
-        Assertions.assertEquals(4, builder.createMonsters().size());
+        Assertions.assertEquals(1, builder.createMonsters().size());
     }
 
     @Test
     public void numWallsTest() {
-        Assertions.assertEquals(96, builder.createWalls().size());
+        Assertions.assertEquals(84, builder.createWalls().size());
     }
 
     @Test

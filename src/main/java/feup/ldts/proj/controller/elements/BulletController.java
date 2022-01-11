@@ -2,6 +2,7 @@ package feup.ldts.proj.controller.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.GameController;
+import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Bullet;
@@ -23,27 +24,56 @@ public class BulletController extends GameController {
         List<Bullet> bullets = getModel().getBullets();
         List<Monster> monsters = getModel().getMonsters();
 
+/*        BULLET_LOOP:
+        for (Bullet bullet : bullets) {
+            if (bullet.isAtLimit()) {
+                for (BulletObserver observer : bullet.getObservers()) {
+                    observer.decayed(bullet);
+                    continue;
+                }
+            }
+
+            Position bulletPos = bullet.moveBullet();
+            if (getModel().isWall(bulletPos)) {
+                for (BulletObserver observer : bullet.getObservers()) {
+                    observer.decayed(bullet);
+                    continue;
+                }
+            }
+            for (int j = 0; j < monsters.size(); j++) {
+                if (monsters.get(j).getPosition().equals(bulletPos)) {
+                    monsters.get(j).decreaseHP(bullet.getDamage());
+                    for (BulletObserver observer : bullet.getObservers()) {
+                        observer.decayed(bullet);
+                        //goes on to the next bullet
+                        continue BULLET_LOOP;
+                    }
+                }
+            }
+            bullet.setPosition(bulletPos);
+            bullet.incrementDistanceTravelled();
+        }*/
+
         BULLET_LOOP:
         for (int i = 0; i < bullets.size(); i++) {
             if (bullets.get(i).isAtLimit()) {
-                bullets.remove(i);
+                for (BulletObserver observer : bullets.get(i).getObservers())
+                    observer.decayed(bullets.get(i));
                 i--;
                 continue;
             }
             Position bulletPos = bullets.get(i).moveBullet();
             if (getModel().isWall(bulletPos)) {
-                bullets.remove(i);
+                for (BulletObserver observer : bullets.get(i).getObservers())
+                    observer.decayed(bullets.get(i));
                 i--;
                 continue;
             }
             for (int j = 0; j < monsters.size(); j++) {
                 if (monsters.get(j).getPosition().equals(bulletPos)) {
                     monsters.get(j).decreaseHP(bullets.get(i).getDamage());
-                    if (monsters.get(j).getHP() == 0) {
-                        monsters.remove(j);
-                        j--;
-                    }
-                    bullets.remove(i);
+                    for (BulletObserver observer : bullets.get(i).getObservers())
+                        observer.decayed(bullets.get(i));
                     i--;
                     //goes on to the next bullet
                     continue BULLET_LOOP;

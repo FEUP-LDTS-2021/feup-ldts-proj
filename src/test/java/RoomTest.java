@@ -27,11 +27,11 @@ public class RoomTest {
         Player player = room.getPlayer();
 
         for (Monster monster : room.getMonsters())
-            Assertions.assertFalse(room.canExecuteMovement(monster.moveMonster()));
+            Assertions.assertTrue(room.canExecuteMovement(monster.moveMonster()));
 
-        Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getLeft()));
+        Assertions.assertTrue(room.canExecuteMovement(player.getPosition().getLeft()));
         Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getRight()));
-        Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getUp()));
-        Assertions.assertFalse(room.canExecuteMovement(player.getPosition().getDown()));
+        Assertions.assertTrue(room.canExecuteMovement(player.getPosition().getUp()));
+        Assertions.assertTrue(room.canExecuteMovement(player.getPosition().getDown()));
     }
 }
