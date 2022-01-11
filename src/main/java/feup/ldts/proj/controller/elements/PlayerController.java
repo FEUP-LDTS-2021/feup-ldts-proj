@@ -23,31 +23,55 @@ public class PlayerController extends GameController {
     }
 
     public void movePlayerUp() {
-
+        movePlayer(getModel().getPlayer().getPosition().getUp());
+        getModel().getPlayer().setFacingDirection(Element.Direction.UP);
     }
 
     public void movePlayerDown() {
-
+        movePlayer(getModel().getPlayer().getPosition().getDown());
+        getModel().getPlayer().setFacingDirection(Element.Direction.DOWN);
     }
 
     public void movePlayerLeft() {
-
+        movePlayer(getModel().getPlayer().getPosition().getLeft());
+        getModel().getPlayer().setFacingDirection(Element.Direction.LEFT);
     }
 
     public void movePlayerRight() {
-
+        movePlayer(getModel().getPlayer().getPosition().getRight());
+        getModel().getPlayer().setFacingDirection(Element.Direction.RIGHT);
     }
 
     private void movePlayer(Position position) {
-
+        if (getModel().canExecuteMovement(position))
+            getModel().getPlayer().setPosition(position);
+        else
+        if (getModel().isMonster(position))
+            getModel().getPlayer().decreaseHP(getModel().getMonsters().get(0).getDamage());
+        if (getModel().passageCollision())
+            System.out.println("I hit the gate");
     }
 
     public void shoot() {
+        if (getModel().getBullets().size() >= getModel().getPlayer().getWeapon().getCapacity()) return;
 
+        for (Bullet bullet : getModel().getBullets())
+            if (bullet.getPosition().equals(getModel().getPlayer().getPosition())) return;
+
+        getModel().getBullets().add(getModel().getPlayer().createBullet());
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
-
+        if (action == GUI.ACTION.UP) movePlayerUp();
+        if (action == GUI.ACTION.DOWN) movePlayerDown();
+        if (action == GUI.ACTION.LEFT) movePlayerLeft();
+        if (action == GUI.ACTION.RIGHT) movePlayerRight();
+        if (action == GUI.ACTION.SHOOT) shoot();
+        if (!getModel().getBullets().isEmpty() && time - lastMovement > 250) {
+            BulletController controller = new BulletController(getModel());
+            controller.step(game, action, time);
+            this.lastMovement = time;
+        }
     }
 }

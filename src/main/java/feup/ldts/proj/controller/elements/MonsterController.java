@@ -18,11 +18,20 @@ public class MonsterController extends GameController {
     }
 
     private void moveMonsters() {
-
+        for (Monster monster : getModel().getMonsters()) {
+            Position monsterPos = monster.getPosition().getRandomPosition();
+            if (getModel().canExecuteMovement(monsterPos))
+                monster.setPosition(monsterPos);
+            else if (getModel().isPlayer(monsterPos))
+                getModel().getPlayer().decreaseHP(monster.getDamage());
+        }
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException {
-
+        if (time - lastMovement > 500) {
+            moveMonsters();
+            this.lastMovement = time;
+        }
     }
 }

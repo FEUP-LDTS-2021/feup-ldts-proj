@@ -20,11 +20,45 @@ public class BulletController extends GameController {
     }
 
     private void moveBullets() {
+        List<Bullet> bullets = getModel().getBullets();
+        List<Monster> monsters = getModel().getMonsters();
 
+        BULLET_LOOP:
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).isAtLimit()) {
+                bullets.remove(i);
+                i--;
+                continue;
+            }
+            Position bulletPos = bullets.get(i).moveBullet();
+            if (getModel().isWall(bulletPos)) {
+                bullets.remove(i);
+                i--;
+                continue;
+            }
+            for (int j = 0; j < monsters.size(); j++) {
+                if (monsters.get(j).getPosition().equals(bulletPos)) {
+                    monsters.get(j).decreaseHP(bullets.get(i).getDamage());
+                    if (monsters.get(j).getHP() == 0) {
+                        monsters.remove(j);
+                        j--;
+                    }
+                    bullets.remove(i);
+                    i--;
+                    //goes on to the next bullet
+                    continue BULLET_LOOP;
+                }
+            }
+            bullets.get(i).setPosition(bulletPos);
+            bullets.get(i).incrementDistanceTravelled();
+        }
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException {
-
+        if (!getModel().getBullets().isEmpty() && time - lastMovement > 250) {
+            moveBullets();
+            this.lastMovement = time;
+        }
     }
 }
