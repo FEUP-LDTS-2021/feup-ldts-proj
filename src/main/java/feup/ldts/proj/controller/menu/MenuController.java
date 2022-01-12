@@ -20,10 +20,10 @@ public class MenuController extends Controller<Menu> {
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
         switch (action) {
             case UP:
-                getModel().previousEntry();
+                getModel().previousOption();
                 break;
             case DOWN:
-                getModel().nextEntry();
+                getModel().nextOption();
                 break;
             case SELECT:
                 if (getModel().isSelectedExit()) game.setState(null);
