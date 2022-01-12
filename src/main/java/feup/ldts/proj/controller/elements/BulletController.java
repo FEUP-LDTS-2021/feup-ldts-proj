@@ -24,36 +24,6 @@ public class BulletController extends GameController {
         List<Bullet> bullets = getModel().getBullets();
         List<Monster> monsters = getModel().getMonsters();
 
-/*        BULLET_LOOP:
-        for (Bullet bullet : bullets) {
-            if (bullet.isAtLimit()) {
-                for (BulletObserver observer : bullet.getObservers()) {
-                    observer.decayed(bullet);
-                    continue;
-                }
-            }
-
-            Position bulletPos = bullet.moveBullet();
-            if (getModel().isWall(bulletPos)) {
-                for (BulletObserver observer : bullet.getObservers()) {
-                    observer.decayed(bullet);
-                    continue;
-                }
-            }
-            for (int j = 0; j < monsters.size(); j++) {
-                if (monsters.get(j).getPosition().equals(bulletPos)) {
-                    monsters.get(j).decreaseHP(bullet.getDamage());
-                    for (BulletObserver observer : bullet.getObservers()) {
-                        observer.decayed(bullet);
-                        //goes on to the next bullet
-                        continue BULLET_LOOP;
-                    }
-                }
-            }
-            bullet.setPosition(bulletPos);
-            bullet.incrementDistanceTravelled();
-        }*/
-
         BULLET_LOOP:
         for (int i = 0; i < bullets.size(); i++) {
             if (bullets.get(i).isAtLimit()) {

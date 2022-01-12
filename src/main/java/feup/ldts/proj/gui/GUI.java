@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface GUI {
     ACTION getAction() throws IOException;
-    enum ACTION {UP, RIGHT, DOWN, LEFT, NONE, EXIT, SHOOT}
+    enum ACTION {UP, RIGHT, DOWN, LEFT, NONE, EXIT, SHOOT, SELECT}
 
     void drawPlayer(Position position, String color);
     void drawWall(Position position);

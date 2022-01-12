@@ -5,9 +5,11 @@ import feup.ldts.proj.controller.room.RoomController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.elements.Player;
+import feup.ldts.proj.model.menu.Menu;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
 import feup.ldts.proj.states.GameState;
+import feup.ldts.proj.states.MenuState;
 import feup.ldts.proj.states.State;
 import feup.ldts.proj.viewer.room.RoomViewer;
 
@@ -33,6 +35,7 @@ public class Game {
         put("Blurple", "#5D5CAF"); //walls
         put("Dirt", "#634220"); //floor
         put("Black", "#000000"); //passage
+        put("White", "#ffffff");
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -55,7 +58,7 @@ public class Game {
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
         this.player = new Player(-1, -1);
-        this.state = new GameState(new RoomBuilder(0, 1).createRoom(player));
+        this.state = new MenuState(new Menu());
     }
 
 
