@@ -1,4 +1,4 @@
-import feup.ldts.proj.model.elements.Monster;
+import feup.ldts.proj.model.elements.monsters.Monster;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;

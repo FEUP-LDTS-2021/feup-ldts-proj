@@ -1,9 +1,15 @@
 package feup.ldts.proj.model.room;
 
-import feup.ldts.proj.model.elements.Monster;
+import feup.ldts.proj.controller.elements.strategies.AttackStrategy;
+import feup.ldts.proj.controller.elements.strategies.BiteStrategy;
+import feup.ldts.proj.controller.elements.strategies.ShootStrategy;
+import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.elements.monsters.Monster;
 import feup.ldts.proj.model.elements.Passage;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.elements.Wall;
+import feup.ldts.proj.model.elements.monsters.Skeleton;
+import feup.ldts.proj.model.elements.monsters.Zombie;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -63,19 +69,23 @@ public class RoomBuilder {
 
         for (int row = 0; row < lines.size(); row++) {
             String line = lines.get(row);
-            for (int col = 0; col < line.length(); col++)
-                if (line.charAt(col) == 'M') monsters.add(new Monster(col, row, depth));
+            for (int col = 0; col < line.length(); col++) {
+                if (line.charAt(col) == '\"')
+                    monsters.add(new Zombie(col, row, depth, new BiteStrategy()));
+                else if (line.charAt(col) == '\'')
+                    monsters.add(new Skeleton(col, row, depth, new ShootStrategy()));
+            }
         }
         return monsters;
     }
 
-    public Player createPlayer() {
+    public void setPlayerPosition(Player player) {
         for (int row = 0; row < lines.size(); row++) {
             String line = lines.get(row);
             for (int col = 0; col < line.length(); col++)
-                if (line.charAt(col) == 'X') return new Player(col, row);
+                if (line.charAt(col) == 'X') player.setPosition(new Position(col ,row));
         }
-        return null;
+
     }
 
     public Passage createPassage() {
@@ -91,12 +101,10 @@ public class RoomBuilder {
         Room room = new Room(depth);
         room.setWalls(createWalls());
         room.setMonsters(createMonsters());
-        room.setPlayer(createPlayer());
+        setPlayerPosition(player);
+        room.setPlayer(player);
         room.setPassage(createPassage());
 
-        room.getPlayer().setWeapon(player.getWeapon());
-        room.getPlayer().setMaxHP(player.getMaxHP());
-        room.getPlayer().setHP(player.getHP());
 
         room.getPlayer().setObservers(room.getMonsters());
         return room;

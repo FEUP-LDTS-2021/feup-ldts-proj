@@ -2,7 +2,6 @@ package controller;
 
 import feup.ldts.proj.controller.elements.PlayerController;
 import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.elements.Monster;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;

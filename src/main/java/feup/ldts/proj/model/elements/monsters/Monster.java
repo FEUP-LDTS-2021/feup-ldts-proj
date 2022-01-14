@@ -1,36 +1,39 @@
-package feup.ldts.proj.model.elements;
+package feup.ldts.proj.model.elements.monsters;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.MonsterObserver;
+import feup.ldts.proj.controller.elements.strategies.AttackStrategy;
 import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.elements.Element;
+import feup.ldts.proj.model.elements.Player;
+import feup.ldts.proj.model.elements.bullets.MonsterBullet;
+import feup.ldts.proj.model.room.Room;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Monster extends Element {
-    final String
-            MONSTER_COLOR_100,
-            MONSTER_COLOR_66,
-            MONSTER_COLOR_33;
-    List<MonsterObserver> observers;
-    final int baseHP = 5;
-    final int baseDamage = 1;
+public abstract class Monster extends Element {
+    protected String MONSTER_COLOR_100, MONSTER_COLOR_66, MONSTER_COLOR_33;
+    protected List<MonsterObserver> observers;
+    protected int baseHP;
+    protected int baseDamage;
+    final AttackStrategy attackStrategy;
     int HP, maxHP;
     int damage;
 
     //constructors
 
-    public Monster(int x, int y, int depth) {
+    public Monster(int x, int y, int depth, AttackStrategy attackStrategy) {
         super(x, y);
-        maxHP = baseHP * depth;
-        HP = maxHP;
-        damage = baseDamage * depth;
+        setBasics();
+        setColors();
+        this.maxHP = baseHP * depth;
+        this.HP = maxHP;
+        this.damage = baseDamage * depth;
+        this.attackStrategy = attackStrategy;
 
-        MONSTER_COLOR_33 = Game.Colors.get("Purple");
-        MONSTER_COLOR_66 = Game.Colors.get("Pink");
-        MONSTER_COLOR_100 = Game.Colors.get("Red");
         observers = new ArrayList<MonsterObserver>();
     }
 
@@ -52,6 +55,8 @@ public class Monster extends Element {
 
     public int getMaxHP() { return maxHP; }
 
+    public abstract char getChar();
+
     //setters
 
     public void setHP(int HP) {
@@ -69,6 +74,10 @@ public class Monster extends Element {
             observer.positionChanged(this);
     }
 
+    protected abstract void setBasics();
+
+    protected abstract void setColors();
+
     //other functions
 
     public void decreaseHP(int damageAmount) {
@@ -81,19 +90,18 @@ public class Monster extends Element {
         this.observers.add(observer);
     }
 
-
-    //----------------------------------------------------------------------------------
-
-    //movement related methods, will be moved to its respective controller
-
-    public Position moveMonster() {
-        switch (new Random().nextInt(4)) {
-            case 0: return new Position(position.getX() - 1, position.getY());
-            case 1: return new Position(position.getX() + 1, position.getY());
-            case 2: return new Position(position.getX(), position.getY() - 1);
-            case 3: return new Position(position.getX(), position.getY() + 1);
-        }
-        return new Position(position.getX(), position.getY());
+    public void bite(Player player) {
+        player.decreaseHP(damage);
     }
+
+    public MonsterBullet createMonsterBullet(int depth, Element.Direction direction) {
+        int maxRange = 3 + depth * 2;
+        return new MonsterBullet(position.getX(), position.getY(), maxRange, damage, direction);
+    }
+
+    public void attack(Player player, Room room) {
+        this.attackStrategy.attack(this, player, room);
+    }
+
 }
 

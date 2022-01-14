@@ -11,7 +11,7 @@ public interface GUI {
 
     void drawPlayer(Position position, String color);
     void drawWall(Position position);
-    void drawMonster(Position position, String color);
+    void drawMonster(Position position, String color, char c);
     void drawBullet(Position position, String color);
     void drawPassage(Position position, String color);
     void drawText(Position position, String text, String color);

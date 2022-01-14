@@ -1,6 +1,7 @@
 package feup.ldts.proj.viewer.menu;
 
 
+import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.menu.Menu;
@@ -12,10 +13,18 @@ public class MenuViewer extends Viewer<Menu> {
     }
     @Override
     protected void drawElements(GUI gui) {
-        for (int i = 0; i < getModel().getNumberEntries(); i++)
+        for (int asset = 0; asset < getModel().getNumberAssets(); asset++)
             gui.drawText(
-                    new Position(8, 9 + i),
-                    getModel().getOption(i),
-                    getModel().isSelected(i) ? "#FFD700" : "#FFFFFF");
+                    getModel().getAssetPosition(asset),
+                    getModel().getAsset(asset),
+                    getModel().getAssetColor()
+            );
+
+        for (int option = 0; option < getModel().getNumberOptions(); option++)
+            gui.drawText(
+                    getModel().getOptionPosition(option),
+                    getModel().getOption(option),
+                    getModel().getOptionColor(option)
+            );
     }
 }

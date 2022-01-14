@@ -2,16 +2,19 @@ package feup.ldts.proj.controller.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.GameController;
+import feup.ldts.proj.controller.elements.bullets.BulletController;
+import feup.ldts.proj.controller.elements.bullets.PlayerBulletController;
+import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.elements.Bullet;
+import feup.ldts.proj.model.elements.bullets.Bullet;
 import feup.ldts.proj.model.elements.Element;
-import feup.ldts.proj.model.elements.Monster;
+import feup.ldts.proj.model.elements.bullets.MonsterBullet;
+import feup.ldts.proj.model.elements.monsters.Monster;
 import feup.ldts.proj.model.room.Room;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 
 public class PlayerController extends GameController {
@@ -43,22 +46,31 @@ public class PlayerController extends GameController {
     }
 
     private void movePlayer(Position position) {
+
         if (getModel().canExecuteMovement(position))
             getModel().getPlayer().setPosition(position);
-        else
-        if (getModel().isMonster(position))
-            getModel().getPlayer().decreaseHP(getModel().getMonsters().get(0).getDamage());
-        if (getModel().passageCollision())
-            System.out.println("I hit the gate");
+        else {
+            for (Monster monster : getModel().getMonsters())
+                if (monster.getPosition().equals(getModel().getPlayer().getPosition()))
+                    monster.bite(getModel().getPlayer());
+            for (int i = 0; i < getModel().getMonsterBullets().size(); i++) {
+                MonsterBullet bullet = getModel().getMonsterBullets().get(i);
+                if (bullet.getPosition().equals(getModel().getPlayer())) {
+                    getModel().getPlayer().decreaseHP(bullet.getDamage());
+                    bullet.alertObserversDecayed();
+                    i--;
+                }
+            }
+        }
     }
 
     public void shoot() {
-        if (getModel().getBullets().size() >= getModel().getPlayer().getWeapon().getCapacity()) return;
+        if (getModel().getPlayerBullets().size() >= getModel().getPlayer().getWeapon().getCapacity()) return;
 
-        for (Bullet bullet : getModel().getBullets())
+        for (Bullet bullet : getModel().getPlayerBullets())
             if (bullet.getPosition().equals(getModel().getPlayer().getPosition())) return;
 
-        getModel().addBullet(getModel().getPlayer().createBullet());
+        getModel().addPlayerBullet(getModel().getPlayer().createBullet());
     }
 
     @Override
@@ -68,8 +80,8 @@ public class PlayerController extends GameController {
         if (action == GUI.ACTION.LEFT) movePlayerLeft();
         if (action == GUI.ACTION.RIGHT) movePlayerRight();
         if (action == GUI.ACTION.SHOOT) shoot();
-        if (!getModel().getBullets().isEmpty() && time - lastMovement > 250) {
-            BulletController controller = new BulletController(getModel());
+        if (!getModel().getPlayerBullets().isEmpty() && time - lastMovement > 250) {
+            BulletController controller = new PlayerBulletController(getModel());
             controller.step(game, action, time);
             this.lastMovement = time;
         }

@@ -1,20 +1,15 @@
 package feup.ldts.proj;
 
-import feup.ldts.proj.controller.Controller;
-import feup.ldts.proj.controller.room.RoomController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
-import feup.ldts.proj.model.elements.Player;
-import feup.ldts.proj.model.menu.Menu;
+import feup.ldts.proj.model.menu.MainMenu;
+import feup.ldts.proj.model.menu.WeaponMenu;
 import feup.ldts.proj.model.room.Room;
-import feup.ldts.proj.model.room.RoomBuilder;
-import feup.ldts.proj.states.GameState;
-import feup.ldts.proj.states.MenuState;
+import feup.ldts.proj.states.MainMenuState;
 import feup.ldts.proj.states.State;
-import feup.ldts.proj.viewer.room.RoomViewer;
+import feup.ldts.proj.states.WeaponMenuState;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -27,7 +22,6 @@ public class Game {
     Room room;
 
     private State state;
-    private Player player;
 
     public static final HashMap<String, String> Colors = new HashMap<String, String>() {{ //should probably be somewhere else?
         //others or not used
@@ -41,6 +35,9 @@ public class Game {
         put("Golden", "#FFD966");
         put("SlightRust", "#94751B");
         put("Rust", "#291e00");
+        put("EvilPurple", "#9b00e3");
+        put("VanishingPurple", "#700cad");
+        put("GonePurple", "#4a107d");
 
         //monster colors
         put("Red", "#D20F23");
@@ -57,8 +54,7 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        this.player = new Player(-1, -1);
-        this.state = new MenuState(new Menu());
+        this.state = new MainMenuState(new MainMenu());
     }
 
 

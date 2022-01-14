@@ -1,11 +1,11 @@
 package feup.ldts.proj.model.elements;
 
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
+import feup.ldts.proj.model.elements.bullets.PlayerBullet;
+import feup.ldts.proj.model.elements.monsters.Monster;
 
 import java.util.List;
 
@@ -105,7 +105,7 @@ public class Player extends Element {
     //other functions
 
     public void decreaseHP(int damageAmount) {
-        HP -= damageAmount;
+        HP = Math.max(0, HP - damageAmount);
     }
 
     //----------------------------------------------------------------------------------
@@ -132,8 +132,8 @@ public class Player extends Element {
         setPosition(position);
     }
 
-    public Bullet createBullet() {
-        return new Bullet(position.getX(), position.getY(), weapon.getRange(), weapon.getDamage(), facingDirection);
+    public PlayerBullet createBullet() {
+        return new PlayerBullet(position.getX(), position.getY(), weapon.getRange(), weapon.getDamage(), facingDirection);
     }
 
 }

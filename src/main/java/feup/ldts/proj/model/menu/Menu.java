@@ -1,43 +1,40 @@
 package feup.ldts.proj.model.menu;
 
+import feup.ldts.proj.Game;
+import feup.ldts.proj.model.Position;
+
 import java.util.List;
 import java.util.Arrays;
 
-public class Menu {
-    private final List<String> options;
-    private int currentEntry = 0;
+public abstract class Menu {
+    protected List<String> options;
+    protected List<String> assets;
+    protected int currentOption = 0;
 
-    public Menu() {
-        this.options = Arrays.asList("Play", "Exit");
+    public Menu() { this.options = Arrays.asList(); this.assets = Arrays.asList(); }
+
+    public String getOption(int i) { return options.get(i); }
+
+    public String getAsset(int i) { return assets.get(i); }
+
+    public String getAssetColor() {return Game.Colors.get("HealthyGreen"); }
+
+    public boolean isSelected(int i) { return currentOption == i; }
+
+    public int getNumberOptions() { return this.options.size(); }
+
+    public int getNumberAssets() { return this.assets.size(); }
+
+    public String getOptionColor(int entry) {
+        if (isSelected(entry)) return Game.Colors.get("Golden");
+        return Game.Colors.get("White");
     }
 
-    public void nextOption() {
-        currentEntry++;
-        if (currentEntry > this.options.size() - 1) currentEntry = 1;
-    }
+    public abstract Position getOptionPosition(int option);
 
-    public void previousOption() {
-        currentEntry--;
-        if (currentEntry <= 0) currentEntry = 0;
-    }
+    public abstract Position getAssetPosition(int asset);
 
-    public String getOption(int i) {
-        return options.get(i);
-    }
+    public abstract void nextOption();
 
-    public boolean isSelected(int i) {
-        return currentEntry == i;
-    }
-
-    public boolean isSelectedExit() {
-        return isSelected(1);
-    }
-
-    public boolean isSelectedStart() {
-        return isSelected(0);
-    }
-
-    public int getNumberEntries() {
-        return this.options.size();
-    }
+    public abstract void previousOption();
 }

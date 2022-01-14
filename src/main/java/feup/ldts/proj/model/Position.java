@@ -45,4 +45,8 @@ public class Position {
     public String toString() {
         return "X: " + x + " Y: " + y;
     }
+
+    public long distanceTo(Position position) {
+        return Math.round(Math.sqrt(Math.pow(this.x - position.getX(), 2) + Math.pow(this.y - position.getY(), 2)));
+    }
 }

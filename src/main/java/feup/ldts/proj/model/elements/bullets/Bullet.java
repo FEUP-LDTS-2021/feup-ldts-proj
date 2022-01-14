@@ -1,17 +1,18 @@
-package feup.ldts.proj.model.elements;
+package feup.ldts.proj.model.elements.bullets;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.elements.Element;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bullet extends Element {
-    final String BULLET_COLOR_INI, BULLET_COLOR_MED, BULLET_COLOR_END;
-    int maxRange, distanceTravelled, damage;
-    Element.Direction facingDirection;
-    List<BulletObserver> observers;
+public abstract class Bullet extends Element {
+    protected String BULLET_COLOR_INI, BULLET_COLOR_MED, BULLET_COLOR_END;
+    protected int maxRange, distanceTravelled, damage;
+    protected Element.Direction facingDirection;
+    protected List<BulletObserver> observers;
 
     //constructors
 
@@ -22,10 +23,6 @@ public class Bullet extends Element {
         this.damage = damage;
         distanceTravelled = 0;
         observers = new ArrayList<BulletObserver>();
-
-        BULLET_COLOR_INI = Game.Colors.get("Golden");
-        BULLET_COLOR_MED = Game.Colors.get("SlightRust");
-        BULLET_COLOR_END = Game.Colors.get("Rust");
     }
 
     //getters
@@ -46,13 +43,14 @@ public class Bullet extends Element {
         return damage;
     }
 
+    public List<BulletObserver> getObservers() {return observers;}
+
+
     public String getColor() {
         if (isAtLimit()) return BULLET_COLOR_END;
         else if (distanceTravelled == maxRange - 1) return BULLET_COLOR_MED;
         return BULLET_COLOR_INI;
     }
-
-    public List<BulletObserver> getObservers() {return observers;}
 
     //setters
 
@@ -70,16 +68,14 @@ public class Bullet extends Element {
         distanceTravelled++;
     }
 
-
-    //other methods
-
     public void addBulletObserver(BulletObserver observer) {
         this.observers.add(observer);
     }
 
-    //----------------------------------------------------------------------------------
-
-    //movement related methods, will be moved to its respective controller at another time
+    public void alertObserversDecayed() {
+        for (BulletObserver observer : observers)
+            observer.decayed(this);
+    }
 
     public Position moveBullet() {
         switch (facingDirection) {

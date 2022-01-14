@@ -6,6 +6,8 @@ import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Element;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.viewer.elements.*;
+import feup.ldts.proj.viewer.elements.bullets.MonsterBulletViewer;
+import feup.ldts.proj.viewer.elements.bullets.PlayerBulletViewer;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,13 +26,14 @@ public class RoomViewer {
         drawBackground();
         drawElements(room.getWalls(), new WallViewer());
         drawElements(room.getMonsters(), new MonsterViewer());
-        drawElements(room.getBullets(), new BulletViewer());
+        drawElements(room.getPlayerBullets(), new PlayerBulletViewer());
+        drawElements(room.getMonsterBullets(), new MonsterBulletViewer());
         drawElement(room.getPlayer(), new PlayerViewer());
         if (room.getMonsters().isEmpty())
             drawElement(room.getPassage(), new PassageViewer());
 
         String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
-        String CapacityString = " C:" + room.getBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
+        String CapacityString = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
         gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
         gui.drawText(new Position(HpString.length()+1, 20), CapacityString, Game.Colors.get("Golden"));
 
@@ -51,12 +54,8 @@ public class RoomViewer {
         return gui.getAction();
     }
 
-    public void drawPassage(Room room) {
-        drawElement(room.getPassage(), new PassageViewer());
-    }
-
     public void drawBackground() {
         for (int i = 0; i < 20; i++)
-            for (int j = 0; j < 20; j++) gui.drawCharacter(j, i,' ', "#ffffff");
+            for (int j = 0; j < 20; j++) gui.drawCharacter(j, i,' ', Game.Colors.get("White"));
     }
 }

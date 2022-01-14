@@ -8,9 +8,7 @@ import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
 import feup.ldts.proj.states.GameState;
-import feup.ldts.proj.states.State;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Random;

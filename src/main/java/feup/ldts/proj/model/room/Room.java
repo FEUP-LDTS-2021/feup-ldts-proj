@@ -3,9 +3,12 @@ package feup.ldts.proj.model.room;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.controller.elements.observers.MonsterObserver;
-import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.*;
+import feup.ldts.proj.model.elements.bullets.Bullet;
+import feup.ldts.proj.model.elements.bullets.MonsterBullet;
+import feup.ldts.proj.model.elements.bullets.PlayerBullet;
+import feup.ldts.proj.model.elements.monsters.Monster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,8 @@ public class Room {
     Passage passage;
     private List<Wall> walls;
     private List<Monster> monsters;
-    private List<Bullet> bullets;
+    private List<MonsterBullet> monsterBullets;
+    private List<PlayerBullet> playerBullets;
 
     //constructors
 
@@ -26,7 +30,8 @@ public class Room {
         this.depth = depth;
         walls = new ArrayList<>();
         monsters = new ArrayList<>();
-        bullets = new ArrayList<>();
+        monsterBullets = new ArrayList<>();
+        playerBullets = new ArrayList<>();
     }
 
     //getters
@@ -45,7 +50,9 @@ public class Room {
         return player;
     }
 
-    public List<Bullet> getBullets() { return bullets; }
+    public List<MonsterBullet> getMonsterBullets() { return monsterBullets; }
+
+    public List<PlayerBullet> getPlayerBullets() { return playerBullets; }
 
     public int getDepth() {
         return depth;
@@ -60,7 +67,9 @@ public class Room {
         setObservers();
     }
 
-    public void setBullets(List<Bullet> bullets) { this.bullets = bullets; }
+    public void setPlayerBullets(List<PlayerBullet> playerBullets) { this.playerBullets = playerBullets; }
+
+    public void setMonsterBullets(List<MonsterBullet> monsterBullets) { this.monsterBullets = monsterBullets; };
 
     public void setPassage(Passage passage) { this.passage = passage; }
 
@@ -85,12 +94,22 @@ public class Room {
 
     //other functions
 
-    public void addBullet (Bullet bullet) {
-        bullets.add(bullet);
+    public void addMonsterBullet (MonsterBullet bullet) {
+        monsterBullets.add(bullet);
         bullet.addBulletObserver(new BulletObserver() {
             @Override
             public void decayed(Bullet bullet) {
-                bullets.remove(bullet);
+                monsterBullets.remove(bullet);
+            }
+        });
+    }
+
+    public void addPlayerBullet (PlayerBullet bullet) {
+        playerBullets.add(bullet);
+        bullet.addBulletObserver(new BulletObserver() {
+            @Override
+            public void decayed(Bullet bullet) {
+                playerBullets.remove(bullet);
             }
         });
     }
@@ -106,7 +125,10 @@ public class Room {
 
     public boolean isMonster(Position position) {
         for (Monster monster : monsters)
-            if (monster.getPosition().equals(position)) return true;
+            if (monster.getPosition().equals(position)) {
+
+                return true;
+            }
         return false;
     }
 
@@ -118,30 +140,9 @@ public class Room {
         return passage.getPosition().equals(position);
     }
 
-    /*
-    public boolean isItem() ;D (coming soon)
-     */
-
-    //------------------------------------------------------------------------------------------------
-
-    //temporary methods to move the game entities
 
 
     //----------- movement and collision down below
-
-    private boolean checkWallCollision(Position position) {
-        for (Wall wall : walls)
-            if (wall.getPosition().equals(position))
-                return true;
-        return false;
-    }
-
-    private boolean checkMonsterCollision(Position position) {
-        for (Monster monster : monsters)
-            if (monster.getPosition().equals(position))
-                return true;
-        return false;
-    }
 
     private boolean checkPlayerCollision(Position position) {
         return player.getPosition().equals(position);
@@ -152,6 +153,6 @@ public class Room {
     }
 
     public boolean canExecuteMovement(Position position) {
-        return (!(checkWallCollision(position) || checkMonsterCollision(position) || checkPlayerCollision(position)));
+        return (!(isWall(position) || isMonster(position) || checkPlayerCollision(position)));
     }
 }
