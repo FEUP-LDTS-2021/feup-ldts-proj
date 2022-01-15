@@ -32,6 +32,4 @@ public class MonsterControllerTest {
         monsterController.step(Mockito.mock(Game.class), GUI.ACTION.UP, 600);
         Assertions.assertNotEquals(new Position(2, 2), monsterController.getModel().getMonsters().get(0).getPosition());
     }
-
-
 }

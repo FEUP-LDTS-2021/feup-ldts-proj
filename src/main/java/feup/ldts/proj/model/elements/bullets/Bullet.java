@@ -54,8 +54,12 @@ public abstract class Bullet extends Element {
 
     //setters
 
-    public void setDistanceTravelled(int distanceTravelled) {
-        this.distanceTravelled = distanceTravelled;
+    public void setDistanceTravelled(int distanceTravelled) { this.distanceTravelled = distanceTravelled; }
+
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
+        incrementDistanceTravelled();
     }
 
     //other functions

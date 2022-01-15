@@ -19,10 +19,12 @@ import java.net.URISyntaxException;
 
 public class PlayerController extends GameController {
     private long lastMovement;
+    private long lastRespawn;
 
     public PlayerController(Room room) {
         super(room);
         this.lastMovement = 0;
+        this.lastRespawn = 0;
     }
 
     public void movePlayerUp() {
@@ -84,6 +86,10 @@ public class PlayerController extends GameController {
             BulletController controller = new PlayerBulletController(getModel());
             controller.step(game, action, time);
             this.lastMovement = time;
+        }
+        if (time - lastRespawn >= 1000) {
+            getModel().getPlayer().decreaseTime();
+            this.lastRespawn = time;
         }
     }
 }

@@ -12,8 +12,8 @@ public class ShootStrategy implements AttackStrategy {
 
     @Override
     public void attack(Monster monster, Player player, Room room) {
-        if (new Random().nextInt(8) != 1) return;
-        room.addMonsterBullet(monster.createMonsterBullet(room.getDepth(), getDirection(monster.getPosition(), player.getPosition())));
+        if (new Random().nextInt(8) == 1)
+            room.addMonsterBullet(monster.createMonsterBullet(room.getDepth(), getDirection(monster.getPosition(), player.getPosition())));
     }
 
     private Element.Direction getDirection(Position monsterPosition, Position playerPosition) {

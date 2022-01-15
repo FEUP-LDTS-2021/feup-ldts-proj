@@ -33,10 +33,13 @@ public class RoomViewer {
             drawElement(room.getPassage(), new PassageViewer());
 
         String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
+        String timeString = "" + room.getPlayer().getTimeLeft();
         String CapacityString = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
-        gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
-        gui.drawText(new Position(HpString.length()+1, 20), CapacityString, Game.Colors.get("Golden"));
 
+
+        gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
+        gui.drawText(new Position(HpString.length() + 1, 20), timeString, Game.Colors.get("White"));
+        gui.drawText(new Position(HpString.length() + timeString.length() + 2, 20), CapacityString, Game.Colors.get("Golden"));
 
         gui.refresh();
     }
@@ -48,10 +51,6 @@ public class RoomViewer {
 
     private <T extends Element> void drawElement(T element, ElementViewer<T> viewer) {
         viewer.draw(element, gui);
-    }
-
-    GUI.ACTION getAction() throws IOException {
-        return gui.getAction();
     }
 
     public void drawBackground() {

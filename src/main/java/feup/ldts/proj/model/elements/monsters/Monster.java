@@ -57,6 +57,8 @@ public abstract class Monster extends Element {
 
     public abstract char getChar();
 
+    public List<MonsterObserver> getObservers() { return observers; }
+
     //setters
 
     public void setHP(int HP) {
@@ -102,6 +104,5 @@ public abstract class Monster extends Element {
     public void attack(Player player, Room room) {
         this.attackStrategy.attack(this, player, room);
     }
-
 }
 

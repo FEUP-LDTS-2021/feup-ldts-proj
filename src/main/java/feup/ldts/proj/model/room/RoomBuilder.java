@@ -85,7 +85,6 @@ public class RoomBuilder {
             for (int col = 0; col < line.length(); col++)
                 if (line.charAt(col) == 'X') player.setPosition(new Position(col ,row));
         }
-
     }
 
     public Passage createPassage() {

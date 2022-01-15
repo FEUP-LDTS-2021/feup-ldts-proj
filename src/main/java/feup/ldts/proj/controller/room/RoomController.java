@@ -28,8 +28,14 @@ public class RoomController extends GameController {
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
-        if (action == GUI.ACTION.EXIT || getModel().getPlayer().getHP() == 0)
-            exit(0);
+        if (action == GUI.ACTION.EXIT) {
+            game.setState(null);
+        }
+        if (getModel().getPlayer().getHP() == 0 || getModel().getPlayer().getTimeLeft() == 0) {
+            getModel().getPlayer().healHP(getModel().getPlayer().getMaxHP());
+            getModel().getPlayer().resetTime();
+            game.setState(new GameState(new RoomBuilder(0, 1).createRoom(getModel().getPlayer())));
+        }
         else {
             playerController.step(game, action, time);
 

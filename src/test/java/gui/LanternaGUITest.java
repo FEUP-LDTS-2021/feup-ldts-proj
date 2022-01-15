@@ -41,7 +41,7 @@ public class LanternaGUITest {
 
     @Test
     public void drawMonsterTest() {
-        GUI.drawMonster(position, Game.Colors.get("Red"));
+        GUI.drawMonster(position, Game.Colors.get("Red"), 'M');
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(Game.Colors.get("Red")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "M");
     }

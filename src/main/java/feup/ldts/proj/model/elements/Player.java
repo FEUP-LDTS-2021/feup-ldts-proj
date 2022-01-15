@@ -15,6 +15,7 @@ public class Player extends Element {
     private int HP, maxHP;
     private Weapon weapon;
     private Element.Direction facingDirection;
+    private long timeLeft;
 
     //constructors
 
@@ -30,6 +31,7 @@ public class Player extends Element {
         PLAYER_COLOR_60 = Game.Colors.get("DarkGreen");
         PLAYER_COLOR_80 = Game.Colors.get("Green");
         PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen");
+        timeLeft = 120;
     }
 
     public Player(int x, int y, int maxHP, int HP, Weapon weapon) {
@@ -44,6 +46,7 @@ public class Player extends Element {
         PLAYER_COLOR_60 = Game.Colors.get("DarkGreen");
         PLAYER_COLOR_80 = Game.Colors.get("Green");
         PLAYER_COLOR_100 = Game.Colors.get("HealthyGreen");
+        timeLeft = 120;
     }
 
     //getters
@@ -67,6 +70,8 @@ public class Player extends Element {
     public Element.Direction getFacingDirection() {return facingDirection;}
 
     public int getMaxHP() {return maxHP;}
+
+    public long getTimeLeft() { return timeLeft; }
 
     //setters
 
@@ -94,9 +99,8 @@ public class Player extends Element {
 
                 @Override
                 public void positionChanged(Monster monster) {
-                    if (monster.getPosition().equals(position)) {
+                    if (monster.getPosition().equals(position))
                         decreaseHP(monster.getDamage());
-                    }
                 }
             });
         }
@@ -108,32 +112,15 @@ public class Player extends Element {
         HP = Math.max(0, HP - damageAmount);
     }
 
-    //----------------------------------------------------------------------------------
+    public void decreaseTime() {timeLeft--;}
 
-    //movement related methods, will be moved to its respective controller at another time
+    public void resetTime() {timeLeft = 120;}
 
-    public void movePlayerLeft() {
-        movePlayer(position.getLeft());
-    }
-
-    public void movePlayerRight() {
-        movePlayer(position.getRight());
-    }
-
-    public void movePlayerUp() {
-        movePlayer(position.getUp());
-    }
-
-    public void movePlayerDown() {
-        movePlayer(position.getDown());
-    }
-
-    public void movePlayer(Position position) {
-        setPosition(position);
+    public void healHP(int healAmount) {
+        HP = Math.min(maxHP, HP + healAmount);
     }
 
     public PlayerBullet createBullet() {
         return new PlayerBullet(position.getX(), position.getY(), weapon.getRange(), weapon.getDamage(), facingDirection);
     }
-
 }

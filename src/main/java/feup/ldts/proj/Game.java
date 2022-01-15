@@ -23,7 +23,8 @@ public class Game {
 
     private State state;
 
-    public static final HashMap<String, String> Colors = new HashMap<String, String>() {{ //should probably be somewhere else?
+    public static final HashMap<String, String> Colors = new HashMap<String, String>()
+    {{ //should probably be somewhere else?
         //others or not used
         put("LightGreen", "#C9F4DA");
         put("Blurple", "#5D5CAF"); //walls
@@ -93,4 +94,6 @@ public class Game {
     public void setState(State state) {
         this.state = state;
     }
+
+    public State getState() { return state; }
 }

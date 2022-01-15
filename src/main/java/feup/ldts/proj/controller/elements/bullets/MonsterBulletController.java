@@ -38,7 +38,6 @@ public class MonsterBulletController extends BulletController {
             }
 
             bullets.get(i).setPosition(bulletPos);
-            bullets.get(i).incrementDistanceTravelled();
         }
     }
 

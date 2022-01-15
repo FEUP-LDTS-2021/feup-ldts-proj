@@ -39,7 +39,6 @@ public class PlayerBulletController extends BulletController {
                 }
             }
             bullets.get(i).setPosition(bulletPos);
-            bullets.get(i).incrementDistanceTravelled();
         }
     }
 

@@ -18,6 +18,4 @@ public abstract class Controller<T> {
     }
 
     public abstract void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException;
-
-    //public abstract void step(Game game, long time) throws IOException, URISyntaxException;
 }
