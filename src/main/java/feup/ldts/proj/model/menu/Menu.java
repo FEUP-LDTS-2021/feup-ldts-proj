@@ -25,6 +25,8 @@ public abstract class Menu {
 
     public int getNumberAssets() { return this.assets.size(); }
 
+    public int getCurrentOption() { return currentOption; }
+
     public String getOptionColor(int entry) {
         if (isSelected(entry)) return Game.Colors.get("Golden");
         return Game.Colors.get("White");
