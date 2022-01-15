@@ -8,6 +8,7 @@ import feup.ldts.proj.model.game.Weapon;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class Player extends Element {
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
         timeLeft = 120;
+        this.observers = new ArrayList<PlayerObserver>();
     }
 
     public Player(Position position, int maxHP, int HP, Weapon weapon) {
@@ -36,6 +38,7 @@ public class Player extends Element {
         this.facingDirection = Element.Direction.DOWN;
         this.maxHP = maxHP;
         this.timeLeft = 120;
+        this.observers = new ArrayList<PlayerObserver>();
     }
 
     //----------------------------------------getters-----------------------------------------
@@ -53,6 +56,12 @@ public class Player extends Element {
     public long getTimeLeft() { return timeLeft; }
 
     //----------------------------------------setters-----------------------------------------
+
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
+        alertObserversMoved();
+    }
 
     public void setHP(int HP) {
         this.HP = HP;
@@ -84,5 +93,10 @@ public class Player extends Element {
 
     public void addPlayerObserver(PlayerObserver observer) {
         this.observers.add(observer);
+    }
+
+    public void alertObserversMoved() {
+        for (PlayerObserver observer : observers)
+            observer.positionChanged(this);
     }
 }

@@ -25,11 +25,11 @@ public class Game {
 
     public static final HashMap<String, String> Colors = new HashMap<String, String>()
     {{
-        put("LightGreen", "#C9F4DA");
+        put("LightGreen", "#C9F4DA"); //text
         put("Blurple", "#5D5CAF"); //walls
         put("Dirt", "#634220"); //floor
         put("Black", "#000000"); //passage
-        put("White", "#ffffff");
+        put("White", "#ffffff"); //text
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -54,7 +54,7 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        this.state = new WeaponMenuState(new WeaponMenu());
+        this.state = new MainMenuState(new MainMenu());
     }
 
 

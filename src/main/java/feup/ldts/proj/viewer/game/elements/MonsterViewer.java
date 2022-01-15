@@ -1,23 +1,28 @@
 package feup.ldts.proj.viewer.game.elements;
 
+import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
 
 public class MonsterViewer implements ElementViewer<Monster> {
     @Override
-    public String getColor(Monster element) {
-        return null;
+    public String getColor(Monster monster) {
+        float hpPercentage = (float) monster.getHP() / monster.getMaxHP();
+
+        if (hpPercentage <= 0.33) return Game.Colors.get("Purple");
+        if (hpPercentage <= 0.66) return Game.Colors.get("Pink");
+        return Game.Colors.get("Red");
     }
 
     @Override
-    public char getChar(Monster element) {
-        if (element instanceof Zombie) return '"';
+    public char getChar(Monster monster) {
+        if (monster instanceof Zombie) return '"';
         return '\'';
     }
 
     @Override
-    public void draw(Monster element, GUI gui) {
-        gui.drawCharacter(element.getPosition().getX(), element.getPosition().getY(), getChar(element), getColor(element));
+    public void draw(Monster monster, GUI gui) {
+        gui.drawCharacter(monster.getPosition().getX(), monster.getPosition().getY(), getChar(monster), getColor(monster));
     }
 }

@@ -24,6 +24,7 @@ public class Room {
     private List<Monster> monsters;
     private List<MonsterBullet> monsterBullets;
     private List<PlayerBullet> playerBullets;
+    private List<Monster> monstersToRemove;
 
     //--------------------------------------constructor--------------------------------------
 
@@ -33,6 +34,7 @@ public class Room {
         monsters = new ArrayList<>();
         monsterBullets = new ArrayList<>();
         playerBullets = new ArrayList<>();
+        monstersToRemove = new ArrayList<>();
     }
 
     //----------------------------------------getters-----------------------------------------
@@ -55,6 +57,8 @@ public class Room {
 
     public List<PlayerBullet> getPlayerBullets() { return playerBullets; }
 
+    public List<Monster> getMonstersToRemove() { return monstersToRemove; }
+
     public int getDepth() {
         return depth;
     }
@@ -63,28 +67,28 @@ public class Room {
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 
-    public void setMonsters(List<Monster> monsters) {
-        this.monsters = monsters;
-        setObservers();
-    }
+    public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
 
     public void setPassage(Passage passage) { this.passage = passage; }
 
     public void setPlayer(Player player) { this.player = player; }
 
-    private void setObservers() {
+    public void setObservers() {
         for (Monster monster : monsters) {
             monster.addMonsterObserver(new MonsterObserver() {
                 @Override
                 public void hpChanged(Monster monster) {
                     if (monster.getHP() <= 0)
-                        monsters.remove(monster);
+                        monstersToRemove.add(monster); //removing directly would cause a ConcurrentModificationException...
                 }
 
                 @Override
                 public void positionChanged(Monster monster) {
-                    if (monster.getPosition().equals(player.getPosition()))  //checks if a monster walked on top of a player
+                    if (monster.getPosition().equals(player.getPosition())){  //checks if a monster walked on top of a player
                         monster.bite(player);
+                        System.out.println("A monster has walked on top of you");
+                    }
+
 
                     for(int i = 0; i < playerBullets.size(); i++) { //checks if a monster walked on top of a PlayerBullet
                         PlayerBullet bullet = playerBullets.get(i);
@@ -102,8 +106,10 @@ public class Room {
             @Override
             public void positionChanged(Player player) {
                 for (Monster monster : monsters) {             //checks if a player has walked on top of a monster
-                    if (monster.getPosition().equals(player.getPosition()))
+                    if (monster.getPosition().equals(player.getPosition())) {
                         monster.bite(player);
+                    }
+
                 }
 
                 for(int i = 0; i < monsterBullets.size(); i++) { //checks if the player walked on top of a MonsterBullet

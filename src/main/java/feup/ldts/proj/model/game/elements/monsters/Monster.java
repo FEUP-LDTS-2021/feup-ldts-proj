@@ -37,6 +37,8 @@ public abstract class Monster extends Element {
         return HP;
     }
 
+    public int getMaxHP() { return maxHP; }
+
     //----------------------------------------setters-----------------------------------------
 
     public void setHP(int HP) {

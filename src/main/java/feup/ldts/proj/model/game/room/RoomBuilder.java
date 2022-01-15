@@ -101,6 +101,7 @@ public class RoomBuilder {
         room.setMonsters(createMonsters());
         setPlayerPosition(player);
         room.setPlayer(player);
+        room.setObservers();
         room.setPassage(createPassage());
 
         return room;
