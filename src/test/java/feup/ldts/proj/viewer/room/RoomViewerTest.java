@@ -1,5 +1,6 @@
 package feup.ldts.proj.viewer.room;
 
+import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
@@ -29,8 +30,8 @@ public class RoomViewerTest {
     @Test
     void drawTest() throws IOException {
         roomViewer.draw(room);
-        Mockito.verify(gui, Mockito.times(84)).drawWall(Mockito.any(Position.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(Mockito.any(Position.class), Mockito.any(String.class));
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(Mockito.any(Position.class), Mockito.any(String.class), Mockito.any(Character.class));
+        Mockito.verify(gui, Mockito.times(84)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), '#', Game.Colors.get("Blurple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), 'X',  Game.Colors.get("HealthyGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), '"', Game.Colors.get("Red"));
     }
 }

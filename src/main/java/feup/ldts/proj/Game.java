@@ -4,8 +4,10 @@ import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.menu.MainMenu;
 import feup.ldts.proj.model.game.room.Room;
+import feup.ldts.proj.model.menu.WeaponMenu;
 import feup.ldts.proj.states.MainMenuState;
 import feup.ldts.proj.states.State;
+import feup.ldts.proj.states.WeaponMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -22,8 +24,7 @@ public class Game {
     private State state;
 
     public static final HashMap<String, String> Colors = new HashMap<String, String>()
-    {{ //should probably be somewhere else?
-        //others or not used
+    {{
         put("LightGreen", "#C9F4DA");
         put("Blurple", "#5D5CAF"); //walls
         put("Dirt", "#634220"); //floor
@@ -53,7 +54,7 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        this.state = new MainMenuState(new MainMenu());
+        this.state = new WeaponMenuState(new WeaponMenu());
     }
 
 

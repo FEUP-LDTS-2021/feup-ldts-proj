@@ -24,22 +24,22 @@ public class PlayerViewerTest {
     @Test
     public void drawPlayerTest() {
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("HealthyGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(player.getPosition().getX(),player.getPosition().getY(), 'X', Game.Colors.get("HealthyGreen"));
 
         player.setHP(7);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("Green"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(player.getPosition().getX(),player.getPosition().getY(), 'X', Game.Colors.get("Green"));
 
         player.setHP(5);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("DarkGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(player.getPosition().getX(),player.getPosition().getY(), 'X', Game.Colors.get("DarkGreen"));
 
         player.setHP(3);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("WoundedGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(player.getPosition().getX(),player.getPosition().getY(), 'X', Game.Colors.get("WoundedGreen"));
 
         player.setHP(1);
         viewer.draw(player, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawPlayer(player.getPosition(), Game.Colors.get("DyingGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(player.getPosition().getX(),player.getPosition().getY(), 'X', Game.Colors.get("DyingGreen"));
     }
 }

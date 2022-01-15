@@ -32,7 +32,7 @@ public class WeaponMenu extends Menu {
 
     @Override
     public void nextOption() {
-        if (currentOption < this.options.size())
+        if (currentOption < this.options.size() - 1)
             currentOption++;
     }
 

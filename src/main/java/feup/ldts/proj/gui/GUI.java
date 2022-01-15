@@ -9,11 +9,6 @@ public interface GUI {
     ACTION getAction() throws IOException;
     enum ACTION {UP, RIGHT, DOWN, LEFT, NONE, EXIT, SHOOT, SELECT}
 
-    void drawPlayer(Position position, String color);
-    void drawWall(Position position);
-    void drawMonster(Position position, String color, char c);
-    void drawBullet(Position position, String color);
-    void drawPassage(Position position, String color);
     void drawText(Position position, String text, String color);
     void drawCharacter(int x, int y, char c, String color);
 

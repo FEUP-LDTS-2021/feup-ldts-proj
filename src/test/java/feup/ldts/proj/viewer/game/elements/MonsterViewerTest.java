@@ -26,14 +26,14 @@ public class MonsterViewerTest {
     @Test
     public void drawMonsterTest() {
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(1, 1), Game.Colors.get("Red"), monster.getChar());
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Red"));
 
         monster.setHP(3);
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(1, 1), Game.Colors.get("Pink"), monster.getChar());
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Pink"));
 
         monster.setHP(1);
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawMonster(new Position(1, 1), Game.Colors.get("Purple"), monster.getChar());
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Purple"));
     }
 }

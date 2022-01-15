@@ -84,31 +84,6 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPlayer(Position position, String color) {
-        drawCharacter(position.getX(), position.getY(), 'X', color);
-    }
-
-    @Override
-    public void drawBullet(Position position, String color) {
-        drawCharacter(position.getX(), position.getY(), '*', color);
-    }
-
-    @Override
-    public void drawWall(Position position) {
-        drawCharacter(position.getX(), position.getY(), '#', Game.Colors.get("Blurple"));
-    }
-
-    @Override
-    public void drawMonster(Position position, String color, char c) {
-        drawCharacter(position.getX(), position.getY(), c, color);
-    }
-
-    @Override
-    public void drawPassage(Position position, String color) {
-        drawCharacter(position.getX(), position.getY(), 'O', color);
-    }
-
-    @Override
     public void drawText(Position position, String text, String color) {
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.Factory.fromString(color));

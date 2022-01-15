@@ -47,21 +47,8 @@ public class PlayerController extends GameController {
     }
 
     private void movePlayer(Position position) {
-
-        if (getModel().canExecuteMovement(position))
+        if (!getModel().isWall(position)) {
             getModel().getPlayer().setPosition(position);
-        else {
-            for (Monster monster : getModel().getMonsters())
-                if (monster.getPosition().equals(getModel().getPlayer().getPosition()))
-                    monster.bite(getModel().getPlayer());
-            for (int i = 0; i < getModel().getMonsterBullets().size(); i++) {
-                MonsterBullet bullet = getModel().getMonsterBullets().get(i);
-                if (bullet.getPosition().equals(getModel().getPlayer())) {
-                    getModel().getPlayer().decreaseHP(bullet.getDamage());
-                    bullet.alertObserversDecayed();
-                    i--;
-                }
-            }
         }
     }
 

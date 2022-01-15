@@ -15,23 +15,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void getColorTest() {
-        Assertions.assertEquals("#02f751", player.getColor());
-
-        player.setHP(7);
-        Assertions.assertEquals("#19b33a", player.getColor());
-
-        player.setHP(5);
-        Assertions.assertEquals("#1d871a", player.getColor());
-
-        player.setHP(3);
-        Assertions.assertEquals("#1a610e", player.getColor());
-
-        player.setHP(1);
-        Assertions.assertEquals("#103d02", player.getColor());
-    }
-
-    @Test
     public void decreaseHPTest() {
         player.decreaseHP(1);
         Assertions.assertEquals(9, player.getHP());

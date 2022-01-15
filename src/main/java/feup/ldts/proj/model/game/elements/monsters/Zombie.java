@@ -11,20 +11,8 @@ public class Zombie extends Monster {
     }
 
     @Override
-    public char getChar() {
-        return '\"';
-    }
-
-    @Override
     public void setBasics() {
         this.baseHP = 5;
         this.baseDamage = 1;
-    }
-
-    @Override
-    protected void setColors() {
-        MONSTER_COLOR_33 = Game.Colors.get("Purple");
-        MONSTER_COLOR_66 = Game.Colors.get("Pink");
-        MONSTER_COLOR_100 = Game.Colors.get("Red");
     }
 }

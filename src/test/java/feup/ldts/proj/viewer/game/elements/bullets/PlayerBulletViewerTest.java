@@ -26,14 +26,14 @@ public class PlayerBulletViewerTest {
     public void drawPlayerBulletTest() {
         bullet.setDistanceTravelled(1);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("Golden"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("Golden"));
 
         bullet.setDistanceTravelled(3);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("SlightRust"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("SlightRust"));
 
         bullet.setDistanceTravelled(4);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("Rust"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("Rust"));
     }
 }

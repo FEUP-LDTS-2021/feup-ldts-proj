@@ -22,7 +22,6 @@ public class PlayerObserverTest {
         player = new Player(new Position(1, 1));
         zombie = new Zombie(new Position(0, 1), 1, new BiteStrategy());
         monsters.add(zombie);
-        player.setObservers(monsters);
     }
 
     @Test

@@ -5,7 +5,6 @@ import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
-import feup.ldts.proj.viewer.game.elements.bullets.MonsterBulletViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,16 +25,14 @@ public class MonsterBulletViewerTest {
     public void drawMonsterBulletTest() {
         bullet.setDistanceTravelled(1);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("EvilPurple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("EvilPurple"));
 
         bullet.setDistanceTravelled(3);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("VanishingPurple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("VanishingPurple"));
 
         bullet.setDistanceTravelled(4);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawBullet(bullet.getPosition(), Game.Colors.get("GonePurple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("GonePurple"));
     }
-
-
 }

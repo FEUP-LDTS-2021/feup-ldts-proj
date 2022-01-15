@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class RoomBuilder {
     private List<String> lines;
-    private int depth, roomNum;
+    private final int depth, roomNum;
 
     public RoomBuilder(int depth, int roomNum) throws FileNotFoundException {
         this.depth = depth;
@@ -103,8 +103,6 @@ public class RoomBuilder {
         room.setPlayer(player);
         room.setPassage(createPassage());
 
-
-        room.getPlayer().setObservers(room.getMonsters());
         return room;
     }
 }

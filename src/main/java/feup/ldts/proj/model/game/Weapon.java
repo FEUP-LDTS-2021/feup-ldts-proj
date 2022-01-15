@@ -20,16 +20,4 @@ public class Weapon {
     }
 
     public int getCapacity() { return capacity; }
-
-    //setters
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
-    public void setCapacity(int capacity) { this.capacity = capacity; }
 }

@@ -17,7 +17,6 @@ public class ShootStrategy implements AttackStrategy {
     }
 
     private Element.Direction getDirection(Position monsterPosition, Position playerPosition) {
-        //just to make it easier to read
         final int monsterX = monsterPosition.getX(), monsterY = monsterPosition.getY(),
                 playerX = playerPosition.getX(), playerY = playerPosition.getY();
 

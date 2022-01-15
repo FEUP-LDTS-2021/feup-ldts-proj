@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Monster extends Element {
-    protected String MONSTER_COLOR_100, MONSTER_COLOR_66, MONSTER_COLOR_33;
     protected List<MonsterObserver> observers;
     protected int baseHP;
     protected int baseDamage;
@@ -25,13 +24,11 @@ public abstract class Monster extends Element {
     public Monster(Position position, int depth, AttackStrategy attackStrategy) {
         super(position);
         setBasics();
-        setColors();
         this.maxHP = baseHP * depth;
         this.HP = maxHP;
         this.damage = baseDamage * depth;
         this.attackStrategy = attackStrategy;
-
-        observers = new ArrayList<MonsterObserver>();
+        this.observers = new ArrayList<MonsterObserver>();
     }
 
     //----------------------------------------getters-----------------------------------------
@@ -40,31 +37,11 @@ public abstract class Monster extends Element {
         return HP;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public String getColor() {
-        if ((float) HP/maxHP <= 0.33) return MONSTER_COLOR_33;
-        if ((float) HP/maxHP <= 0.66) return MONSTER_COLOR_66;
-        return MONSTER_COLOR_100;
-    }
-
-    public int getMaxHP() { return maxHP; }
-
-    public abstract char getChar();
-
-    public List<MonsterObserver> getObservers() { return observers; }
-
     //----------------------------------------setters-----------------------------------------
 
     public void setHP(int HP) {
         this.HP = HP;
     }
-
-    public void setDamage(int damage) { this.damage = damage; }
-
-    public void setMaxHP(int maxHP) { this.maxHP = maxHP; }
 
     @Override
     public void setPosition(Position position) {
@@ -74,8 +51,6 @@ public abstract class Monster extends Element {
     }
 
     protected abstract void setBasics();
-
-    protected abstract void setColors();
 
     //-------------------------------------other functions-------------------------------------
 

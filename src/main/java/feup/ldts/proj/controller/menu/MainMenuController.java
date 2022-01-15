@@ -5,6 +5,7 @@ import feup.ldts.proj.controller.Controller;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
+import feup.ldts.proj.model.menu.MainMenu;
 import feup.ldts.proj.model.menu.Menu;
 import feup.ldts.proj.model.game.room.RoomBuilder;
 import feup.ldts.proj.states.GameState;

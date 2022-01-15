@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Bullet extends Element {
-    protected String BULLET_COLOR_INI, BULLET_COLOR_MED, BULLET_COLOR_END;
     protected Element.Direction facingDirection;
     protected List<BulletObserver> observers;
     protected int maxRange, distanceTravelled, damage;
@@ -26,30 +25,11 @@ public abstract class Bullet extends Element {
 
     //----------------------------------------getters-----------------------------------------
 
-    public Element.Direction getFacingDirection() {
-        return facingDirection;
-    }
-
-    public int getMaxRange() {
-        return maxRange;
-    }
-
-    public int getDistanceTravelled() {
-        return distanceTravelled;
-    }
-
     public int getDamage() {
         return damage;
     }
 
-    public List<BulletObserver> getObservers() {return observers;}
-
-
-    public String getColor() {
-        if (isAtLimit()) return BULLET_COLOR_END;
-        else if (distanceTravelled == maxRange - 1) return BULLET_COLOR_MED;
-        return BULLET_COLOR_INI;
-    }
+    public Element.Direction getFacingDirection() { return facingDirection; }
 
     //----------------------------------------setters-----------------------------------------
 
@@ -66,6 +46,8 @@ public abstract class Bullet extends Element {
     public boolean isAtLimit() {
         return distanceTravelled >= maxRange;
     }
+
+    public boolean isAlmostAtLimit() { return distanceTravelled == maxRange-1; }
 
     public void incrementDistanceTravelled() {
         distanceTravelled++;

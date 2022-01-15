@@ -1,8 +1,8 @@
 package feup.ldts.proj.model.game.room;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.game.elements.observers.BulletObserver;
 import feup.ldts.proj.controller.game.elements.observers.MonsterObserver;
+import feup.ldts.proj.controller.game.elements.observers.PlayerObserver;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Passage;
 import feup.ldts.proj.model.game.elements.Player;
@@ -17,7 +17,6 @@ import java.util.List;
 
 public class Room {
     private final int depth;
-    private final String BG_COLOR = Game.Colors.get("Dirt");
 
     Player player;
     Passage passage;
@@ -69,10 +68,6 @@ public class Room {
         setObservers();
     }
 
-    public void setPlayerBullets(List<PlayerBullet> playerBullets) { this.playerBullets = playerBullets; }
-
-    public void setMonsterBullets(List<MonsterBullet> monsterBullets) { this.monsterBullets = monsterBullets; };
-
     public void setPassage(Passage passage) { this.passage = passage; }
 
     public void setPlayer(Player player) { this.player = player; }
@@ -88,10 +83,44 @@ public class Room {
 
                 @Override
                 public void positionChanged(Monster monster) {
-                    //do nothing
+                    if (monster.getPosition().equals(player.getPosition()))  //checks if a monster walked on top of a player
+                        monster.bite(player);
+
+                    for(int i = 0; i < playerBullets.size(); i++) { //checks if a monster walked on top of a PlayerBullet
+                        PlayerBullet bullet = playerBullets.get(i);
+                        if (monster.getPosition().equals(bullet.getPosition())) {
+                            monster.decreaseHP(bullet.getDamage());
+                            bullet.alertObserversDecayed();
+                            i--;
+                        }
+                    }
                 }
             });
         }
+
+        player.addPlayerObserver(new PlayerObserver() {
+            @Override
+            public void positionChanged(Player player) {
+                for (Monster monster : monsters) {             //checks if a player has walked on top of a monster
+                    if (monster.getPosition().equals(player.getPosition()))
+                        monster.bite(player);
+                }
+
+                for(int i = 0; i < monsterBullets.size(); i++) { //checks if the player walked on top of a MonsterBullet
+                    MonsterBullet bullet = monsterBullets.get(i);
+                    if (player.getPosition().equals(bullet.getPosition())) {
+                        player.decreaseHP(bullet.getDamage());
+                        bullet.alertObserversDecayed();
+                        i--;
+                    }
+                }
+
+                // checks if the player walked on top of a potion
+
+                // checks if the player walked on top of a weapon
+
+            }
+        });
     }
 
     //-------------------------------------other functions-------------------------------------
@@ -135,9 +164,5 @@ public class Room {
 
     public boolean isPassage() {
         return player.getPosition().equals(passage.getPosition());
-    }
-
-    public boolean canExecuteMovement(Position position) {
-        return (!(isWall(position) || isMonster(position) || isPlayer(position)));
     }
 }
