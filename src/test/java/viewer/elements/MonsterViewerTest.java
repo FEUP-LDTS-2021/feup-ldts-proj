@@ -1,7 +1,6 @@
 package viewer.elements;
 
 import feup.ldts.proj.Game;
-import feup.ldts.proj.controller.elements.strategies.AttackStrategy;
 import feup.ldts.proj.controller.elements.strategies.BiteStrategy;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;

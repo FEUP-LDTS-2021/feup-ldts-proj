@@ -1,8 +1,7 @@
-package controller;
+package controller.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.MonsterController;
-import feup.ldts.proj.controller.elements.PlayerController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Player;

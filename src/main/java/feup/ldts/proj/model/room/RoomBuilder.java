@@ -1,6 +1,5 @@
 package feup.ldts.proj.model.room;
 
-import feup.ldts.proj.controller.elements.strategies.AttackStrategy;
 import feup.ldts.proj.controller.elements.strategies.BiteStrategy;
 import feup.ldts.proj.controller.elements.strategies.ShootStrategy;
 import feup.ldts.proj.model.Position;

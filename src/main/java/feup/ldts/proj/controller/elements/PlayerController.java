@@ -4,7 +4,6 @@ import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.GameController;
 import feup.ldts.proj.controller.elements.bullets.BulletController;
 import feup.ldts.proj.controller.elements.bullets.PlayerBulletController;
-import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.bullets.Bullet;

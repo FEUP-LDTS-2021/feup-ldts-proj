@@ -1,12 +1,7 @@
 package feup.ldts.proj.viewer;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.elements.Element;
 import feup.ldts.proj.model.room.Room;
-import feup.ldts.proj.viewer.Viewer;
-import feup.ldts.proj.viewer.elements.*;
 import feup.ldts.proj.viewer.room.RoomViewer;
 
 import java.io.IOException;

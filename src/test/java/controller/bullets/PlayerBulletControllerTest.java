@@ -9,15 +9,12 @@ import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.model.elements.bullets.PlayerBullet;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

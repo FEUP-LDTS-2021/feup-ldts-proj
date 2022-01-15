@@ -2,7 +2,6 @@ package viewer.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Player;
 import feup.ldts.proj.viewer.elements.PlayerViewer;
 import org.junit.jupiter.api.BeforeEach;

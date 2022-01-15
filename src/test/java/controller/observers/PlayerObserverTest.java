@@ -1,6 +1,5 @@
 package controller.observers;
 
-import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.controller.elements.strategies.BiteStrategy;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Player;
@@ -9,7 +8,6 @@ import feup.ldts.proj.model.elements.monsters.Zombie;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;

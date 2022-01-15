@@ -1,6 +1,5 @@
 package feup.ldts.proj.model.elements.bullets;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.BulletObserver;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Element;
@@ -14,7 +13,7 @@ public abstract class Bullet extends Element {
     protected Element.Direction facingDirection;
     protected List<BulletObserver> observers;
 
-    //constructors
+    //--------------------------------------constructor--------------------------------------
 
     public Bullet(int x, int y, int maxRange, int damage, Element.Direction facingDirection) {
         super(x, y);
@@ -25,7 +24,7 @@ public abstract class Bullet extends Element {
         observers = new ArrayList<BulletObserver>();
     }
 
-    //getters
+    //----------------------------------------getters-----------------------------------------
 
     public Element.Direction getFacingDirection() {
         return facingDirection;
@@ -52,7 +51,7 @@ public abstract class Bullet extends Element {
         return BULLET_COLOR_INI;
     }
 
-    //setters
+    //----------------------------------------setters-----------------------------------------
 
     public void setDistanceTravelled(int distanceTravelled) { this.distanceTravelled = distanceTravelled; }
 
@@ -62,7 +61,7 @@ public abstract class Bullet extends Element {
         incrementDistanceTravelled();
     }
 
-    //other functions
+    //-------------------------------------other functions-------------------------------------
 
     public boolean isAtLimit() {
         return (distanceTravelled >= maxRange);

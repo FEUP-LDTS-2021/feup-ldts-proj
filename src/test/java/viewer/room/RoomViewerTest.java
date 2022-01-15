@@ -3,8 +3,6 @@ package viewer.room;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.*;
-import feup.ldts.proj.model.elements.bullets.PlayerBullet;
-import feup.ldts.proj.model.elements.monsters.Monster;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.model.room.RoomBuilder;
 import feup.ldts.proj.viewer.room.RoomViewer;
@@ -15,7 +13,6 @@ import org.mockito.Mockito;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 
 public class RoomViewerTest {
     private GUI gui;

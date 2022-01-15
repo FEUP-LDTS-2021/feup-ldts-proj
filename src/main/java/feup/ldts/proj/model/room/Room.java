@@ -24,7 +24,7 @@ public class Room {
     private List<MonsterBullet> monsterBullets;
     private List<PlayerBullet> playerBullets;
 
-    //constructors
+    //--------------------------------------constructor--------------------------------------
 
     public Room(int depth) {
         this.depth = depth;
@@ -34,7 +34,7 @@ public class Room {
         playerBullets = new ArrayList<>();
     }
 
-    //getters
+    //----------------------------------------getters-----------------------------------------
 
     public List<Wall> getWalls() {
         return walls;
@@ -58,7 +58,7 @@ public class Room {
         return depth;
     }
 
-    //setters
+    //----------------------------------------setters-----------------------------------------
 
     public void setWalls(List<Wall> walls) { this.walls = walls; }
 
@@ -92,7 +92,7 @@ public class Room {
         }
     }
 
-    //other functions
+    //-------------------------------------other functions-------------------------------------
 
     public void addMonsterBullet (MonsterBullet bullet) {
         monsterBullets.add(bullet);
@@ -114,9 +114,6 @@ public class Room {
         });
     }
 
-
-    //collision detection methods
-
     public boolean isWall(Position position) {
         for (Wall wall : walls)
             if (wall.getPosition().equals(position)) return true;
@@ -125,10 +122,8 @@ public class Room {
 
     public boolean isMonster(Position position) {
         for (Monster monster : monsters)
-            if (monster.getPosition().equals(position)) {
-
+            if (monster.getPosition().equals(position))
                 return true;
-            }
         return false;
     }
 
@@ -136,23 +131,11 @@ public class Room {
         return player.getPosition().equals(position);
     }
 
-    public boolean isPassage(Position position) {
-        return passage.getPosition().equals(position);
-    }
-
-
-
-    //----------- movement and collision down below
-
-    private boolean checkPlayerCollision(Position position) {
-        return player.getPosition().equals(position);
-    }
-
-    public boolean passageCollision() {
+    public boolean isPassage() {
         return player.getPosition().equals(passage.getPosition());
     }
 
     public boolean canExecuteMovement(Position position) {
-        return (!(isWall(position) || isMonster(position) || checkPlayerCollision(position)));
+        return (!(isWall(position) || isMonster(position) || isPlayer(position)));
     }
 }

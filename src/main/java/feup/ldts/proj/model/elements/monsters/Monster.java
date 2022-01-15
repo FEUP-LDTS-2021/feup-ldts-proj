@@ -23,7 +23,7 @@ public abstract class Monster extends Element {
     int HP, maxHP;
     int damage;
 
-    //constructors
+    //--------------------------------------constructor--------------------------------------
 
     public Monster(int x, int y, int depth, AttackStrategy attackStrategy) {
         super(x, y);
@@ -37,7 +37,7 @@ public abstract class Monster extends Element {
         observers = new ArrayList<MonsterObserver>();
     }
 
-    //getters
+    //----------------------------------------getters-----------------------------------------
 
     public int getHP() {
         return HP;
@@ -59,7 +59,7 @@ public abstract class Monster extends Element {
 
     public List<MonsterObserver> getObservers() { return observers; }
 
-    //setters
+    //----------------------------------------setters-----------------------------------------
 
     public void setHP(int HP) {
         this.HP = HP;
@@ -80,7 +80,7 @@ public abstract class Monster extends Element {
 
     protected abstract void setColors();
 
-    //other functions
+    //-------------------------------------other functions-------------------------------------
 
     public void decreaseHP(int damageAmount) {
         HP = Math.max(0, HP - damageAmount);

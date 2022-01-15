@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Random;
 
-import static java.lang.System.exit;
-
 public class RoomController extends GameController {
     private final PlayerController playerController;
     private final MonsterController monsterController;
@@ -39,7 +37,7 @@ public class RoomController extends GameController {
         else {
             playerController.step(game, action, time);
 
-            if (getModel().passageCollision()) {
+            if (getModel().isPassage()) {
                 int newDepth = getModel().getDepth() + 1;
                 int newRoom = new Random().nextInt(3) + 1;
                 game.setState(new GameState(new RoomBuilder(newDepth, newRoom).createRoom(getModel().getPlayer())));

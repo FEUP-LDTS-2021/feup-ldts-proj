@@ -2,7 +2,6 @@ package controller.bullets;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.bullets.MonsterBulletController;
-import feup.ldts.proj.controller.elements.bullets.PlayerBulletController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.elements.Element;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

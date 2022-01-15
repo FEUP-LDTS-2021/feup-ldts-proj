@@ -3,11 +3,9 @@ package feup.ldts.proj;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.menu.MainMenu;
-import feup.ldts.proj.model.menu.WeaponMenu;
 import feup.ldts.proj.model.room.Room;
 import feup.ldts.proj.states.MainMenuState;
 import feup.ldts.proj.states.State;
-import feup.ldts.proj.states.WeaponMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -94,6 +92,4 @@ public class Game {
     public void setState(State state) {
         this.state = state;
     }
-
-    public State getState() { return state; }
 }

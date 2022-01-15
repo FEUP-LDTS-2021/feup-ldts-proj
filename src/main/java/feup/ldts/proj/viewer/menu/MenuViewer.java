@@ -1,9 +1,6 @@
 package feup.ldts.proj.viewer.menu;
 
-
-import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.menu.Menu;
 import feup.ldts.proj.viewer.Viewer;
 

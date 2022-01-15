@@ -1,6 +1,5 @@
 package feup.ldts.proj.states;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.Controller;
 import feup.ldts.proj.controller.room.RoomController;
 import feup.ldts.proj.model.room.Room;

@@ -2,7 +2,6 @@ package feup.ldts.proj.model.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.elements.observers.MonsterObserver;
-import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.Weapon;
 import feup.ldts.proj.model.elements.bullets.PlayerBullet;
 import feup.ldts.proj.model.elements.monsters.Monster;
@@ -17,7 +16,7 @@ public class Player extends Element {
     private Element.Direction facingDirection;
     private long timeLeft;
 
-    //constructors
+    //--------------------------------------constructor--------------------------------------
 
     public Player(int x, int y) {
         super(x, y);
@@ -49,7 +48,7 @@ public class Player extends Element {
         timeLeft = 120;
     }
 
-    //getters
+    //----------------------------------------getters-----------------------------------------
 
     public String getColor() {
         if ((float) HP/maxHP <= 0.20) return PLAYER_COLOR_20;
@@ -73,7 +72,7 @@ public class Player extends Element {
 
     public long getTimeLeft() { return timeLeft; }
 
-    //setters
+    //----------------------------------------setters-----------------------------------------
 
     public void setHP(int HP) {
         this.HP = HP;
@@ -106,7 +105,7 @@ public class Player extends Element {
         }
     }
 
-    //other functions
+    //-------------------------------------other functions-------------------------------------
 
     public void decreaseHP(int damageAmount) {
         HP = Math.max(0, HP - damageAmount);
