@@ -1,4 +1,4 @@
-package model;
+package feup.ldts.proj.model;
 
 import feup.ldts.proj.model.Position;
 import org.junit.jupiter.api.Assertions;

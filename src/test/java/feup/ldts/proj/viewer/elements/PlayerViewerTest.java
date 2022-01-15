@@ -1,4 +1,4 @@
-package viewer.elements;
+package feup.ldts.proj.viewer.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;

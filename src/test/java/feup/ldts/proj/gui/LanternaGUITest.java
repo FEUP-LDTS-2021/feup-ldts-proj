@@ -1,4 +1,4 @@
-package gui;
+package feup.ldts.proj.gui;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;

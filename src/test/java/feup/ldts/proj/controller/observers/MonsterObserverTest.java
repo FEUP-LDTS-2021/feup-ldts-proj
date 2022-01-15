@@ -1,4 +1,4 @@
-package controller.observers;
+package feup.ldts.proj.controller.observers;
 
 import feup.ldts.proj.controller.elements.observers.MonsterObserver;
 import feup.ldts.proj.controller.elements.strategies.BiteStrategy;

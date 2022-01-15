@@ -1,4 +1,4 @@
-package controller.elements;
+package feup.ldts.proj.controller.elements;
 
 import feup.ldts.proj.controller.elements.PlayerController;
 import feup.ldts.proj.model.Position;

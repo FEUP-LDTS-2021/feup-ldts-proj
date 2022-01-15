@@ -1,4 +1,4 @@
-package viewer.room;
+package feup.ldts.proj.viewer.room;
 
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.Position;
