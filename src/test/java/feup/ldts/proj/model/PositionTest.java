@@ -1,6 +1,5 @@
 package feup.ldts.proj.model;
 
-import feup.ldts.proj.model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,5 +40,27 @@ public class PositionTest {
     @Test
     public void getDownTest() {
         Assertions.assertEquals(new Position(5, 5), position.getDown());
+    }
+
+    @Test
+    public void equalsOperatorTest() {
+        Assertions.assertEquals(new Position(5, 4), this.position);
+    }
+
+    @Test
+    public void getRandomTest() {
+        Position rand = position.getRandomPosition();
+        Assertions.assertNotEquals(rand, this.position);
+    }
+
+    @Test
+    public void positionToStringTest() {
+        String strPos = position.toString();
+        Assertions.assertEquals("X: " + position.getX() + " Y: " + position.getY(), strPos);
+    }
+
+    @Test
+    public void distanceTest() {
+        Assertions.assertEquals(1, position.distanceTo(new Position(5, 3)));
     }
 }

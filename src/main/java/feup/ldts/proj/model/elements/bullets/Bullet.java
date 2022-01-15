@@ -64,7 +64,7 @@ public abstract class Bullet extends Element {
     //-------------------------------------other functions-------------------------------------
 
     public boolean isAtLimit() {
-        return (distanceTravelled >= maxRange);
+        return distanceTravelled >= maxRange;
     }
 
     public void incrementDistanceTravelled() {

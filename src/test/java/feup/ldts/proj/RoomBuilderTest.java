@@ -1,3 +1,5 @@
+package feup.ldts.proj;
+
 import feup.ldts.proj.model.Position;
 import feup.ldts.proj.model.room.RoomBuilder;
 import org.junit.jupiter.api.Assertions;
