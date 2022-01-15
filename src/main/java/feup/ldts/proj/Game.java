@@ -3,7 +3,7 @@ package feup.ldts.proj;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
 import feup.ldts.proj.model.menu.MainMenu;
-import feup.ldts.proj.model.room.Room;
+import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.states.MainMenuState;
 import feup.ldts.proj.states.State;
 

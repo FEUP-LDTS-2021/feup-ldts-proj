@@ -11,7 +11,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import feup.ldts.proj.Game;
-import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.game.Position;
 
 import java.awt.*;
 import java.io.File;

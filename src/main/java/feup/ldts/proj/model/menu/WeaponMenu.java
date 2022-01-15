@@ -1,7 +1,6 @@
 package feup.ldts.proj.model.menu;
 
-import feup.ldts.proj.model.Position;
-import feup.ldts.proj.states.GameState;
+import feup.ldts.proj.model.game.Position;
 
 import java.util.Arrays;
 

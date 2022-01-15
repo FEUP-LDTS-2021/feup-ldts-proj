@@ -1,11 +1,11 @@
 package feup.ldts.proj.viewer.room;
 
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.elements.*;
-import feup.ldts.proj.model.room.Room;
-import feup.ldts.proj.model.room.RoomBuilder;
-import feup.ldts.proj.viewer.room.RoomViewer;
+import feup.ldts.proj.model.game.Position;
+import feup.ldts.proj.model.game.elements.Player;
+import feup.ldts.proj.model.game.room.Room;
+import feup.ldts.proj.model.game.room.RoomBuilder;
+import feup.ldts.proj.viewer.game.room.RoomViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +21,7 @@ public class RoomViewerTest {
 
     @BeforeEach
     void setUp() throws FileNotFoundException, URISyntaxException {
-        room = new RoomBuilder(99, 99).createRoom(new Player(-1, -1));
+        room = new RoomBuilder(99, 99).createRoom(new Player(new Position(-1, -1)));
         gui = Mockito.mock(GUI.class);
         roomViewer = new RoomViewer(gui);
     }

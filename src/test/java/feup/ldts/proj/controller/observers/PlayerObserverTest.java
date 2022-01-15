@@ -1,10 +1,10 @@
 package feup.ldts.proj.controller.observers;
 
-import feup.ldts.proj.controller.elements.strategies.BiteStrategy;
-import feup.ldts.proj.model.Position;
-import feup.ldts.proj.model.elements.Player;
-import feup.ldts.proj.model.elements.monsters.Monster;
-import feup.ldts.proj.model.elements.monsters.Zombie;
+import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
+import feup.ldts.proj.model.game.Position;
+import feup.ldts.proj.model.game.elements.Player;
+import feup.ldts.proj.model.game.elements.monsters.Monster;
+import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ public class PlayerObserverTest {
 
     @BeforeEach
     public void setUp() {
-        player = new Player(1, 1);
-        zombie = new Zombie(0, 1, 1, new BiteStrategy());
+        player = new Player(new Position(1, 1));
+        zombie = new Zombie(new Position(0, 1), 1, new BiteStrategy());
         monsters.add(zombie);
         player.setObservers(monsters);
     }

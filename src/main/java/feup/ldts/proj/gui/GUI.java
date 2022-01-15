@@ -1,7 +1,7 @@
 package feup.ldts.proj.gui;
 
 import com.googlecode.lanterna.screen.Screen;
-import feup.ldts.proj.model.Position;
+import feup.ldts.proj.model.game.Position;
 
 import java.io.IOException;
 

@@ -1,5 +1,6 @@
 package feup.ldts.proj.model;
 
+import feup.ldts.proj.model.game.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
