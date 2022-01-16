@@ -26,9 +26,7 @@ public class WeaponMenuTest {
         menu.nextOption();
         Assertions.assertEquals(1, menu.getCurrentOption());
         menu.nextOption();
-        Assertions.assertEquals(2, menu.getCurrentOption());
+        Assertions.assertEquals(1, menu.getCurrentOption());
 
-        menu.nextOption();
-        Assertions.assertEquals(2, menu.getCurrentOption());
     }
 }

@@ -14,8 +14,4 @@ public class PassageTest {
         this.passage = new Passage(new Position(5, 5));
     }
 
-    @Test
-    public void getColorTest() {
-        Assertions.assertEquals("#000000", passage.getColor());
-    }
 }

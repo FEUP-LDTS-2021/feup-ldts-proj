@@ -3,6 +3,8 @@ package feup.ldts.proj.states;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.Controller;
 import feup.ldts.proj.gui.GUI;
+import feup.ldts.proj.model.game.Weapon;
+import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.viewer.Viewer;
 
 import java.io.IOException;
@@ -16,6 +18,12 @@ public abstract class State<T> {
     public State(T model) {
         this.model = model;
         this.controller = getController();
+        this.viewer = getViewer();
+    }
+
+    public State(T model, Controller<T> controller) {
+        this.model = model;
+        this.controller = controller;
         this.viewer = getViewer();
     }
 

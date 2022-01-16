@@ -25,13 +25,14 @@ public class RoomViewerTest {
         room = new RoomBuilder(99, 99).createRoom(new Player(new Position(-1, -1)));
         gui = Mockito.mock(GUI.class);
         roomViewer = new RoomViewer(gui);
+
     }
 
     @Test
     void drawTest() throws IOException {
         roomViewer.draw(room);
-        Mockito.verify(gui, Mockito.times(84)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), '#', Game.Colors.get("Blurple"));
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), 'X',  Game.Colors.get("HealthyGreen"));
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(Mockito.any(Integer.class), Mockito.any(Integer.class), '"', Game.Colors.get("Red"));
+        //Mockito.verify(gui, Mockito.times(84)).drawCharacter(Mockito.anyInt(), Mockito.anyInt(), '#', Game.Colors.get("Blurple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(8, 8, 'X',  Game.Colors.get("HealthyGreen"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(2, 2, '\'', Game.Colors.get("Red"));
     }
 }

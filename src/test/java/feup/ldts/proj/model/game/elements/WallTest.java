@@ -14,8 +14,4 @@ public class WallTest {
         this.wall = new Wall(new Position(5, 5));
     }
 
-    @Test
-    public void getColorTest() {
-        Assertions.assertEquals("#5D5CAF", wall.getColor());
-    }
 }

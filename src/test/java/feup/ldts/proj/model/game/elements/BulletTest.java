@@ -1,5 +1,6 @@
 package feup.ldts.proj.model.game.elements;
 
+import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.bullets.Bullet;
@@ -14,12 +15,6 @@ public class BulletTest {
     @BeforeEach
     public void setUp() {
         this.bullet = new PlayerBullet(new Position(1, 1), 5, 5, Element.Direction.LEFT);
-    }
-
-    @Test
-    public void getColorTest() {
-        Assertions.assertEquals("#FFD966", bullet.getColor());
-
     }
 
     @Test

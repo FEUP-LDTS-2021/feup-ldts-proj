@@ -27,6 +27,14 @@ public class WeaponMenu extends Menu {
         this.currentOption = 0;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Weapon getNewWeapon() {
+        return newWeapon;
+    }
+
     @Override
     public Position getOptionPosition(int option) {
         switch (option) {

@@ -34,7 +34,7 @@ public class Game {
         put("Dirt", "#634220"); //floor
         put("Black", "#000000"); //passage
         put("White", "#ffffff"); //text
-        put("LightBlue", "#4ebbed"); //time potion
+        put("LightBlue", "#12cfe0"); //time potion
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -59,8 +59,7 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        //Game.stateStack.push(new MainMenuState(new MainMenu()));
-        Game.stateStack.push(new WeaponMenuState(new WeaponMenu(new Player(new Position(-1, -1), 10, 10, new Weapon(5, 5,5)), new Weapon(4,5,7))));
+        Game.stateStack.push(new MainMenuState(new MainMenu()));
     }
 
 

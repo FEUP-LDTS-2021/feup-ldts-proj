@@ -29,20 +29,27 @@ public class RoomController extends GameController {
         if (action == GUI.ACTION.EXIT) {
             game.setState(null);
         }
-        else if (action == GUI.ACTION.RETURN) {
+        if (action == GUI.ACTION.RETURN) {
             Game.stateStack.pop();
         }
         if (getModel().getPlayer().getHP() == 0 || getModel().getPlayer().getTimeLeft() == 0) {
             getModel().getPlayer().healHP(getModel().getPlayer().getMaxHP());
             getModel().getPlayer().resetTime();
-            game.setState(new GameState(new RoomBuilder(0, 1).createRoom(getModel().getPlayer())));
+            Game.stateStack.pop();
+            Game.stateStack.push(new GameState(new RoomBuilder(0, 1).createRoom(getModel().getPlayer())));
         }
         else {
             playerController.step(game, action, time);
 
             if (getModel().isPassage()) {
-                int newDepth = getModel().getDepth() + 1;
-                int newRoom = new Random().nextInt(3) + 1;
+                int newDepth, newRoom;
+                if (getModel().getDepth() == 2) {
+                    newDepth = 0;
+                    newRoom = 1;
+                } else {
+                    newDepth = getModel().getDepth() + 1;
+                    newRoom = new Random().nextInt(3) + 1;
+                }
                 Game.stateStack.pop();
                 Game.stateStack.push(new GameState(new RoomBuilder(newDepth, newRoom).createRoom(getModel().getPlayer())));
             }

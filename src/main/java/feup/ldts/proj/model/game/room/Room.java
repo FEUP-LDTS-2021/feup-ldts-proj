@@ -10,6 +10,7 @@ import feup.ldts.proj.model.game.elements.bullets.Bullet;
 import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import feup.ldts.proj.model.game.elements.items.Item;
+import feup.ldts.proj.model.game.elements.items.WeaponItem;
 import feup.ldts.proj.model.game.elements.items.potions.HealingPotion;
 import feup.ldts.proj.model.game.elements.items.potions.MaxHealthPotion;
 import feup.ldts.proj.model.game.elements.items.potions.TimePotion;
@@ -93,8 +94,8 @@ public class Room {
         this.player = player;
     }
 
-    public void setObservers() {
-        for (Monster monster : monsters) {
+    public void setMonsterObservers() {
+        for (Monster monster : monsters)
             monster.addMonsterObserver(new MonsterObserver() {
                 @Override
                 public void hpChanged(Monster monster) {
@@ -106,9 +107,8 @@ public class Room {
 
                 @Override
                 public void positionChanged(Monster monster) {
-                    if (monster.getPosition().equals(player.getPosition())) {  //checks if a monster walked on top of a player
+                    if (monster.getPosition().equals(player.getPosition()))  //checks if a monster walked on top of a player
                         monster.bite(player);
-                    }
 
                     for (int i = 0; i < playerBullets.size(); i++) { //checks if a monster walked on top of a PlayerBullet
                         PlayerBullet bullet = playerBullets.get(i);
@@ -120,15 +120,13 @@ public class Room {
                     }
                 }
             });
-        }
+    }
 
+    public void setPlayerObserver() {
         player.addPlayerObserver(player -> {
                     for (Monster monster : monsters)             //checks if a player has walked on top of a monster
-                        if (monster.getPosition().equals(player.getPosition())) {
+                        if (monster.getPosition().equals(player.getPosition()))
                             monster.bite(player);
-                            System.out.println("You have walked on top of a monster");
-                        }
-
 
                     for (int i = 0; i < monsterBullets.size(); i++) { //checks if the player walked on top of a MonsterBullet
                         MonsterBullet bullet = monsterBullets.get(i);
@@ -147,9 +145,13 @@ public class Room {
                             i--;
                         }
                     }
-
                 }
         );
+    }
+
+    public void setObservers() {
+        setMonsterObservers();
+        setPlayerObserver();
     }
 
     //-------------------------------------other functions-------------------------------------
@@ -211,8 +213,8 @@ public class Room {
     }
 
     public void createItem(Position position) {
-        if (!isItem(position) && new Random().nextInt(8) == 1)
-            switch (new Random().nextInt(3)) {
+        if (!isItem(position) && new Random().nextInt(4) == 0)
+            switch (new Random().nextInt(4)) {
                 case 0:
                     items.add(new HealingPotion(position, depth));
                     break;
@@ -221,6 +223,10 @@ public class Room {
                     break;
                 case 2:
                     items.add(new TimePotion(position, depth));
+                    break;
+                case 3:
+                    items.add(new WeaponItem(position, depth));
+                    break;
             }
     }
 }
