@@ -24,7 +24,7 @@ public class LanternaGUITest {
         position = new Position(5, 5);
     }
 
-    @Test
+/*    @Test
     public void drawPlayerTest() {
         GUI.drawPlayer(position, Game.Colors.get("HealthyGreen"));
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(Game.Colors.get("HealthyGreen")));
@@ -50,7 +50,7 @@ public class LanternaGUITest {
         GUI.drawBullet(position, Game.Colors.get("Golden"));
         Mockito.verify(textGraphics, Mockito.times(1)).setForegroundColor(TextColor.Factory.fromString(Game.Colors.get("Golden")));
         Mockito.verify(textGraphics, Mockito.times(1)).putString(position.getX(), position.getY(), "*");
-    }
+    }*/
 
     @Test
     public void drawTextTest() {

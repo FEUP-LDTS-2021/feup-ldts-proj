@@ -1,5 +1,6 @@
 package feup.ldts.proj.model.menu;
 
+import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;
 
 import java.util.Arrays;
@@ -37,5 +38,10 @@ public class MainMenu extends Menu {
     public void previousOption() {
         currentOption--;
         if (currentOption < 0) currentOption = 0;
+    }
+
+    @Override
+    public String getAssetColor(int asset) {
+        return Game.Colors.get("HealthyGreen");
     }
 }

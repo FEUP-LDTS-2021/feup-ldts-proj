@@ -27,8 +27,12 @@ public class MainMenuController extends Controller<Menu> {
                 getModel().nextOption();
                 break;
             case SELECT:
-                if (getModel().isSelected(0)) game.setState(new GameState(new RoomBuilder(0, 1).createRoom(new Player(new Position(0, 0)))));
+                if (getModel().isSelected(0)) Game.stateStack.push(new GameState(new RoomBuilder(0, 1).createRoom(new Player(new Position(0, 0)))));
                 if (getModel().isSelected(2)) game.setState(null);
+                break;
+            case RETURN:
+            case EXIT:
+                game.setState(null);
         }
     }
 }

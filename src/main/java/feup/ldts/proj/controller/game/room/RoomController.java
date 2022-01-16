@@ -5,7 +5,6 @@ import feup.ldts.proj.controller.GameController;
 import feup.ldts.proj.controller.game.elements.MonsterController;
 import feup.ldts.proj.controller.game.elements.PlayerController;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
 import feup.ldts.proj.states.GameState;
@@ -30,6 +29,9 @@ public class RoomController extends GameController {
         if (action == GUI.ACTION.EXIT) {
             game.setState(null);
         }
+        else if (action == GUI.ACTION.RETURN) {
+            Game.stateStack.pop();
+        }
         if (getModel().getPlayer().getHP() == 0 || getModel().getPlayer().getTimeLeft() == 0) {
             getModel().getPlayer().healHP(getModel().getPlayer().getMaxHP());
             getModel().getPlayer().resetTime();
@@ -41,12 +43,11 @@ public class RoomController extends GameController {
             if (getModel().isPassage()) {
                 int newDepth = getModel().getDepth() + 1;
                 int newRoom = new Random().nextInt(3) + 1;
-                game.setState(new GameState(new RoomBuilder(newDepth, newRoom).createRoom(getModel().getPlayer())));
+                Game.stateStack.pop();
+                Game.stateStack.push(new GameState(new RoomBuilder(newDepth, newRoom).createRoom(getModel().getPlayer())));
             }
 
             monsterController.step(game, action, time);
-            for (Monster monster : getModel().getMonstersToRemove())
-                getModel().getMonsters().remove(monster);
         }
     }
 }

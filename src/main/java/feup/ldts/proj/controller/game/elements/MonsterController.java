@@ -21,10 +21,14 @@ public class MonsterController extends GameController {
     }
 
     private void moveMonsters() {
-        for (Monster monster : getModel().getMonsters()) {
+        for (int i = 0; i < getModel().getMonsters().size(); i++) {
+            Monster monster = getModel().getMonsters().get(i);
+            int iniSize = getModel().getMonsters().size();
             Position monsterPos = monster.getPosition().getRandomPosition();
             if (!getModel().isWall(monsterPos) && !getModel().isMonster(monsterPos))
                 monster.setPosition(monsterPos);
+            if (iniSize != getModel().getMonsters().size())
+                i--;
         }
     }
 

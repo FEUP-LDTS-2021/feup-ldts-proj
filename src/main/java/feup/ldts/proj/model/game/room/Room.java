@@ -2,7 +2,6 @@ package feup.ldts.proj.model.game.room;
 
 import feup.ldts.proj.controller.game.elements.observers.BulletObserver;
 import feup.ldts.proj.controller.game.elements.observers.MonsterObserver;
-import feup.ldts.proj.controller.game.elements.observers.PlayerObserver;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Passage;
 import feup.ldts.proj.model.game.elements.Player;
@@ -10,10 +9,15 @@ import feup.ldts.proj.model.game.elements.Wall;
 import feup.ldts.proj.model.game.elements.bullets.Bullet;
 import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
+import feup.ldts.proj.model.game.elements.items.Item;
+import feup.ldts.proj.model.game.elements.items.potions.HealingPotion;
+import feup.ldts.proj.model.game.elements.items.potions.MaxHealthPotion;
+import feup.ldts.proj.model.game.elements.items.potions.TimePotion;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Room {
     private final int depth;
@@ -24,7 +28,7 @@ public class Room {
     private List<Monster> monsters;
     private List<MonsterBullet> monsterBullets;
     private List<PlayerBullet> playerBullets;
-    private List<Monster> monstersToRemove;
+    private List<Item> items;
 
     //--------------------------------------constructor--------------------------------------
 
@@ -34,7 +38,7 @@ public class Room {
         monsters = new ArrayList<>();
         monsterBullets = new ArrayList<>();
         playerBullets = new ArrayList<>();
-        monstersToRemove = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     //----------------------------------------getters-----------------------------------------
@@ -47,17 +51,25 @@ public class Room {
         return monsters;
     }
 
-    public Passage getPassage() { return passage; }
+    public Passage getPassage() {
+        return passage;
+    }
 
     public Player getPlayer() {
         return player;
     }
 
-    public List<MonsterBullet> getMonsterBullets() { return monsterBullets; }
+    public List<MonsterBullet> getMonsterBullets() {
+        return monsterBullets;
+    }
 
-    public List<PlayerBullet> getPlayerBullets() { return playerBullets; }
+    public List<PlayerBullet> getPlayerBullets() {
+        return playerBullets;
+    }
 
-    public List<Monster> getMonstersToRemove() { return monstersToRemove; }
+    public List<Item> getItems() {
+        return items;
+    }
 
     public int getDepth() {
         return depth;
@@ -65,32 +77,40 @@ public class Room {
 
     //----------------------------------------setters-----------------------------------------
 
-    public void setWalls(List<Wall> walls) { this.walls = walls; }
+    public void setWalls(List<Wall> walls) {
+        this.walls = walls;
+    }
 
-    public void setMonsters(List<Monster> monsters) { this.monsters = monsters; }
+    public void setMonsters(List<Monster> monsters) {
+        this.monsters = monsters;
+    }
 
-    public void setPassage(Passage passage) { this.passage = passage; }
+    public void setPassage(Passage passage) {
+        this.passage = passage;
+    }
 
-    public void setPlayer(Player player) { this.player = player; }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
     public void setObservers() {
         for (Monster monster : monsters) {
             monster.addMonsterObserver(new MonsterObserver() {
                 @Override
                 public void hpChanged(Monster monster) {
-                    if (monster.getHP() <= 0)
-                        monstersToRemove.add(monster); //removing directly would cause a ConcurrentModificationException...
+                    if (monster.getHP() <= 0) {
+                        createItem(monster.getPosition());
+                        monsters.remove(monster);
+                    }
                 }
 
                 @Override
                 public void positionChanged(Monster monster) {
-                    if (monster.getPosition().equals(player.getPosition())){  //checks if a monster walked on top of a player
+                    if (monster.getPosition().equals(player.getPosition())) {  //checks if a monster walked on top of a player
                         monster.bite(player);
-                        System.out.println("A monster has walked on top of you");
                     }
 
-
-                    for(int i = 0; i < playerBullets.size(); i++) { //checks if a monster walked on top of a PlayerBullet
+                    for (int i = 0; i < playerBullets.size(); i++) { //checks if a monster walked on top of a PlayerBullet
                         PlayerBullet bullet = playerBullets.get(i);
                         if (monster.getPosition().equals(bullet.getPosition())) {
                             monster.decreaseHP(bullet.getDamage());
@@ -102,36 +122,39 @@ public class Room {
             });
         }
 
-        player.addPlayerObserver(new PlayerObserver() {
-            @Override
-            public void positionChanged(Player player) {
-                for (Monster monster : monsters) {             //checks if a player has walked on top of a monster
-                    if (monster.getPosition().equals(player.getPosition())) {
-                        monster.bite(player);
+        player.addPlayerObserver(player -> {
+                    for (Monster monster : monsters)             //checks if a player has walked on top of a monster
+                        if (monster.getPosition().equals(player.getPosition())) {
+                            monster.bite(player);
+                            System.out.println("You have walked on top of a monster");
+                        }
+
+
+                    for (int i = 0; i < monsterBullets.size(); i++) { //checks if the player walked on top of a MonsterBullet
+                        MonsterBullet bullet = monsterBullets.get(i);
+                        if (player.getPosition().equals(bullet.getPosition())) {
+                            player.decreaseHP(bullet.getDamage());
+                            bullet.alertObserversDecayed();
+                            i--;
+                        }
+                    }
+
+                    for (int i = 0; i < items.size(); i++) {// checks if the player walked on top of an item
+                        Item item = items.get(i);
+                        if (player.getPosition().equals(item.getPosition())) {
+                            item.onPickup(player);
+                            items.remove(i);
+                            i--;
+                        }
                     }
 
                 }
-
-                for(int i = 0; i < monsterBullets.size(); i++) { //checks if the player walked on top of a MonsterBullet
-                    MonsterBullet bullet = monsterBullets.get(i);
-                    if (player.getPosition().equals(bullet.getPosition())) {
-                        player.decreaseHP(bullet.getDamage());
-                        bullet.alertObserversDecayed();
-                        i--;
-                    }
-                }
-
-                // checks if the player walked on top of a potion
-
-                // checks if the player walked on top of a weapon
-
-            }
-        });
+        );
     }
 
     //-------------------------------------other functions-------------------------------------
 
-    public void addMonsterBullet (MonsterBullet bullet) {
+    public void addMonsterBullet(MonsterBullet bullet) {
         monsterBullets.add(bullet);
         bullet.addBulletObserver(new BulletObserver() {
             @Override
@@ -141,7 +164,7 @@ public class Room {
         });
     }
 
-    public void addPlayerBullet (PlayerBullet bullet) {
+    public void addPlayerBullet(PlayerBullet bullet) {
         playerBullets.add(bullet);
         bullet.addBulletObserver(new BulletObserver() {
             @Override
@@ -164,11 +187,40 @@ public class Room {
         return false;
     }
 
+    public boolean isItem(Position position) {
+        for (Item item : items)
+            if (item.getPosition().equals(position))
+                return true;
+        return false;
+    }
+
     public boolean isPlayer(Position position) {
         return player.getPosition().equals(position);
     }
 
+    public boolean isBullet(Position position) {
+        for (PlayerBullet bullet : playerBullets)
+            if (bullet.getPosition().equals(position))
+                return true;
+        return false;
+    }
+
+
     public boolean isPassage() {
         return player.getPosition().equals(passage.getPosition());
+    }
+
+    public void createItem(Position position) {
+        if (!isItem(position) && new Random().nextInt(8) == 1)
+            switch (new Random().nextInt(3)) {
+                case 0:
+                    items.add(new HealingPotion(position, depth));
+                    break;
+                case 1:
+                    items.add(new MaxHealthPotion(position, depth));
+                    break;
+                case 2:
+                    items.add(new TimePotion(position, depth));
+            }
     }
 }

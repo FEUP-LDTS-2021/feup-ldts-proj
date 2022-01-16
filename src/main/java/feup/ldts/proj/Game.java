@@ -2,9 +2,13 @@ package feup.ldts.proj;
 
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
+import feup.ldts.proj.model.game.Position;
+import feup.ldts.proj.model.game.Weapon;
+import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.menu.MainMenu;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.menu.WeaponMenu;
+import feup.ldts.proj.states.GameState;
 import feup.ldts.proj.states.MainMenuState;
 import feup.ldts.proj.states.State;
 import feup.ldts.proj.states.WeaponMenuState;
@@ -20,9 +24,9 @@ public class Game {
     int depth;
     GUI gui;
     Room room;
-
     private State state;
 
+    public static Stack<State> stateStack = new Stack<State>(){};
     public static final HashMap<String, String> Colors = new HashMap<String, String>()
     {{
         put("LightGreen", "#C9F4DA"); //text
@@ -30,6 +34,7 @@ public class Game {
         put("Dirt", "#634220"); //floor
         put("Black", "#000000"); //passage
         put("White", "#ffffff"); //text
+        put("LightBlue", "#4ebbed"); //time potion
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -54,7 +59,8 @@ public class Game {
 
     public Game() throws IOException, URISyntaxException, FontFormatException {
         this.gui = new LanternaGUI(NUM_COLS, NUM_ROWS);
-        this.state = new MainMenuState(new MainMenu());
+        //Game.stateStack.push(new MainMenuState(new MainMenu()));
+        Game.stateStack.push(new WeaponMenuState(new WeaponMenu(new Player(new Position(-1, -1), 10, 10, new Weapon(5, 5,5)), new Weapon(4,5,7))));
     }
 
 
@@ -72,7 +78,9 @@ public class Game {
         int FPS = 60;
         int frameTime = 1000 / FPS;
 
-        while (this.state != null) {
+
+        do  {
+            this.state = Game.stateStack.peek();
             long startTime = System.currentTimeMillis();
 
             state.step(this, gui, startTime);
@@ -85,7 +93,7 @@ public class Game {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        } while (this.state != null);
 
         gui.close();
     }

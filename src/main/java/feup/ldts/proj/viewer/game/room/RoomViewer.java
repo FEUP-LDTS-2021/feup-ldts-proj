@@ -24,7 +24,9 @@ public class RoomViewer {
         gui.clear();
 
         drawBackground();
+
         drawElements(room.getWalls(), new WallViewer());
+        drawElements(room.getItems(), new ItemViewer());
         drawElements(room.getMonsters(), new MonsterViewer());
         drawElements(room.getPlayerBullets(), new PlayerBulletViewer());
         drawElements(room.getMonsterBullets(), new MonsterBulletViewer());
@@ -32,6 +34,12 @@ public class RoomViewer {
         if (room.getMonsters().isEmpty())
             drawElement(room.getPassage(), new PassageViewer());
 
+        drawBottomText(room);
+
+        gui.refresh();
+    }
+
+    private void drawBottomText(Room room) {
         String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
         String timeString = "" + room.getPlayer().getTimeLeft();
         String CapacityString = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
@@ -39,8 +47,6 @@ public class RoomViewer {
         gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
         gui.drawText(new Position(HpString.length() + 1, 20), timeString, Game.Colors.get("White"));
         gui.drawText(new Position(HpString.length() + timeString.length() + 2, 20), CapacityString, Game.Colors.get("Golden"));
-
-        gui.refresh();
     }
 
     private <T extends Element> void drawElements(List<T> elements, ElementViewer<T> viewer) {

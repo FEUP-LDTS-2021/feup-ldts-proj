@@ -24,13 +24,13 @@ public class Position {
     public Position getDown() {return new Position(x, y+1);}
 
     public Position getRandomPosition() {
-        switch (new Random().nextInt(4)) {
-            case 0: return new Position(x - 1, y);
-            case 1: return new Position(x + 1, y);
-            case 2: return new Position(x, y - 1);
-            case 3: return new Position(x, y + 1);
-        }
-        return null;
+        return switch (new Random().nextInt(4)) {
+            case 0 -> new Position(x - 1, y);
+            case 1 -> new Position(x + 1, y);
+            case 2 -> new Position(x, y - 1);
+            case 3 -> new Position(x, y + 1);
+            default -> null;
+        };
     }
 
     @Override

@@ -55,6 +55,8 @@ public class Player extends Element {
 
     public long getTimeLeft() { return timeLeft; }
 
+    public List<PlayerObserver> getObservers() { return observers; }
+
     //----------------------------------------setters-----------------------------------------
 
     @Override
@@ -86,6 +88,10 @@ public class Player extends Element {
     public void healHP(int healAmount) {
         HP = Math.min(maxHP, HP + healAmount);
     }
+
+    public void increaseMaxHP(int healthBoost) { maxHP += healthBoost; }
+
+    public void increaseTime(int timeAmount) { timeLeft += timeAmount; }
 
     public PlayerBullet createBullet() {
         return new PlayerBullet(position, weapon.getRange(), weapon.getDamage(), facingDirection);

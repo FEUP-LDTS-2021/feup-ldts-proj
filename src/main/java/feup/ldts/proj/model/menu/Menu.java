@@ -17,7 +17,7 @@ public abstract class Menu {
 
     public String getAsset(int i) { return assets.get(i); }
 
-    public String getAssetColor() {return Game.Colors.get("HealthyGreen"); }
+    public abstract String getAssetColor(int asset);
 
     public boolean isSelected(int i) { return currentOption == i; }
 

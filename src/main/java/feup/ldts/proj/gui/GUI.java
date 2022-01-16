@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public interface GUI {
     ACTION getAction() throws IOException;
-    enum ACTION {UP, RIGHT, DOWN, LEFT, NONE, EXIT, SHOOT, SELECT}
+    enum ACTION {UP, RIGHT, DOWN, LEFT, NONE, EXIT, SHOOT, SELECT, RETURN}
 
     void drawText(Position position, String text, String color);
     void drawCharacter(int x, int y, char c, String color);

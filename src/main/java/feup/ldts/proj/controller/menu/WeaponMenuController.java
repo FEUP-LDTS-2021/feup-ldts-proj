@@ -30,6 +30,12 @@ public class WeaponMenuController extends Controller<Menu> {
             case SELECT:
                 if (getModel().isSelected(0)) game.setState(new GameState(new RoomBuilder(0, 1).createRoom(new Player(new Position(0, 0)))));
                 if (getModel().isSelected(1)) game.setState(null);
+
+            case RETURN:
+                Game.stateStack.pop();
+
+            case EXIT:
+                game.setState(null);
         }
     }
 }
