@@ -25,7 +25,6 @@ public class RoomController extends GameController {
         this.monsterController = new MonsterController(room);
     }
 
-
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
         if (action == GUI.ACTION.EXIT) {
@@ -33,6 +32,7 @@ public class RoomController extends GameController {
         }
         if (action == GUI.ACTION.RETURN) {
             Game.stateStack.pop();
+            return;
         }
         if (getModel().getPlayer().getHP() == 0 || getModel().getPlayer().getTimeLeft() == 0) {
             getModel().getPlayer().healHP(getModel().getPlayer().getMaxHP());
@@ -44,16 +44,13 @@ public class RoomController extends GameController {
 
             if (getModel().isPassage()) {
                 int newDepth, newRoom;
-                if (getModel().getDepth() == 2) {
-                    newDepth = 3;
-                    newRoom = 1;
-                } else if (getModel().getDepth() == 3) {
+                if (getModel().getDepth() == 3) {
                     Game.stateStack.push(new VictoryMenuState(new VictoryMenu()));
                     return;
-                } else {
-                    newDepth = getModel().getDepth() + 1;
-                    newRoom = new Random().nextInt(3) + 1;
                 }
+                newDepth = getModel().getDepth() + 1;
+                newRoom = new Random().nextInt(3) + 1;
+
                 Game.stateStack.pop();
                 Game.stateStack.push(new GameState(new RoomBuilder(newDepth, newRoom).createRoom(getModel().getPlayer())));
             }

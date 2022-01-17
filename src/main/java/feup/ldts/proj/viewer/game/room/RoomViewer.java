@@ -43,9 +43,11 @@ public class RoomViewer {
         String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
         String timeString = "" + room.getPlayer().getTimeLeft();
         String CapacityString = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
+        String timeColor = room.getPlayer().getTimeLeft() < 60 ? Game.Colors.get("Red") : Game.Colors.get("White");
+
 
         gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
-        gui.drawText(new Position(HpString.length() + 1, 20), timeString, Game.Colors.get("White"));
+        gui.drawText(new Position(HpString.length() + 1, 20), timeString, timeColor);
         gui.drawText(new Position(HpString.length() + timeString.length() + 2, 20), CapacityString, Game.Colors.get("Golden"));
     }
 

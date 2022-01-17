@@ -131,7 +131,7 @@ public class Room {
     }
 
     public void setPlayerObserver() {
-        player.addPlayerObserver(player -> {
+        player.addPlayerObserver(player -> { //player has moved
                     for (Monster monster : monsters)             //checks if a player has walked on top of a monster
                         if (monster.getPosition().equals(player.getPosition()))
                             monster.bite(player);
@@ -221,7 +221,7 @@ public class Room {
     }
 
     public void createItem(Position position) {
-        if (!isItem(position) && new Random().nextInt(4) == 0)
+        if (!isItem(position) && new Random().nextInt(3) == 0)
             switch (new Random().nextInt(4)) {
                 case 0:
                     items.add(new HealingPotion(position, depth));

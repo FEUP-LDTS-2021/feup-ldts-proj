@@ -11,12 +11,12 @@ import feup.ldts.proj.model.game.room.Room;
 import java.io.IOException;
 
 public class MonsterController extends GameController {
-    private long lastMovement;
+    private long lastAction;
     private long lastBulletMovement;
 
     public MonsterController(Room room) {
         super(room);
-        this.lastMovement = 0;
+        this.lastAction = 0;
         this.lastBulletMovement = 0;
     }
 
@@ -41,10 +41,10 @@ public class MonsterController extends GameController {
     public void step(Game game, GUI.ACTION action, long time) throws IOException {
         MonsterBulletController controller = new MonsterBulletController(getModel());
 
-        if (time - lastMovement > 500) {
-            moveMonsters();
+        if (time - lastAction > 500) {
             makeMonstersAttack();
-            this.lastMovement = time;
+            moveMonsters();
+            this.lastAction = time;
         }
 
         if (time - lastBulletMovement > 250 && !getModel().getMonsterBullets().isEmpty()) {
