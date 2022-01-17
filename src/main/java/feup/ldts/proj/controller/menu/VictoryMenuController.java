@@ -5,36 +5,41 @@ import feup.ldts.proj.controller.Controller;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
-import feup.ldts.proj.model.menu.ControlsMenu;
+import feup.ldts.proj.model.game.room.RoomBuilder;
 import feup.ldts.proj.model.menu.MainMenu;
 import feup.ldts.proj.model.menu.Menu;
-import feup.ldts.proj.model.game.room.RoomBuilder;
-import feup.ldts.proj.states.ControlsMenuState;
 import feup.ldts.proj.states.GameState;
+import feup.ldts.proj.states.MainMenuState;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MainMenuController extends Controller<Menu> {
-    public MainMenuController(Menu menu) {
+public class VictoryMenuController extends Controller<Menu> {
+    public VictoryMenuController(Menu menu) {
         super(menu);
     }
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
+
         switch (action) {
-            case UP:
+            case LEFT:
                 getModel().previousOption();
                 break;
-            case DOWN:
+            case RIGHT:
                 getModel().nextOption();
                 break;
             case SELECT:
-                if (getModel().isSelected(0)) Game.stateStack.push(new GameState(new RoomBuilder(0, 1).createRoom(new Player(new Position(0, 0)))));
-                if (getModel().isSelected(1)) Game.stateStack.push(new ControlsMenuState(new ControlsMenu()));
-                if (getModel().isSelected(2)) game.setState(null);
+                while (!Game.stateStack.empty())
+                    Game.stateStack.pop();
+                if (getModel().isSelected(0)) Game.stateStack.push(new MainMenuState(new MainMenu()));
+                if (getModel().isSelected(1)) game.setState(null);
                 break;
             case RETURN:
+                while (!Game.stateStack.empty())
+                    Game.stateStack.pop();
+                Game.stateStack.push(new MainMenuState(new MainMenu()));
+                break;
             case EXIT:
                 game.setState(null);
         }

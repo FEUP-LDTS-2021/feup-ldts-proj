@@ -14,6 +14,7 @@ import feup.ldts.proj.model.game.elements.items.WeaponItem;
 import feup.ldts.proj.model.game.elements.items.potions.HealingPotion;
 import feup.ldts.proj.model.game.elements.items.potions.MaxHealthPotion;
 import feup.ldts.proj.model.game.elements.items.potions.TimePotion;
+import feup.ldts.proj.model.game.elements.monsters.Boss;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 
 import java.util.ArrayList;
@@ -74,6 +75,13 @@ public class Room {
 
     public int getDepth() {
         return depth;
+    }
+
+    public Boss getBoss() {
+        for (Monster monster : monsters)
+            if (monster instanceof Boss)
+                return (Boss) monster;
+        return null;
     }
 
     //----------------------------------------setters-----------------------------------------

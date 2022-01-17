@@ -2,6 +2,7 @@ package feup.ldts.proj.model.game.elements.monsters;
 
 import feup.ldts.proj.controller.game.elements.observers.MonsterObserver;
 import feup.ldts.proj.controller.game.elements.strategies.AttackStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.MovementStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.Player;
@@ -15,19 +16,21 @@ public abstract class Monster extends Element {
     protected List<MonsterObserver> observers;
     protected int baseHP;
     protected int baseDamage;
-    final AttackStrategy attackStrategy;
-    int HP, maxHP;
-    int damage;
+    protected final AttackStrategy attackStrategy;
+    protected final MovementStrategy movementStrategy;
+    protected int HP, maxHP;
+    protected int damage;
 
     //--------------------------------------constructor--------------------------------------
 
-    public Monster(Position position, int depth, AttackStrategy attackStrategy) {
+    public Monster(Position position, int depth, AttackStrategy attackStrategy, MovementStrategy movementStrategy) {
         super(position);
         setBasics();
-        this.maxHP = baseHP * depth;
+        this.maxHP = baseHP + 2 * depth;
         this.HP = maxHP;
-        this.damage = baseDamage * depth;
+        this.damage = baseDamage + 2 * depth;
         this.attackStrategy = attackStrategy;
+        this.movementStrategy = movementStrategy;
         this.observers = new ArrayList<MonsterObserver>();
     }
 
@@ -38,6 +41,10 @@ public abstract class Monster extends Element {
     }
 
     public int getMaxHP() { return maxHP; }
+    
+    public int getDamage() { return damage; }
+
+    public MovementStrategy getMovementStrategy() { return movementStrategy; }
 
     //----------------------------------------setters-----------------------------------------
 
@@ -68,6 +75,8 @@ public abstract class Monster extends Element {
     public void attack(Player player, Room room) {
         this.attackStrategy.attack(this, player, room);
     }
+
+    public void move(Room room) { this.movementStrategy.move(this, room);}
 
     public MonsterBullet createMonsterBullet(int depth, Element.Direction direction) {
         int maxRange = 3 + depth * 2;

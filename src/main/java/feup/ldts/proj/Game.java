@@ -35,6 +35,8 @@ public class Game {
         put("Black", "#000000"); //passage
         put("White", "#ffffff"); //text
         put("LightBlue", "#12cfe0"); //time potion
+        put("OceanBlue", "#018370");
+        put("Mud", "#b88b00");
 
         //bullet colors
         put("Golden", "#FFD966");

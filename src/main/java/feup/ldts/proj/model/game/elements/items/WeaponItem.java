@@ -26,9 +26,9 @@ public class WeaponItem extends Item {
     }
 
     private Weapon createRandomWeapon(int depth) {
-        int dmg = (new Random().nextInt(2 + depth) + 1) * depth;
-        int range = (new Random().nextInt(1 + depth) + 2) + depth;
-        int capacity = (new Random().nextInt(2 + depth) + 2) * depth;
+        int dmg = (new Random().nextInt(2 + depth) + depth) * (1+depth);
+        int range = new Random().nextInt(1 + depth) + 2 * depth;
+        int capacity = new Random().nextInt(2 + depth) + 2 * depth;
 
         return new Weapon(dmg, range, capacity);
     }

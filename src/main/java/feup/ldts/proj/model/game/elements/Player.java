@@ -27,7 +27,7 @@ public class Player extends Element {
         this.weapon = new Weapon(3, 4, 2);
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
-        timeLeft = 120;
+        timeLeft = 180;
         this.observers = new ArrayList<PlayerObserver>();
     }
 
@@ -37,7 +37,7 @@ public class Player extends Element {
         this.weapon = weapon;
         this.facingDirection = Element.Direction.DOWN;
         this.maxHP = maxHP;
-        this.timeLeft = 120;
+        this.timeLeft = 180;
         this.observers = new ArrayList<PlayerObserver>();
     }
 
@@ -83,7 +83,7 @@ public class Player extends Element {
 
     public void decreaseTime() {timeLeft--;}
 
-    public void resetTime() {timeLeft = 120;}
+    public void resetTime() {timeLeft = 180;}
 
     public void healHP(int healAmount) {
         HP = Math.min(maxHP, HP + healAmount);

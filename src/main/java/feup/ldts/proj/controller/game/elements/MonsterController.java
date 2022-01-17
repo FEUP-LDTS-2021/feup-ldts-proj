@@ -24,10 +24,10 @@ public class MonsterController extends GameController {
         for (int i = 0; i < getModel().getMonsters().size(); i++) {
             Monster monster = getModel().getMonsters().get(i);
             int iniSize = getModel().getMonsters().size();
-            Position monsterPos = monster.getPosition().getRandomPosition();
-            if (!getModel().isWall(monsterPos) && !getModel().isMonster(monsterPos))
-                monster.setPosition(monsterPos);
-            if (iniSize != getModel().getMonsters().size())
+
+            monster.move(getModel());
+
+            if (iniSize != getModel().getMonsters().size()) //checks if the monster has been removed (because he stepped on a playerBullet)
                 i--;
         }
     }

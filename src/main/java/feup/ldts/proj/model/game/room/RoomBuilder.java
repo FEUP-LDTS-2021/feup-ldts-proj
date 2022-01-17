@@ -1,8 +1,8 @@
 package feup.ldts.proj.model.game.room;
 
-import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
-import feup.ldts.proj.controller.game.elements.strategies.ShootStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.*;
 import feup.ldts.proj.model.game.Position;
+import feup.ldts.proj.model.game.elements.monsters.Boss;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.Passage;
 import feup.ldts.proj.model.game.elements.Player;
@@ -69,9 +69,11 @@ public class RoomBuilder {
             String line = lines.get(row);
             for (int col = 0; col < line.length(); col++) {
                 if (line.charAt(col) == '\"')
-                    monsters.add(new Zombie(new Position(col, row), depth, new BiteStrategy()));
+                    monsters.add(new Zombie(new Position(col, row), depth, new BiteStrategy(), new RandomMovementStrategy()));
                 else if (line.charAt(col) == '\'')
-                    monsters.add(new Skeleton(new Position(col, row), depth, new ShootStrategy()));
+                    monsters.add(new Skeleton(new Position(col, row), depth, new ShootStrategy(), new RandomMovementStrategy()));
+                else if (line.charAt(col) == '~')
+                    monsters.add(new Boss(new Position(col, row), depth, new BossAttackStrategy(), new BossMovementStrategy()));
             }
         }
         return monsters;

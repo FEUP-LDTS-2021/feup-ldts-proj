@@ -83,6 +83,6 @@ public class WeaponMenu extends Menu {
     @Override
     public String getAssetColor(int asset) {
         if (asset == 0 || asset == 4) return Game.Colors.get("HealthyGreen");
-        return Game.Colors.get("Blurple");
+        return Game.Colors.get("OceanBlue");
     }
 }

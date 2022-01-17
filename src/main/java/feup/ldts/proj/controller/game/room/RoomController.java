@@ -7,7 +7,9 @@ import feup.ldts.proj.controller.game.elements.PlayerController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
+import feup.ldts.proj.model.menu.VictoryMenu;
 import feup.ldts.proj.states.GameState;
+import feup.ldts.proj.states.VictoryMenuState;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -37,15 +39,17 @@ public class RoomController extends GameController {
             getModel().getPlayer().resetTime();
             Game.stateStack.pop();
             Game.stateStack.push(new GameState(new RoomBuilder(0, 1).createRoom(getModel().getPlayer())));
-        }
-        else {
+        } else {
             playerController.step(game, action, time);
 
             if (getModel().isPassage()) {
                 int newDepth, newRoom;
                 if (getModel().getDepth() == 2) {
-                    newDepth = 0;
+                    newDepth = 3;
                     newRoom = 1;
+                } else if (getModel().getDepth() == 3) {
+                    Game.stateStack.push(new VictoryMenuState(new VictoryMenu()));
+                    return;
                 } else {
                     newDepth = getModel().getDepth() + 1;
                     newRoom = new Random().nextInt(3) + 1;
