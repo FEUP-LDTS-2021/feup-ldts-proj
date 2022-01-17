@@ -1,6 +1,7 @@
 package feup.ldts.proj.model.game.room;
 
 import feup.ldts.proj.model.game.Position;
+import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.room.RoomBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,5 +33,12 @@ public class RoomBuilderTest {
     @Test
     public void passagePositionTest() {
         Assertions.assertEquals(new Position(9, 15), builder.createPassage().getPosition());
+    }
+
+    @Test
+    public void playerPositionTest() {
+        Player player = new Player(new Position(-1, -1));
+        builder.setPlayerPosition(player);
+        Assertions.assertEquals(new Position(8, 8), player.getPosition());
     }
 }

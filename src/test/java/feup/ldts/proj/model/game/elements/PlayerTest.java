@@ -26,7 +26,7 @@ public class PlayerTest {
     @Test
     public void decreaseTimeTest() {
         player.decreaseTime();
-        Assertions.assertEquals(119, player.getTimeLeft());
+        Assertions.assertEquals(179, player.getTimeLeft());
     }
 
     @Test
@@ -35,10 +35,10 @@ public class PlayerTest {
         player.decreaseTime();
         player.decreaseTime();
         player.decreaseTime();
-        Assertions.assertEquals(116, player.getTimeLeft());
+        Assertions.assertEquals(176, player.getTimeLeft());
 
         player.resetTime();
-        Assertions.assertEquals(120, player.getTimeLeft());
+        Assertions.assertEquals(180, player.getTimeLeft());
     }
 
     @Test

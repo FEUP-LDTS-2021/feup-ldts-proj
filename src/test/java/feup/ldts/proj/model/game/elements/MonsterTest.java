@@ -20,7 +20,7 @@ public class MonsterTest {
     @Test
     public void decreaseHPTest() {
         monster.decreaseHP(4);
-        Assertions.assertEquals(1, monster.getHP());
+        Assertions.assertEquals(3, monster.getHP());
 
         monster.decreaseHP(100);
         Assertions.assertEquals(0, monster.getHP());

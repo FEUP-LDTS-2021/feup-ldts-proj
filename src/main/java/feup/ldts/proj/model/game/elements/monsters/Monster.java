@@ -14,14 +14,15 @@ import java.util.List;
 
 public abstract class Monster extends Element {
     protected List<MonsterObserver> observers;
+
     protected int baseHP;
     protected int baseDamage;
+
     protected final AttackStrategy attackStrategy;
     protected final MovementStrategy movementStrategy;
+
     protected int HP, maxHP;
     protected int damage;
-
-    //--------------------------------------constructor--------------------------------------
 
     public Monster(Position position, int depth, AttackStrategy attackStrategy, MovementStrategy movementStrategy) {
         super(position);
@@ -34,8 +35,6 @@ public abstract class Monster extends Element {
         this.observers = new ArrayList<MonsterObserver>();
     }
 
-    //----------------------------------------getters-----------------------------------------
-
     public int getHP() {
         return HP;
     }
@@ -45,8 +44,6 @@ public abstract class Monster extends Element {
     public int getDamage() { return damage; }
 
     public MovementStrategy getMovementStrategy() { return movementStrategy; }
-
-    //----------------------------------------setters-----------------------------------------
 
     public void setHP(int HP) {
         this.HP = HP;
@@ -60,9 +57,6 @@ public abstract class Monster extends Element {
     }
 
     protected abstract void setBasics();
-
-    //-------------------------------------other functions-------------------------------------
-
 
     public void addMonsterObserver(MonsterObserver observer) {
         this.observers.add(observer);
