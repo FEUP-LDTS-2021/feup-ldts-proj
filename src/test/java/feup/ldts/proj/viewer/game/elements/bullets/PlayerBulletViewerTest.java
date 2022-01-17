@@ -6,6 +6,7 @@ import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import feup.ldts.proj.viewer.game.elements.bullets.PlayerBulletViewer;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,26 @@ public class PlayerBulletViewerTest {
         bullet = new PlayerBullet(new Position(5, 5), 4, 4, Element.Direction.UP);
         viewer = new PlayerBulletViewer();
         gui = Mockito.mock(GUI.class);
+    }
+
+    @Test
+    public void getPlayerBulletCharTest() {
+        Assertions.assertEquals('*', viewer.getChar(bullet));
+    }
+
+    @Test
+    public void getPlayerBulletColorTest() {
+        bullet.setDistanceTravelled(1);
+        viewer.draw(bullet, gui);
+        Assertions.assertEquals(Game.Colors.get("Golden"), viewer.getColor(bullet));
+
+        bullet.setDistanceTravelled(3);
+        viewer.draw(bullet, gui);
+        Assertions.assertEquals(Game.Colors.get("SlightRust"), viewer.getColor(bullet));
+
+        bullet.setDistanceTravelled(4);
+        viewer.draw(bullet, gui);
+        Assertions.assertEquals(Game.Colors.get("Rust"), viewer.getColor(bullet));
     }
 
     @Test

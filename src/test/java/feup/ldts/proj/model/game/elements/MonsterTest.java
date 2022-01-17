@@ -1,6 +1,7 @@
 package feup.ldts.proj.model.game.elements;
 
 import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovementStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
@@ -13,7 +14,7 @@ public class MonsterTest {
 
     @BeforeEach
     public void setUp() {
-        this.monster = new Zombie(new Position(1, 1), 1, new BiteStrategy());
+        this.monster = new Zombie(new Position(1, 1), 1, new BiteStrategy(), new RandomMovementStrategy());
     }
 
     @Test

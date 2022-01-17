@@ -51,13 +51,12 @@ public class PositionTest {
     @Test
     public void getRandomTest() {
         Position rand = position.getRandomPosition();
-        Assertions.assertNotEquals(rand, this.position);
+        Assertions.assertNotEquals(rand, position);
     }
 
     @Test
     public void positionToStringTest() {
-        String strPos = position.toString();
-        Assertions.assertEquals("X: " + position.getX() + " Y: " + position.getY(), strPos);
+        Assertions.assertEquals("X: 5 Y: 4", position.toString());
     }
 
     @Test

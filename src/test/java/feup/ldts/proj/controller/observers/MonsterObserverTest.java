@@ -1,6 +1,7 @@
 package feup.ldts.proj.controller.observers;
 
 import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovementStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,7 @@ public class MonsterObserverTest {
 
     @BeforeEach
     public void setUp() {
-        this.zombie = new Zombie(new Position(1 , 1),1, new BiteStrategy());
+        this.zombie = new Zombie(new Position(1 , 1),1, new BiteStrategy(), new RandomMovementStrategy());
     }
 
     /*@Test

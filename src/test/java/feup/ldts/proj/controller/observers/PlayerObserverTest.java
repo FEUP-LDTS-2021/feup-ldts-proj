@@ -1,6 +1,7 @@
 package feup.ldts.proj.controller.observers;
 
 import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovementStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
@@ -18,7 +19,7 @@ public class PlayerObserverTest {
     @BeforeEach
     public void setUp() {
         player = new Player(new Position(1, 1));
-        zombie = new Zombie(new Position(0, 1), 1, new BiteStrategy());
+        zombie = new Zombie(new Position(0, 1), 1, new BiteStrategy(), new RandomMovementStrategy());
         monsters.add(zombie);
     }
 

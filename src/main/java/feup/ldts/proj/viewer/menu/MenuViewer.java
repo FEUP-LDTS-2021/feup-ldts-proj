@@ -8,6 +8,7 @@ public class MenuViewer extends Viewer<Menu> {
     public MenuViewer(Menu menu) {
         super(menu);
     }
+
     @Override
     protected void drawElements(GUI gui) {
         for (int asset = 0; asset < getModel().getNumberAssets(); asset++)
