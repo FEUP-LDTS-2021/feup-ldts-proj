@@ -31,4 +31,12 @@ public class MonsterControllerTest {
         monsterController.step(Mockito.mock(Game.class), GUI.ACTION.UP, 600);
         Assertions.assertNotEquals(new Position(2, 2), monsterController.getModel().getMonsters().get(0).getPosition());
     }
+
+    @Test
+    public void monsterAttackTest() throws IOException {
+        room.getPlayer().setPosition(room.getMonsters().get(0).getPosition());
+        monsterController.step(Mockito.mock(Game.class), GUI.ACTION.UP, 600);
+
+        Assertions.assertEquals(0, room.getPlayer().getHP());
+    }
 }

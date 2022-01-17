@@ -26,15 +26,25 @@ public class PlayerControllerTest {
     @Test
     public void playerMovementTest() {
         playerController.movePlayerRight();
-        Assertions.assertEquals(new Position(8, 8), room.getPlayer().getPosition()); //can't move
+        Assertions.assertEquals(new Position(8, 8), room.getPlayer().getPosition());
+
         playerController.movePlayerUp();
         Assertions.assertEquals(new Position(8, 7), room.getPlayer().getPosition());
+
         playerController.movePlayerLeft();
         Assertions.assertEquals(new Position(7, 7), room.getPlayer().getPosition());
+
         playerController.movePlayerDown();
         Assertions.assertEquals(new Position(7, 8), room.getPlayer().getPosition());
+
         playerController.movePlayerRight();
         Assertions.assertEquals(new Position(8, 8), room.getPlayer().getPosition());
+    }
+
+    @Test
+    public void playerShootTest() {
+        playerController.shoot();
+        Assertions.assertFalse(room.getPlayerBullets().isEmpty());
     }
 
 }

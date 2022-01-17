@@ -1,4 +1,4 @@
-package feup.ldts.proj.menu;
+package feup.ldts.proj.model.menu;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;

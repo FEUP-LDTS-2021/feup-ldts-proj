@@ -1,4 +1,4 @@
-package feup.ldts.proj.controller.observers;
+package feup.ldts.proj.controller.game.elements.observers;
 
 import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
 import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovementStrategy;
