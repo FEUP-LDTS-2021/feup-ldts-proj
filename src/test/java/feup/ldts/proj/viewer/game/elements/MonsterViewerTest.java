@@ -1,12 +1,11 @@
 package feup.ldts.proj.viewer.game.elements;
 
 import feup.ldts.proj.Game;
-import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
-import feup.ldts.proj.viewer.game.elements.MonsterViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

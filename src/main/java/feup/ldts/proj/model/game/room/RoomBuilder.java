@@ -1,6 +1,10 @@
 package feup.ldts.proj.model.game.room;
 
-import feup.ldts.proj.controller.game.elements.strategies.*;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BossAttackStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.ShootStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.BossMovementStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovementStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Boss;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
@@ -45,8 +49,7 @@ public class RoomBuilder {
         List<String> fileContent = new ArrayList<>();
         Scanner fileReader = new Scanner(file);
 
-        while (fileReader.hasNextLine())
-            fileContent.add(fileReader.nextLine());
+        while (fileReader.hasNextLine()) fileContent.add(fileReader.nextLine());
 
         return fileContent;
     }
@@ -70,9 +73,9 @@ public class RoomBuilder {
             for (int col = 0; col < line.length(); col++) {
                 if (line.charAt(col) == '\"')
                     monsters.add(new Zombie(new Position(col, row), depth, new BiteStrategy(), new RandomMovementStrategy()));
-                else if (line.charAt(col) == '\'')
+                if (line.charAt(col) == '\'')
                     monsters.add(new Skeleton(new Position(col, row), depth, new ShootStrategy(), new RandomMovementStrategy()));
-                else if (line.charAt(col) == '~')
+                if (line.charAt(col) == '~')
                     monsters.add(new Boss(new Position(col, row), depth, new BossAttackStrategy(), new BossMovementStrategy()));
             }
         }
@@ -96,16 +99,16 @@ public class RoomBuilder {
         return null;
     }
 
-    public Room createRoom(Player player) throws URISyntaxException, FileNotFoundException {
+    public Room createRoom(Player player) {
         Room room = new Room(depth);
         room.setWalls(createWalls());
         room.setMonsters(createMonsters());
+        room.setPassage(createPassage());
+
         setPlayerPosition(player);
         room.setPlayer(player);
         room.getPlayer().getObservers().clear();
         room.setObservers();
-        room.setPassage(createPassage());
-
         return room;
     }
 }

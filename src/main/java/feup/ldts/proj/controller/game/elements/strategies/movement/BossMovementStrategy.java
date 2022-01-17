@@ -1,4 +1,4 @@
-package feup.ldts.proj.controller.game.elements.strategies;
+package feup.ldts.proj.controller.game.elements.strategies.movement;
 
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Monster;

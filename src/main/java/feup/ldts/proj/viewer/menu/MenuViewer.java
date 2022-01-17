@@ -16,7 +16,6 @@ public class MenuViewer extends Viewer<Menu> {
                     getModel().getAsset(asset),
                     getModel().getAssetColor(asset)
             );
-
         for (int option = 0; option < getModel().getNumberOptions(); option++)
             gui.drawText(
                     getModel().getOptionPosition(option),

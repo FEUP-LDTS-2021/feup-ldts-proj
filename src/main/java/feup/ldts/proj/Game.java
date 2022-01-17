@@ -2,16 +2,9 @@ package feup.ldts.proj;
 
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.gui.LanternaGUI;
-import feup.ldts.proj.model.game.Position;
-import feup.ldts.proj.model.game.Weapon;
-import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.menu.MainMenu;
-import feup.ldts.proj.model.game.room.Room;
-import feup.ldts.proj.model.menu.WeaponMenu;
-import feup.ldts.proj.states.GameState;
-import feup.ldts.proj.states.MainMenuState;
+import feup.ldts.proj.states.menu.MainMenuState;
 import feup.ldts.proj.states.State;
-import feup.ldts.proj.states.WeaponMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,9 +14,7 @@ import java.util.*;
 public class Game {
     private final int NUM_ROWS = 20;
     private final int NUM_COLS = 20;
-    int depth;
     GUI gui;
-    Room room;
     private State state;
 
     public static Stack<State> stateStack = new Stack<State>(){};
@@ -37,6 +28,8 @@ public class Game {
         put("LightBlue", "#12cfe0"); //time potion
         put("OceanBlue", "#018370");
         put("Mud", "#b88b00");
+        put("Orange", "#FF9A00");
+        put ("Lime", "#8fce00");
 
         //bullet colors
         put("Golden", "#FFD966");
@@ -64,7 +57,6 @@ public class Game {
         Game.stateStack.push(new MainMenuState(new MainMenu()));
     }
 
-
     public static void main(String[] args) throws URISyntaxException, FontFormatException {
         try {
             Game game = new Game();
@@ -78,7 +70,6 @@ public class Game {
     private void run() throws IOException, URISyntaxException {
         int FPS = 60;
         int frameTime = 1000 / FPS;
-
 
         do  {
             this.state = Game.stateStack.peek();

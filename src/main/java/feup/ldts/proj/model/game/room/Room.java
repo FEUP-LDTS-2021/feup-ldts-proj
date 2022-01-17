@@ -32,8 +32,6 @@ public class Room {
     private List<PlayerBullet> playerBullets;
     private List<Item> items;
 
-    //--------------------------------------constructor--------------------------------------
-
     public Room(int depth) {
         this.depth = depth;
         walls = new ArrayList<>();
@@ -42,8 +40,6 @@ public class Room {
         playerBullets = new ArrayList<>();
         items = new ArrayList<>();
     }
-
-    //----------------------------------------getters-----------------------------------------
 
     public List<Wall> getWalls() {
         return walls;
@@ -84,8 +80,6 @@ public class Room {
         return null;
     }
 
-    //----------------------------------------setters-----------------------------------------
-
     public void setWalls(List<Wall> walls) {
         this.walls = walls;
     }
@@ -112,7 +106,6 @@ public class Room {
                         monsters.remove(monster);
                     }
                 }
-
                 @Override
                 public void positionChanged(Monster monster) {
                     if (monster.getPosition().equals(player.getPosition()))  //checks if a monster walked on top of a player
@@ -162,8 +155,6 @@ public class Room {
         setPlayerObserver();
     }
 
-    //-------------------------------------other functions-------------------------------------
-
     public void addMonsterBullet(MonsterBullet bullet) {
         monsterBullets.add(bullet);
         bullet.addBulletObserver(new BulletObserver() {
@@ -204,18 +195,6 @@ public class Room {
         return false;
     }
 
-    public boolean isPlayer(Position position) {
-        return player.getPosition().equals(position);
-    }
-
-    public boolean isBullet(Position position) {
-        for (PlayerBullet bullet : playerBullets)
-            if (bullet.getPosition().equals(position))
-                return true;
-        return false;
-    }
-
-
     public boolean isPassage() {
         return player.getPosition().equals(passage.getPosition());
     }
@@ -223,18 +202,10 @@ public class Room {
     public void createItem(Position position) {
         if (!isItem(position) && new Random().nextInt(3) == 0)
             switch (new Random().nextInt(4)) {
-                case 0:
-                    items.add(new HealingPotion(position, depth));
-                    break;
-                case 1:
-                    items.add(new MaxHealthPotion(position, depth));
-                    break;
-                case 2:
-                    items.add(new TimePotion(position, depth));
-                    break;
-                case 3:
-                    items.add(new WeaponItem(position, depth));
-                    break;
+                case 0: items.add(new HealingPotion(position, depth)); break;
+                case 1: items.add(new MaxHealthPotion(position, depth)); break;
+                case 2: items.add(new TimePotion(position, depth)); break;
+                case 3: items.add(new WeaponItem(position, depth)); break;
             }
     }
 }

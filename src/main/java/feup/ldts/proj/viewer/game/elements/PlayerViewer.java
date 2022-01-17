@@ -7,7 +7,6 @@ import feup.ldts.proj.model.game.elements.Player;
 public class PlayerViewer implements ElementViewer<Player> {
     @Override
     public String getColor(Player player) {
-
         float hpPercentage = (float) player.getHP() / player.getMaxHP();
 
         if (hpPercentage <= 0.20) return Game.Colors.get("DyingGreen");

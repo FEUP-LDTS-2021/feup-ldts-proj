@@ -8,13 +8,10 @@ import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.bullets.Bullet;
 import feup.ldts.proj.model.game.elements.Element;
-import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
-import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.room.Room;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 
 public class PlayerController extends GameController {
     private long lastMovement;
@@ -68,6 +65,7 @@ public class PlayerController extends GameController {
         if (action == GUI.ACTION.LEFT) movePlayerLeft();
         if (action == GUI.ACTION.RIGHT) movePlayerRight();
         if (action == GUI.ACTION.SHOOT) shoot();
+        if (action == GUI.ACTION.EXIT) game.setState(null);
         if (!getModel().getPlayerBullets().isEmpty() && time - lastMovement > 250) {
             BulletController controller = new PlayerBulletController(getModel());
             controller.step(game, action, time);

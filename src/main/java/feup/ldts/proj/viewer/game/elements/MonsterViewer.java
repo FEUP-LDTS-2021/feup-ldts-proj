@@ -30,8 +30,8 @@ public class MonsterViewer implements ElementViewer<Monster> {
     @Override
     public char getChar(Monster monster) {
         if (monster instanceof Zombie) return '"';
-        else if (monster instanceof Skeleton)  return '\'';
-        else return '~';
+        if (monster instanceof Skeleton)  return '\'';
+        return '~';
     }
 
     @Override

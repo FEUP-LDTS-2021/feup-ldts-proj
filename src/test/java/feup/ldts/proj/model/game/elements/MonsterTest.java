@@ -1,6 +1,6 @@
 package feup.ldts.proj.model.game.elements;
 
-import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;

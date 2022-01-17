@@ -8,23 +8,15 @@ import feup.ldts.proj.model.game.elements.Player;
 import java.util.Arrays;
 
 public class WeaponMenu extends Menu {
-
     private Weapon newWeapon;
     private Player player;
-
-    public WeaponMenu() {
-        this.options = Arrays.asList("YES", "NO");
-        this.assets = Arrays.asList("WEAPONS MENU", "SWAP WEAPON?");
-        this.currentOption = 0;
-    }
 
     public WeaponMenu(Player player, Weapon newWeapon) {
         this.player = player;
         this.newWeapon = newWeapon;
-
         this.options = Arrays.asList("YES", "NO");
-        setUpAssets(player.getWeapon(), newWeapon);
         this.currentOption = 0;
+        setUpAssets(player.getWeapon(), newWeapon);
     }
 
     public Player getPlayer() {
@@ -69,15 +61,15 @@ public class WeaponMenu extends Menu {
     }
 
     private void setUpAssets(Weapon currWeapon, Weapon newWeapon) {
-        int dmgDiff = newWeapon.getDamage() - currWeapon.getDamage();
-        int rangeDiff = newWeapon.getRange() - currWeapon.getRange();
-        int capacityDiff = newWeapon.getCapacity() - currWeapon.getCapacity();
+        int DMG_DIFF = newWeapon.getDamage() - currWeapon.getDamage();
+        int RANGE_DIFF = newWeapon.getRange() - currWeapon.getRange();
+        int CAPACITY_DIFF = newWeapon.getCapacity() - currWeapon.getCapacity();
 
-        String dmgString = "D:" + newWeapon.getDamage() + " (" + (dmgDiff >= 0 ? "+" + dmgDiff : dmgDiff) + ")";
-        String rangeString = "R:" + newWeapon.getRange() + " (" + ( rangeDiff >= 0 ? "+" + rangeDiff  : rangeDiff ) + ")";
-        String capacityString = "C:"+ newWeapon.getCapacity() + " (" + ( capacityDiff >= 0 ? "+" + capacityDiff  : capacityDiff ) + ")";
+        String DMG_STR = "D:" + newWeapon.getDamage() + " (" + (DMG_DIFF >= 0 ? "+" + DMG_DIFF : DMG_DIFF) + ")";
+        String RANGE_STR = "R:" + newWeapon.getRange() + " (" + (RANGE_DIFF >= 0 ? "+" + RANGE_DIFF : RANGE_DIFF) + ")";
+        String CAPACITY_STR = "C:"+ newWeapon.getCapacity() + " (" + (CAPACITY_DIFF >= 0 ? "+" + CAPACITY_DIFF  : CAPACITY_DIFF) + ")";
 
-        this.assets = Arrays.asList("WEAPONS MENU", dmgString, rangeString, capacityString , "SWAP WEAPON?");
+        this.assets = Arrays.asList("WEAPONS MENU", DMG_STR, RANGE_STR, CAPACITY_STR , "SWAP WEAPON?");
     }
 
     @Override

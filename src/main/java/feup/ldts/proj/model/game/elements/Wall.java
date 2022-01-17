@@ -1,6 +1,5 @@
 package feup.ldts.proj.model.game.elements;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;
 
 public class Wall extends Element {

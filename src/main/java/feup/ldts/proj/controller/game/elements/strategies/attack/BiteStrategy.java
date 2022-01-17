@@ -1,5 +1,6 @@
-package feup.ldts.proj.controller.game.elements.strategies;
+package feup.ldts.proj.controller.game.elements.strategies.attack;
 
+import feup.ldts.proj.controller.game.elements.strategies.attack.AttackStrategy;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.room.Room;

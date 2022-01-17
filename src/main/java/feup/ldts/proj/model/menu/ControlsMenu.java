@@ -8,15 +8,15 @@ import java.util.Arrays;
 public class ControlsMenu extends Menu {
 
     public ControlsMenu() {
-        this.options = Arrays.asList("-GO BACK");
-        this.assets = Arrays.asList("CONTROLS", "ARROW KEYS TO MOVE", "X TO SHOOT", "Q TO RETURN TO THE", "MAIN MENU", "CTRL+D TO QUIT");
+        this.options = Arrays.asList("GO BACK");
+        this.assets = Arrays.asList("CONTROLS", "ARROW KEYS to move", "X to shoot", "Q to go back", "CTRL+D to quit");
         this.currentOption = 0;
     }
 
     @Override
     public Position getOptionPosition(int option) {
         switch (option) {
-            case 0: return new Position(7, 16);
+            case 0: return new Position(1, 16);
             default: return null;
         }
     }
@@ -24,12 +24,11 @@ public class ControlsMenu extends Menu {
     @Override
     public Position getAssetPosition(int asset) {
         switch (asset) {
-            case 0: return new Position(7, 2);
-            case 1: return new Position(1, 5);
-            case 2: return new Position(1, 7);
-            case 3: return new Position(1, 9);
-            case 4: return new Position(1, 11);
-            case 5: return new Position(1, 13);
+            case 0: return new Position(6, 2);
+            case 1: return new Position(1, 6);
+            case 2: return new Position(1, 8);
+            case 3: return new Position(1, 10);
+            case 4: return new Position(1, 12);
             default: return null;
         }
     }
@@ -48,6 +47,7 @@ public class ControlsMenu extends Menu {
 
     @Override
     public String getAssetColor(int asset) {
-        return Game.Colors.get("HealthyGreen");
+        if (asset == 0) return Game.Colors.get("Orange");
+        return Game.Colors.get("White");
     }
 }

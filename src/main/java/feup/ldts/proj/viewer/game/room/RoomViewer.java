@@ -22,7 +22,6 @@ public class RoomViewer {
 
     public void draw(Room room) throws IOException {
         gui.clear();
-
         drawBackground();
 
         drawElements(room.getWalls(), new WallViewer());
@@ -31,29 +30,26 @@ public class RoomViewer {
         drawElements(room.getPlayerBullets(), new PlayerBulletViewer());
         drawElements(room.getMonsterBullets(), new MonsterBulletViewer());
         drawElement(room.getPlayer(), new PlayerViewer());
-        if (room.getMonsters().isEmpty())
-            drawElement(room.getPassage(), new PassageViewer());
+
+        if (room.getMonsters().isEmpty()) drawElement(room.getPassage(), new PassageViewer());
 
         drawBottomText(room);
-
         gui.refresh();
     }
 
     private void drawBottomText(Room room) {
-        String HpString = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
-        String timeString = "" + room.getPlayer().getTimeLeft();
-        String CapacityString = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
-        String timeColor = room.getPlayer().getTimeLeft() < 60 ? Game.Colors.get("Red") : Game.Colors.get("White");
+        String HP = "HP:" + room.getPlayer().getHP() + "/" + room.getPlayer().getMaxHP();
+        String TIME = "" + room.getPlayer().getTimeLeft();
+        String CAPACITY = " C:" + room.getPlayerBullets().size() + "/" + room.getPlayer().getWeapon().getCapacity();
+        String TIME_COLOR = room.getPlayer().getTimeLeft() < 60 ? Game.Colors.get("Red") : Game.Colors.get("White");
 
-
-        gui.drawText(new Position(0, 20), HpString , Game.Colors.get("LightGreen"));
-        gui.drawText(new Position(HpString.length() + 1, 20), timeString, timeColor);
-        gui.drawText(new Position(HpString.length() + timeString.length() + 2, 20), CapacityString, Game.Colors.get("Golden"));
+        gui.drawText(new Position(0, 20), HP , Game.Colors.get("LightGreen"));
+        gui.drawText(new Position(HP.length() + 1, 20), TIME, TIME_COLOR);
+        gui.drawText(new Position(HP.length() + TIME.length() + 2, 20), CAPACITY, Game.Colors.get("Golden"));
     }
 
     private <T extends Element> void drawElements(List<T> elements, ElementViewer<T> viewer) {
-        for (T element : elements)
-            drawElement(element, viewer);
+        for (T element : elements) drawElement(element, viewer);
     }
 
     private <T extends Element> void drawElement(T element, ElementViewer<T> viewer) {

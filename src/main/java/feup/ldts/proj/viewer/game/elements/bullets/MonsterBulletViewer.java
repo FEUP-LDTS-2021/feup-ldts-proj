@@ -3,16 +3,14 @@ package feup.ldts.proj.viewer.game.elements.bullets;
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
-import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import feup.ldts.proj.viewer.game.elements.ElementViewer;
 
 public class MonsterBulletViewer implements ElementViewer<MonsterBullet> {
 
     @Override
     public String getColor(MonsterBullet bullet) {
-
         if (bullet.isAtLimit()) return Game.Colors.get("GonePurple");
-        else if (bullet.isAlmostAtLimit()) return Game.Colors.get("VanishingPurple");
+        if (bullet.isAlmostAtLimit()) return Game.Colors.get("VanishingPurple");
         return Game.Colors.get("EvilPurple");
     }
 

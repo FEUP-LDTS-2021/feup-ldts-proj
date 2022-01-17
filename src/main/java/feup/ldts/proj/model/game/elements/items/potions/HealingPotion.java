@@ -2,7 +2,6 @@ package feup.ldts.proj.model.game.elements.items.potions;
 
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
-import feup.ldts.proj.model.game.elements.items.Item;
 
 public class HealingPotion extends Potion {
     private int baseHealAmount;

@@ -9,8 +9,6 @@ public class Weapon {
         this.capacity = capacity;
     }
 
-    //getters
-
     public int getDamage() {
         return damage;
     }

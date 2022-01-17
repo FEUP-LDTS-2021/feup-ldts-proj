@@ -19,7 +19,9 @@ public abstract class Menu {
 
     public abstract String getAssetColor(int asset);
 
-    public boolean isSelected(int i) { return currentOption == i; }
+    public abstract Position getOptionPosition(int option);
+
+    public abstract Position getAssetPosition(int asset);
 
     public int getNumberOptions() { return this.options.size(); }
 
@@ -32,11 +34,9 @@ public abstract class Menu {
         return Game.Colors.get("White");
     }
 
-    public abstract Position getOptionPosition(int option);
-
-    public abstract Position getAssetPosition(int asset);
-
     public abstract void nextOption();
 
     public abstract void previousOption();
+
+    public boolean isSelected(int i) { return currentOption == i; }
 }

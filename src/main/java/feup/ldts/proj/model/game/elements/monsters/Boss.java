@@ -1,7 +1,7 @@
 package feup.ldts.proj.model.game.elements.monsters;
 
-import feup.ldts.proj.controller.game.elements.strategies.AttackStrategy;
-import feup.ldts.proj.controller.game.elements.strategies.MovementStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.AttackStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.movement.MovementStrategy;
 import feup.ldts.proj.model.game.Position;
 
 public class Boss extends Monster {

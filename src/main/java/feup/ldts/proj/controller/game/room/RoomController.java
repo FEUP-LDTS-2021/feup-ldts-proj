@@ -9,7 +9,7 @@ import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
 import feup.ldts.proj.model.menu.VictoryMenu;
 import feup.ldts.proj.states.GameState;
-import feup.ldts.proj.states.VictoryMenuState;
+import feup.ldts.proj.states.menu.VictoryMenuState;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -27,9 +27,8 @@ public class RoomController extends GameController {
 
     @Override
     public void step(Game game, GUI.ACTION action, long time) throws IOException, URISyntaxException {
-        if (action == GUI.ACTION.EXIT) {
-            game.setState(null);
-        }
+        if (action == GUI.ACTION.EXIT) game.setState(null);
+
         if (action == GUI.ACTION.RETURN) {
             Game.stateStack.pop();
             return;
@@ -42,7 +41,7 @@ public class RoomController extends GameController {
         } else {
             playerController.step(game, action, time);
 
-            if (getModel().isPassage()) {
+            if (getModel().isPassage() && getModel().getMonsters().isEmpty()) {
                 int newDepth, newRoom;
                 if (getModel().getDepth() == 3) {
                     Game.stateStack.push(new VictoryMenuState(new VictoryMenu()));

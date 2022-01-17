@@ -1,3 +1,4 @@
+/*
 package feup.ldts.proj.menu;
 
 import feup.ldts.proj.model.menu.WeaponMenu;
@@ -30,3 +31,4 @@ public class WeaponMenuTest {
 
     }
 }
+*/

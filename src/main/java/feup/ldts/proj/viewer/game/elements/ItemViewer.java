@@ -1,6 +1,5 @@
 package feup.ldts.proj.viewer.game.elements;
 
-
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.elements.items.Item;

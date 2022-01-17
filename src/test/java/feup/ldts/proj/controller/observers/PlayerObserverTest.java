@@ -1,13 +1,11 @@
 package feup.ldts.proj.controller.observers;
 
-import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

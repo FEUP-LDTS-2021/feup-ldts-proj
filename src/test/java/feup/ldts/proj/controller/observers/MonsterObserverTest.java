@@ -1,12 +1,9 @@
 package feup.ldts.proj.controller.observers;
 
-import feup.ldts.proj.controller.game.elements.observers.MonsterObserver;
-import feup.ldts.proj.controller.game.elements.strategies.BiteStrategy;
+import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 public class MonsterObserverTest {
     Zombie zombie;

@@ -1,12 +1,9 @@
 package feup.ldts.proj.model.game.elements;
 
-import feup.ldts.proj.Game;
-import feup.ldts.proj.controller.game.elements.observers.MonsterObserver;
 import feup.ldts.proj.controller.game.elements.observers.PlayerObserver;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.Weapon;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
-import feup.ldts.proj.model.game.elements.monsters.Monster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +16,10 @@ public class Player extends Element {
     private long timeLeft;
     protected List<PlayerObserver> observers;
 
-    //--------------------------------------constructor--------------------------------------
-
     public Player(Position position) {
         super(position);
         this.maxHP = 10;
-        this.weapon = new Weapon(3, 4, 2);
+        this.weapon = new Weapon(10, 10, 10);
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
         timeLeft = 180;
@@ -41,8 +36,6 @@ public class Player extends Element {
         this.observers = new ArrayList<PlayerObserver>();
     }
 
-    //----------------------------------------getters-----------------------------------------
-
     public int getHP() {
         return HP;
     }
@@ -56,8 +49,6 @@ public class Player extends Element {
     public long getTimeLeft() { return timeLeft; }
 
     public List<PlayerObserver> getObservers() { return observers; }
-
-    //----------------------------------------setters-----------------------------------------
 
     @Override
     public void setPosition(Position position) {
@@ -74,8 +65,6 @@ public class Player extends Element {
     }
 
     public void setFacingDirection(Element.Direction newFacingDirection) {this.facingDirection = newFacingDirection;}
-
-    //-------------------------------------other functions-------------------------------------
 
     public void decreaseHP(int damageAmount) {
         HP = Math.max(0, HP - damageAmount);
@@ -102,7 +91,6 @@ public class Player extends Element {
     }
 
     public void alertObserversMoved() {
-        for (PlayerObserver observer : observers)
-            observer.positionChanged(this);
+        for (PlayerObserver observer : observers) observer.positionChanged(this);
     }
 }
