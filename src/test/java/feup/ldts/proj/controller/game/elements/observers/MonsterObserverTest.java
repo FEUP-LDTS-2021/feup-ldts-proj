@@ -5,6 +5,8 @@ import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovemen
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class MonsterObserverTest {
     Zombie zombie;
@@ -14,7 +16,7 @@ public class MonsterObserverTest {
         this.zombie = new Zombie(new Position(1 , 1),1, new BiteStrategy(), new RandomMovementStrategy());
     }
 
-    /*@Test
+    @Test
     public void alertPositionChanged() {
         MonsterObserver observer = Mockito.mock(MonsterObserver.class);
         zombie.addMonsterObserver(observer);
@@ -38,5 +40,5 @@ public class MonsterObserverTest {
         zombie.decreaseHP(1);
         zombie.decreaseHP(1);
         Mockito.verify(observer, Mockito.times(3)).hpChanged(zombie);
-    }*/
+    }
 }

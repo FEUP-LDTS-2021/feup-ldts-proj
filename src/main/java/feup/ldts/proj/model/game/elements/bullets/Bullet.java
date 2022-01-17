@@ -53,6 +53,8 @@ public abstract class Bullet extends Element {
 
     public boolean isAlmostAtLimit() { return distanceTravelled == maxRange-1; }
 
+    public int getMaxRange() { return maxRange; }
+
     public Position moveBullet() {
         switch (facingDirection) {
             case UP: return new Position(position.getX(), position.getY() - 1);

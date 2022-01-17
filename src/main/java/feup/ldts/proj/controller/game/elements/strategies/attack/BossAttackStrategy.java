@@ -45,6 +45,5 @@ public class BossAttackStrategy implements AttackStrategy {
             else
                 return Element.Direction.DOWN; // in the boss' exact position
         }
-
     }
 }

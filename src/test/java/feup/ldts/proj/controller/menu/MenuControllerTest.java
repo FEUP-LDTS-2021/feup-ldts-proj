@@ -18,6 +18,11 @@ import java.net.URISyntaxException;
 public class MenuControllerTest {
     private Controller<Menu> controller;
 
+    @BeforeEach
+    public void setUp() {
+        Game.stateStack.clear();
+    }
+
     @Test
     public void controlsMenuSelectTest() throws IOException, URISyntaxException {
         controller = new ControlsMenuController(new ControlsMenu());

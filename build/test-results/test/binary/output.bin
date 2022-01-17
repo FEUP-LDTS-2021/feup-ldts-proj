@@ -1,0 +1,26 @@
+Xtimestamp = 2022-01-17T22:53:20.738182489, PlayerBulletControllerTest:testBulletFade = 
+K                              |-------------------jqwik-------------------
+7tries = 10                    | # of calls to property
+8checks = 10                   | # of not rejected calls
+Bgeneration = RANDOMIZED       | parameters are randomly generated
+6after-failure = PREVIOUS_SEED | use the previous seed
+Bwhen-fixed-seed = ALLOW       | fixing the random seed is allowed
+8edge-cases#mode = MIXIN       | edge cases are mixed in
+=edge-cases#total = 9          | # of all combined edge cases
+Eedge-cases#tried = 4          | # of edge cases tried in current run
+Jseed = -7998816864834087960   | random seed to reproduce generated values
+
+
+Ytimestamp = 2022-01-17T22:54:01.200024744, MonsterBulletControllerTest:testBulletFade = 
+K                              |-------------------jqwik-------------------
+7tries = 20                    | # of calls to property
+8checks = 20                   | # of not rejected calls
+Bgeneration = RANDOMIZED       | parameters are randomly generated
+6after-failure = PREVIOUS_SEED | use the previous seed
+Bwhen-fixed-seed = ALLOW       | fixing the random seed is allowed
+8edge-cases#mode = MIXIN       | edge cases are mixed in
+=edge-cases#total = 9          | # of all combined edge cases
+Eedge-cases#tried = 3          | # of edge cases tried in current run
+Jseed = 8864559245062167217    | random seed to reproduce generated values
+
+

@@ -6,7 +6,9 @@ import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class PlayerObserverTest {
         monsters.add(zombie);
     }
 
-    /*@Test
+/*    @Test
     public void alertPositionChangedTest() {
         int currentHP = player.getHP();
         zombie.setPosition(new Position(1, 1));
