@@ -48,6 +48,8 @@ public class Player extends Element {
 
     public long getTimeLeft() { return timeLeft; }
 
+    public Element.Direction getFacingDirection() { return facingDirection; }
+
     public List<PlayerObserver> getObservers() { return observers; }
 
     @Override

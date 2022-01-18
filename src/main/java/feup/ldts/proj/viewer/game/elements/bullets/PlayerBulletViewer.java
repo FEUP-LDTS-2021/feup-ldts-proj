@@ -20,10 +20,10 @@ public class PlayerBulletViewer implements ElementViewer<PlayerBullet> {
     @Override
     public char getChar(PlayerBullet bullet) {
         switch (bullet.getFacingDirection()) {
-            case UP:    return '*';
-            case RIGHT: return '*';
-            case DOWN:  return '*';
-            case LEFT:  return '*';
+            case UP:    return '\u00E3';
+            case RIGHT: return '\u00BB';
+            case DOWN:  return '\u00F5';
+            case LEFT:  return '\u00AB';
             default:    return '*';
         }
     }

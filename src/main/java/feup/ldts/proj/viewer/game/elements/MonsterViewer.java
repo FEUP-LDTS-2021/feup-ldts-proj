@@ -16,9 +16,9 @@ public class MonsterViewer implements ElementViewer<Monster> {
             return Game.Colors.get("Red");
         }
         else if (monster instanceof Skeleton) {
-            if (hpPercentage <= 0.33) return Game.Colors.get("Purple");
-            if (hpPercentage <= 0.66) return Game.Colors.get("Pink");
-            return Game.Colors.get("Red");
+            if (hpPercentage <= 0.33) return "#bcbcbc";
+            if (hpPercentage <= 0.66) return "#999999";
+            return "#5b5b5b";
         }
         else {
             if (hpPercentage <= 0.33) return Game.Colors.get("Purple");
@@ -30,7 +30,7 @@ public class MonsterViewer implements ElementViewer<Monster> {
     @Override
     public char getChar(Monster monster) {
         if (monster instanceof Zombie) return '"';
-        if (monster instanceof Skeleton)  return '\'';
+        if (monster instanceof Skeleton)  return '\u00C3';
         return '~';
     }
 

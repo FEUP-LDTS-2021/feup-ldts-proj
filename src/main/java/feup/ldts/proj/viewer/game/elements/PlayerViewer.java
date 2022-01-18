@@ -2,6 +2,7 @@ package feup.ldts.proj.viewer.game.elements;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
+import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.Player;
 
 public class PlayerViewer implements ElementViewer<Player> {
@@ -18,7 +19,10 @@ public class PlayerViewer implements ElementViewer<Player> {
 
     @Override
     public char getChar(Player player) {
-        return 'X';
+        if (player.getFacingDirection() == Element.Direction.UP) return '\u00D5';
+        else if (player.getFacingDirection() == Element.Direction.DOWN) return '\u00D4';
+        else if (player.getFacingDirection() == Element.Direction.LEFT) return '\u00D3';
+        else return '\u00D2';
     }
 
     @Override

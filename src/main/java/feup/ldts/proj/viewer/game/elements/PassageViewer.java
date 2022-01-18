@@ -12,7 +12,7 @@ public class PassageViewer implements ElementViewer<Passage> {
 
     @Override
     public char getChar(Passage element) {
-        return 'O';
+        return '@';
     }
 
     @Override

@@ -23,7 +23,7 @@ public class ItemViewer implements ElementViewer<Item> {
     public char getChar(Item item) {
         if (item instanceof HealingPotion) return '$';
         if (item instanceof MaxHealthPotion) return '$';
-        if (item instanceof TimePotion) return 'T';
+        if (item instanceof TimePotion) return '\u00A4';
         if (item instanceof WeaponItem) return '&';
         return 'p';
     }

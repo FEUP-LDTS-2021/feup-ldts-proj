@@ -17,10 +17,10 @@ public class MonsterBulletViewer implements ElementViewer<MonsterBullet> {
     @Override
     public char getChar(MonsterBullet bullet) {
         switch (bullet.getFacingDirection()) {
-            case UP:    return '*';
-            case RIGHT: return '*';
-            case DOWN:  return '*';
-            case LEFT:  return '*';
+            case UP:    return '\u00E3';
+            case RIGHT: return '\u00BB';
+            case DOWN:  return '\u00F5';
+            case LEFT:  return '\u00AB';
             default:    return '*';
         }
     }
