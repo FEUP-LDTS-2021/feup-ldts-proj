@@ -1,4 +1,3 @@
-/*
 package feup.ldts.proj.controller.game.elements.strategies;
 
 import feup.ldts.proj.controller.game.elements.strategies.attack.BiteStrategy;
@@ -32,16 +31,15 @@ public class BiteStrategyTest {
     public void biteStrategyTest() {
         BiteStrategy bite = Mockito.mock(BiteStrategy.class);
 
-        Monster monster = new Zombie(new Position(8, 8), 99, bite, new RandomMovementStrategy());
+        Monster monster = new Zombie(new Position(7, 8), 99, bite, new RandomMovementStrategy());
         Player player = room.getPlayer();
         List<Monster> monsters = new ArrayList<>();
 
         monsters.add(monster);
         room.setMonsters(monsters);
         room.setObservers();
-        room.getMonsters().get(0).setPosition(new Position(8, 8));
 
+        monster.attack(player, room);
         Mockito.verify(bite, Mockito.times(1)).attack(monster, player, room);
     }
 }
-*/

@@ -12,6 +12,4 @@ public class RandomMovementStrategy implements MovementStrategy {
         if (!room.isWall(newMonsterPos) && !room.isMonster(newMonsterPos))
             monster.setPosition(newMonsterPos);
     }
-
-
 }

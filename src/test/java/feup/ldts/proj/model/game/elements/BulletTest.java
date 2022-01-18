@@ -19,7 +19,7 @@ public class BulletTest {
 
     @Test
     public void moveBulletTest() {
-        Assertions.assertEquals(new Position(0, 1), bullet.moveBullet());
+        Assertions.assertEquals(new Position(6, 9), bullet.moveBullet());
     }
 
     @Test

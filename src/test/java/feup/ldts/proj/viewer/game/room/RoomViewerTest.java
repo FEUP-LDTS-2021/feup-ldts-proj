@@ -30,6 +30,6 @@ public class RoomViewerTest {
     void drawTest() throws IOException {
         roomViewer.draw(room);
         Mockito.verify(gui, Mockito.times(1)).drawCharacter(8, 8, 'X',  Game.Colors.get("HealthyGreen"));
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(2, 2, '\'', Game.Colors.get("Red"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(2, 2, '"', Game.Colors.get("Red"));
     }
 }
