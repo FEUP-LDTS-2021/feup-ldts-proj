@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class MonsterObserverTest {
-    Zombie zombie;
+    private Zombie zombie;
 
     @BeforeEach
     public void setUp() {

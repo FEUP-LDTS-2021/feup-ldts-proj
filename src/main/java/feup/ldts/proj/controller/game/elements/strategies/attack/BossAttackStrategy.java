@@ -1,6 +1,5 @@
 package feup.ldts.proj.controller.game.elements.strategies.attack;
 
-import feup.ldts.proj.controller.game.elements.strategies.attack.AttackStrategy;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.Player;
@@ -16,7 +15,7 @@ public class BossAttackStrategy implements AttackStrategy {
     @Override
     public void attack(Monster monster, Player player, Room room) {
         if (new Random().nextInt(6) == 1)
-        bossAttack(room.getBoss(), room);
+            bossAttack(room.getBoss(), room);
     }
 
     public void bossAttack(Boss boss, Room room) {

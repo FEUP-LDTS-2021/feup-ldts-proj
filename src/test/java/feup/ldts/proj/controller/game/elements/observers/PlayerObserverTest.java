@@ -6,29 +6,37 @@ import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
+import feup.ldts.proj.model.game.room.Room;
+import feup.ldts.proj.model.game.room.RoomBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerObserverTest {
-    private Player player;
-    private Zombie zombie;
-    private List<Monster> monsters = new ArrayList<Monster>();
+    private Room room;
 
     @BeforeEach
-    public void setUp() {
-        player = new Player(new Position(1, 1));
-        zombie = new Zombie(new Position(0, 1), 1, new BiteStrategy(), new RandomMovementStrategy());
-        monsters.add(zombie);
+    public void setUp() throws FileNotFoundException {
+        this.room = new RoomBuilder(99, 99).createRoom(new Player(new Position(-1, -1)));
     }
 
-/*    @Test
-    public void alertPositionChangedTest() {
-        int currentHP = player.getHP();
-        zombie.setPosition(new Position(1, 1));
-        Assertions.assertTrue(player.getHP() < currentHP);
-    }*/
+    @Test
+    public void playerObserverTest() {
+        List<Monster> monsters = room.getMonsters();
+        Monster monster = monsters.get(0);
+        Player player = room.getPlayer();
+        PlayerObserver observer = Mockito.mock(PlayerObserver.class);
+        player.addPlayerObserver(observer);
+
+        monster.setPosition(player.getPosition());
+        Assertions.assertNotEquals(player.getMaxHP(), player.getHP());
+
+        player.setPosition(new Position(2, 2));
+        Mockito.verify(observer, Mockito.times(1)).positionChanged(player);
+    }
 }

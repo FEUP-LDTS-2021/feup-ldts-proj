@@ -12,6 +12,7 @@ pitest {
     junit5PluginVersion = '0.12'
 }
 
+
 group 'feup.ldts.proj'
 version '1.0-SNAPSHOT'
 
