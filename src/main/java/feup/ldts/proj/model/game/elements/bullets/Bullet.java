@@ -25,6 +25,8 @@ public abstract class Bullet extends Element {
         return damage;
     }
 
+    public int getDistanceTravelled() { return distanceTravelled; }
+
     public Element.Direction getFacingDirection() { return facingDirection; }
 
     public void setDistanceTravelled(int distanceTravelled) { this.distanceTravelled = distanceTravelled; }

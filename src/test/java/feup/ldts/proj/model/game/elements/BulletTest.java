@@ -33,4 +33,18 @@ public class BulletTest {
         bullet.setPosition(bullet.moveBullet());
         Assertions.assertTrue(bullet.isAtLimit());
     }
+
+    @Test
+    public void incrementDistanceTest() {
+        Assertions.assertEquals(0, bullet.getDistanceTravelled());
+
+        bullet.setPosition(bullet.moveBullet());
+        Assertions.assertEquals(1, bullet.getDistanceTravelled());
+
+        bullet.setPosition(bullet.moveBullet());
+        Assertions.assertEquals(2, bullet.getDistanceTravelled());
+
+        bullet.setPosition(bullet.moveBullet());
+        Assertions.assertEquals(3, bullet.getDistanceTravelled());
+    }
 }
