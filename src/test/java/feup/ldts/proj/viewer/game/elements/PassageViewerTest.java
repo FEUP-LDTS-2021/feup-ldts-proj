@@ -24,7 +24,7 @@ public class PassageViewerTest {
 
     @Test
     public void getPassageCharTest() {
-        Assertions.assertEquals('O', viewer.getChar(passage));
+        Assertions.assertEquals('@', viewer.getChar(passage));
     }
 
     @Test
@@ -35,6 +35,6 @@ public class PassageViewerTest {
     @Test
     public void drawPassageTest() {
         viewer.draw(passage, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1, 'O', Game.Colors.get("Black"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1, '@', Game.Colors.get("Black"));
     }
 }

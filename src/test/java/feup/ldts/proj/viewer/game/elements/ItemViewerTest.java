@@ -47,11 +47,11 @@ public class ItemViewerTest {
     @Test
     public void timePotionTest() {
         item = new TimePotion(new Position(1, 1), 1);
-        Assertions.assertEquals('T', viewer.getChar(item));
+        Assertions.assertEquals('\u00A4', viewer.getChar(item));
         Assertions.assertEquals(Game.Colors.get("LightBlue"), viewer.getColor(item));
 
         viewer.draw(item, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1, 'T', Game.Colors.get("LightBlue"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1, '\u00A4', Game.Colors.get("LightBlue"));
     }
 
     @Test
