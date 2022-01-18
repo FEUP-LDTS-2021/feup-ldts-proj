@@ -25,7 +25,7 @@ public class PlayerBulletViewerTest {
 
     @Test
     public void getPlayerBulletCharTest() {
-        Assertions.assertEquals('*', viewer.getChar(bullet));
+        Assertions.assertEquals('\u00E3', viewer.getChar(bullet));
     }
 
     @Test
@@ -47,14 +47,14 @@ public class PlayerBulletViewerTest {
     public void drawPlayerBulletTest() {
         bullet.setDistanceTravelled(1);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("Golden"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '\u00E3', Game.Colors.get("Golden"));
 
         bullet.setDistanceTravelled(3);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("SlightRust"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '\u00E3', Game.Colors.get("SlightRust"));
 
         bullet.setDistanceTravelled(4);
         viewer.draw(bullet, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '*', Game.Colors.get("Rust"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(bullet.getPosition().getX(), bullet.getPosition().getY(), '\u00E3', Game.Colors.get("Rust"));
     }
 }
