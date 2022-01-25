@@ -44,6 +44,14 @@ public class Game {
         put("Pink", "#B01549");
         put("Purple", "#691b51");
 
+        put("LightGrey", "#bcbcbc");
+        put("Grey", "#999999");
+        put("DarkGrey", "#5b5b5b");
+
+        put("ZombieDarkGreen", "#38761d");
+        put("ZombieGreen", "#53ac2c");
+        put("ZombieLightGreen", "#7ce051");
+
         //player colors
         put("HealthyGreen", "#02f751");
         put("Green", "#19b33a");

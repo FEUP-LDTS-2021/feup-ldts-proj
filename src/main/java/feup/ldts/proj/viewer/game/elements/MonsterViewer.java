@@ -11,14 +11,14 @@ public class MonsterViewer implements ElementViewer<Monster> {
     public String getColor(Monster monster) {
         float hpPercentage = (float) monster.getHP() / monster.getMaxHP();
         if (monster instanceof Zombie) {
-            if (hpPercentage <= 0.33) return Game.Colors.get("Purple");
-            if (hpPercentage <= 0.66) return Game.Colors.get("Pink");
-            return Game.Colors.get("Red");
+            if (hpPercentage <= 0.33) return Game.Colors.get("ZombieLightGreen");
+            if (hpPercentage <= 0.66) return Game.Colors.get("ZombieGreen");
+            return Game.Colors.get("ZombieDarkGreen");
         }
         else if (monster instanceof Skeleton) {
-            if (hpPercentage <= 0.33) return "#bcbcbc";
-            if (hpPercentage <= 0.66) return "#999999";
-            return "#5b5b5b";
+            if (hpPercentage <= 0.33) return Game.Colors.get("LightGrey"); //light grey
+            if (hpPercentage <= 0.66) return Game.Colors.get("Grey"); //grey
+            return Game.Colors.get("DarkGrey"); //dark grey
         }
         else {
             if (hpPercentage <= 0.33) return Game.Colors.get("Purple");
