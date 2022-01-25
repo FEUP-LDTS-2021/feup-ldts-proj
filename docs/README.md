@@ -3,7 +3,7 @@
 ## Game description
 
 The game is based on the Hero project developed in the practical Labs, with some additional tweaks. 
-Initially, the Player, spawns in an empty Room with Walls and a Passage, and has a default Weapon and health stats. Every X (to be defined) seconds the Player dies, respawning inside the first Room. 
+Initially, the Player, spawns in an empty Room with Walls and a Passage, and has a default Weapon and health stats. Every 180 seconds the Player dies, respawning inside the first Room. 
 The Player has a <b>maximum HP</b> stat which limits the possible current HP. If the Player dies, he respawns in the initial Room with full HP.
 The maximum HP can be increased through some Potions.
 
@@ -23,56 +23,22 @@ The current implemented features are:
 <ul>
 <li><b>Keyboard control</b> - the user interacts with the game screen through the keyboard, every action is interpreted through a keyboard input made by the user.</li>
 <li><b>Player combat</b> - the player shoots Bullets off of his Weapon if he presses <b>x</b>, damaging and killing the Monsters he hits.</li>
-<li><b>Monster movement</b> - the monsters are constantly moving in random directions.</li>
-<li><b>Monster combat</b> - the monsters are also capable of damaging the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
-<li><b>Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters' health and damage scale with the room's depth depth).</li>
+<li><b> Regular Monster movement</b> - the monsters (Zombies and Skeletons) are constantly moving in random directions.</li>
+<li><b> Boss movement - </b> the Boss moves to the square which is closest to the Player.</li>
+<li><b> Monster combat</b> - the monsters are also capable of damaging the Player. Zombies will bite the Player if he gets too close. The Skeletons, on top of biting, also have a chance of shooting Bullets which damage the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
+<li><b> Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters' health and damage scale with the room's depth depth).</li>
+<li><b> Menus -</b> there's a Main Menu where the Player can choose to Play, view the Controls and Exit the game. There is also a Weapon Menu which displays
+the differences in stats between the Player's current Weapon and the new Weapon (the Player can then choose if he wants to swap Weapons or not) and a Victory Menu, which displays
+when the Player kills the Boss (wins the game).</li>
+<li><b> Items - </b> there are special Potions and Weapons, dropped from Monsters, which boost the Player in various ways. The effects given to
+the Player by these Items scale with Room's depth.</li>
 <li><b>Collision detection</b> - collisions between different objects are verified (e.g. Player and Wall collisions)</li>
+
 </ul>
 
 ## Planned features
 
-The features we would like to add to our game are the following:
-<ul>
-<li>A new and improved color scheme and a custom font, designed specifically for our game</li>
-<li>New Weapon upgrades for the Player which will increase the diversity of combat techniques</li>
-<br>
-<p align="center">
-<img src="screenshots/mockups/WeaponMockup.png">
-</p>
-<p align="center"><b><i>Fig. 1 - Weapon pickup mock</i></b></p>
-<br>
-
-<p align="center">
-<img src="screenshots/mockups/WeaponsMenuMockup.png">
-</p>
-<p align="center"><b><i>Fig. 2 - Weapon pickup menu mockup</i></b></p> 
-<br>
-
-<li>Different types of Monsters with different attributes (different health, damage, attack strategies, ...)</li>
-<br>
-<p align="center">
-<img src="screenshots/mockups/MonstersMockup.png">
-</p>
-<p align="center"><b><i>Fig. 3 - Different monsters mockup</i></b></p>
-
-<li>Potions and Effects which will aid the Player in various ways</li>
-<br>
-<p align="center">
-<img src="screenshots/mockups/PotionsAndEffectsMockup.png">
-</p>
-<p align="center"><b><i>Fig. 4 - Potions and Effects mockup</i></b></p>
-<br>
-
-<li>A challenging Boss Fight (to be defined)</li>
-
-<li>A menu which will allow the Player to Play, read the game Instructions or Exit</li>
-</ul>
-<br>
-<p align="center">
-<img src="screenshots/mockups/MainMenuMockup.png">
-</p>
-<p align="center"><b><i>Fig. 5 - Main Menu mockup</i></b></p>
-<br>
+All planned features were implemented successfully.
 
 ## Design
 
@@ -164,9 +130,89 @@ the necessary methods from the Lanterna library.
 <p align="center"> <b><i>Fig. 9 - Simplified LanternaGUI design</i></b></p>
 <br>
 
-## Testing
+### Game states
 
-### Test Coverage
+#### Problem in Context
+
+#### The Pattern
+
+#### Implementation
+
+### Observers and Listeners
+
+#### Problem in Context
+
+#### The Pattern
+
+#### Implementation
+
+## Known Code Smells and Refactoring Suggestions
+
+#### Data Class
+
+All models are Data Classes. They contain only fields and no behavior or logic. This is caused by
+the <b>MVC</b> architectural pattern which holds the responsability to the controller to implement
+the logic functionalities of each model and the displaying portion to the viewer. 
+We believe this is not a bad code smell since it only exists due to our chosen design pattern.
+
+#### Long Class
+
+Some Classes (e.g ``Room.java``, 200+ lines) contain many fields and methods (e.g LanternaGUI). We find this to be
+justifiable since the Classes require these fields in order to fully implement the Game itself.
+The Room Class is responsible for holding every object inside of it (Player, Monsters, Bullets...) and checking 
+for collisions between these objects. In the other hand, the LanternaGUI Class is
+responsible for displaying every object on screen. Therefore, we believe this is not a bad code smell.
+
+#### Long Method
+
+Some methods (e.g ``Room.setMonsterObservers()``) are long (20+ lines). In this case, we find it
+justifiable for the method to be this long since it's where we're setting up the Monster observers (as the name suggests).
+
+#### Long Parameter List
+
+There are Classes (e.g ``Room.java``) and methods/constructors (e.g constructor of ``Bullet.java``) that have
+a long list of parameters. In the first case, since the Room is the "container" of every component of our Game,
+we find it justifiable. In the second case, we believe it's not a bad code smell since every Bullet needs those parameters.
+
+#### Alternative Classes with different interfaces
+
+Since we have different types of Monsters we decided to create a general abstract Monster Class.
+Classes which extend this generalized Class (``Zombie.java``, ``Skeleton.java`` and ``Boss.java``) have different field
+values (damage, health...). They have no other significant functions or methods, so they're an example of
+<b>Alternative Classes with different interfaces.</b> 
+
+## TDD Process, Branches and Testing
+
+### The TDD process
+
+Test-driven development consists on converting software requirements
+to test cases before the software itself is fully developed,  and tracking all software development by 
+repeatedly testing the software against all test cases.
+
+For this project we were asked to do 3 commits per "feature":
+<ol>
+    <li> Commit the <b>interface</b> (the "skeleton" of the Class/Method) </li>
+    <li> Commit the <b>tests</b> for said interface</li>
+    <li> Commit the implementation</li>
+</ol>
+
+Below are screenshots of two separate implementations, following TDD:
+
+#### Case 1
+
+#### Case 2
+
+### Branches and Workflow
+
+We made use of Git branches during the development of our project.
+A feature had a corresponding branch where it was developed and tested.
+
+Below are screenshots of our branches:
+
+
+
+
+### Test Coverage and PIT Testing
 
 <p align="center">
 <img src="screenshots/testing/TestCoverage.png">
@@ -174,14 +220,16 @@ the necessary methods from the Lanterna library.
 <p align="center"> <b><i>Fig. 10 - Test coverage </i></b>
 <br>
 
+Insert PIT report here
+
 ### Self-evaluation
 
 The work was divided in a mutual way and we all contributed our best.
 
 <ul>
-<li>João Paulo Luís: 33.3%</li>
-<li>Guilherme Soares Sequeira: 33.3%</li>
-<li>Pedro Miguel Ramalho: 33.3%</li>
+<li>João Paulo Luís: 20.0%</li>
+<li>Guilherme Soares Sequeira: 40.0%</li>
+<li>Pedro Miguel Ramalho: 40.0%</li>
 </ul>
 
 ### Important mentions
