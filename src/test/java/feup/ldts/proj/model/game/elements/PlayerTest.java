@@ -17,7 +17,7 @@ public class PlayerTest {
     @Test
     public void decreaseHPTest() {
         player.decreaseHP(1);
-        Assertions.assertEquals(9, player.getHP());
+        Assertions.assertEquals(19, player.getHP());
 
         player.decreaseHP(500);
         Assertions.assertEquals(0, player.getHP());
@@ -44,7 +44,7 @@ public class PlayerTest {
     @Test
     public void healHPTest() {
         player.decreaseHP(5);
-        Assertions.assertEquals(5, player.getHP());
+        Assertions.assertEquals(15, player.getHP());
 
         player.healHP(100);
         Assertions.assertEquals(player.getMaxHP(), player.getHP());

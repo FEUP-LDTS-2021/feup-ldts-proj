@@ -9,9 +9,6 @@ import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.bullets.MonsterBullet;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
-import net.jqwik.api.ForAll;
-import net.jqwik.api.Property;
-import net.jqwik.api.constraints.IntRange;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +40,7 @@ public class MonsterBulletControllerTest {
         Assertions.assertEquals(new Position(monsterX - 1, monsterY), room.getMonsterBullets().get(0).getPosition());
     }
 
-    @Property(tries = 20)
+/*    @Property(tries = 20)
     public void testBulletFade(@ForAll @IntRange(min = 1, max = 1000) int a) {
         MonsterBullet bullet = new MonsterBullet(new Position(10, 10), 5, 1, Element.Direction.UP);
 
@@ -51,5 +48,5 @@ public class MonsterBulletControllerTest {
 
         if (a >= bullet.getMaxRange()) Assertions.assertTrue(bullet.isAtLimit());
         else Assertions.assertFalse(bullet.isAtLimit());
-    }
+    }*/
 }

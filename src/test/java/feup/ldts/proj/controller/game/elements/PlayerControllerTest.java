@@ -46,5 +46,4 @@ public class PlayerControllerTest {
         playerController.shoot();
         Assertions.assertFalse(room.getPlayerBullets().isEmpty());
     }
-
 }
