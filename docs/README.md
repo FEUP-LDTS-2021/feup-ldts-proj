@@ -45,7 +45,7 @@ All planned features were implemented successfully.
 ### General Structure
 
 <p align="center">
-<img src="screenshots/other/GeneralStructure.png">
+<img src="other/GeneralStructure.png">
 </p>
 <p align="center"><b><i>Fig. 6 - General Structure of the project</i></b></p>
 <br>
@@ -207,7 +207,7 @@ Below are screenshots of two separate implementations, following TDD:
 We made use of Git branches during the development of our project.
 A feature had a corresponding branch where it was developed and tested.
 
-Below are screenshots of our branches:
+Below is a screenshot of our branches:
 
 
 
