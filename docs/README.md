@@ -252,22 +252,69 @@ Below is a screenshot of our branches:
 <li><b>simplified-font - </b> branch where we switched the font of our Game</li>
 </ul>
 
-
 ### Test Coverage and PIT Testing
 
+#### Controller Coverage
+
 <p align="center">
-<img src="screenshots/testing/TestCoverage.png">
+<img src="screenshots/testing/ControllerCoverage.png">
 </p>
-<p align="center"> <b><i>Fig. 10 - Test coverage </i></b>
+<p align="center"> <b><i>Fig. 12 - Controller tests coverage </i></b>
 <br>
 
-fig12 13 14 15 16 efig 17
+#### GUI Coverage
 
-Insert PIT report here
+<p align="center">
+<img src="screenshots/testing/GUICoverage.png">
+</p>
+<p align="center"> <b><i>Fig. 13 - GUI tests coverage </i></b>
+<br>
+
+#### Model Coverage
+
+<p align="center">
+<img src="screenshots/testing/GUICoverage.png">
+</p>
+<p align="center"> <b><i>Fig. 14 - Model tests coverage </i></b>
+<br>
+
+#### State Coverage
+
+<p align="center">
+<img src="screenshots/testing/GUICoverage.png">
+</p>
+<p align="center"> <b><i>Fig. 15 - State tests coverage </i></b>
+<br>
+
+#### Viewer Coverage
+
+<p align="center">
+<img src="screenshots/testing/GUICoverage.png">
+</p>
+<p align="center"> <b><i>Fig. 16 - Viewer tests coverage </i></b>
+<br>
+
+#### PIT Test Report (Mutation testing)
+
+<p align="center">
+<img src="screenshots/testing/PITReport.png">
+</p>
+<p align="center"> <b><i>Fig. 17 - PIT report </i></b>
+<br>
+
+#### Libraries and technologies used
+
+<ul>
+<li>JUnit</li>
+<li>Mockito</li>
+<li>PIT Mutation Testing</li>
+<li>JQWIK for Property Based Testing</li>
+</ul>
+
+<i>Note: JQWIK is incompatible with PIT. The tests which use JQWIK are commented
+and can be found at</i> ``test/feup.ldts.proj/controller/game/elements/bullets/MonsterBulletControllerTest.java`` and ``test/feup.ldts.proj/controller/game/elements/bullets/PlayerBulletControllerTest.java``.
 
 ### Self-evaluation
-
-The work was divided in a mutual way and we all contributed our best.
 
 <ul>
 <li>João Paulo Luís: 20.0%</li>
