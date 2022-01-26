@@ -50,15 +50,15 @@ All planned features were implemented successfully.
 <p align="center"><b><i>Fig. 1 - General Structure of the project</i></b></p>
 <br>
 
-##### Problem in Context
+#### Problem in Context
 
 Design-wise our first concern was how to efficiently structure the project. Since we are dealing with a GUI and our game has different elements which need to be displayed on screen, we chose some patterns in order to fulfill our goals in the best way possible.
 
-##### The Pattern
+#### The Pattern
 
 We are currently following the <b>Model-View-Controller Architectural Pattern</b>, which is commonly used in programs with a GUI.
 
-##### Implementation
+#### Implementation
 
 Regarding the implementation, we now have classes which main purpose is to store data (Models) and classes that are responsible for
 the visual effects on screen (Viewers). The logic of the game will be handled by the Controllers.
@@ -70,7 +70,7 @@ the visual effects on screen (Viewers). The logic of the game will be handled by
 <p align="center"> <b><i>Fig. 2 - Model and Viewer pattern design</i></b></p>
 <br>
 
-##### Consequences
+#### Consequences
 
 The use of the Model and View pattern for our objects makes it possible for our code to acknowledge the <b><i>Single Responsibility Principle</b></i> and also makes it easier to add new features throughout the future development of our game.
 
@@ -241,7 +241,7 @@ Below is a screenshot of our branches:
     <img src="screenshots/testing/Branches.png">
 </p>
 
-<p align="center"> <b><i>Fig. 11 - Comitting the Implementations for the BulletViewer Class</i></b></p> 
+<p align="center"> <b><i>Fig. 11 - Different branches of our project</i></b></p> 
 <br>
 
 <ul>
