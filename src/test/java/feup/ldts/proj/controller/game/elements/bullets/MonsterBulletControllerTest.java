@@ -1,7 +1,6 @@
 package feup.ldts.proj.controller.game.elements.bullets;
 
 import feup.ldts.proj.Game;
-import feup.ldts.proj.controller.game.elements.bullets.MonsterBulletController;
 import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;

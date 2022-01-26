@@ -26,7 +26,7 @@ The current implemented features are:
 <li><b> Regular Monster movement</b> - the monsters (Zombies and Skeletons) are constantly moving in random directions.</li>
 <li><b> Boss movement - </b> the Boss moves to the square which is closest to the Player.</li>
 <li><b> Monster combat</b> - the monsters are also capable of damaging the Player. Zombies will bite the Player if he gets too close. The Skeletons, on top of biting, also have a chance of shooting Bullets which damage the Player. If the Player dies, he respawns at the initial room. The color of each Monster and Player indicate their health percentage.</li>
-<li><b> Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters' health and damage scale with the room's depth depth).</li>
+<li><b> Different levels</b> - 3 different <i>levels</i> (we call them depths) with an increasing difficulty (at the moment the Monsters' health and damage scale with the room's depth).</li>
 <li><b> Menus -</b> there's a Main Menu where the Player can choose to Play, view the Controls and Exit the game. There is also a Weapon Menu which displays
 the differences in stats between the Player's current Weapon and the new Weapon (the Player can then choose if he wants to swap Weapons or not) and a Victory Menu, which displays
 when the Player kills the Boss (wins the game).</li>

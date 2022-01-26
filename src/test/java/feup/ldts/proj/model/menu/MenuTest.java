@@ -4,7 +4,6 @@ import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.Weapon;
 import feup.ldts.proj.model.game.elements.Player;
-import feup.ldts.proj.model.menu.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

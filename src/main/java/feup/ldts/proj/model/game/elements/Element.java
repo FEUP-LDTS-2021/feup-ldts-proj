@@ -1,6 +1,6 @@
 package feup.ldts.proj.model.game.elements;
-import feup.ldts.proj.model.game.Position;
 
+import feup.ldts.proj.model.game.Position;
 
 public abstract class Element {
     protected Position position;

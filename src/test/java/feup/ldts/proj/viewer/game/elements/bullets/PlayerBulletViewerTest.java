@@ -5,7 +5,6 @@ import feup.ldts.proj.gui.GUI;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
-import feup.ldts.proj.viewer.game.elements.bullets.PlayerBulletViewer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,8 +2,6 @@ package feup.ldts.proj.viewer.game.elements.bullets;
 
 import feup.ldts.proj.Game;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.game.elements.Element;
-import feup.ldts.proj.model.game.elements.Wall;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import feup.ldts.proj.viewer.game.elements.ElementViewer;
 

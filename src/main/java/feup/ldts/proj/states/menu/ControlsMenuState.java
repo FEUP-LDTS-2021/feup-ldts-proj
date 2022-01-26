@@ -7,7 +7,6 @@ import feup.ldts.proj.states.State;
 import feup.ldts.proj.viewer.Viewer;
 import feup.ldts.proj.viewer.menu.MenuViewer;
 
-
 public class ControlsMenuState extends State<Menu> {
 
     public ControlsMenuState(Menu model) {super(model);}

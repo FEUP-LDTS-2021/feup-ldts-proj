@@ -4,7 +4,6 @@ import feup.ldts.proj.Game;
 import feup.ldts.proj.controller.GameController;
 import feup.ldts.proj.controller.game.elements.bullets.MonsterBulletController;
 import feup.ldts.proj.gui.GUI;
-import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.room.Room;
 

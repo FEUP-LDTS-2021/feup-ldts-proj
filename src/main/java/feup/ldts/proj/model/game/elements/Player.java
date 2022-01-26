@@ -8,7 +8,6 @@ import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Player extends Element {
     private int HP, maxHP;
     private Weapon weapon;

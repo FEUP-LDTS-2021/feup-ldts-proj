@@ -7,7 +7,6 @@ import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
 import feup.ldts.proj.model.game.elements.monsters.Skeleton;
-import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
 import org.junit.jupiter.api.BeforeEach;
