@@ -47,7 +47,7 @@ All planned features were implemented successfully.
 <p align="center">
 <img src="other/GeneralStructure.png">
 </p>
-<p align="center"><b><i>Fig. 6 - General Structure of the project</i></b></p>
+<p align="center"><b><i>Fig. 1 - General Structure of the project</i></b></p>
 <br>
 
 ##### Problem in Context
@@ -67,7 +67,7 @@ the visual effects on screen (Viewers). The logic of the game will be handled by
     <img src="screenshots/uml/MVC.png">
 </p>
 
-<p align="center"> <b><i>Fig. 7 - Model and Viewer pattern design</i></b></p>
+<p align="center"> <b><i>Fig. 2 - Model and Viewer pattern design</i></b></p>
 <br>
 
 ##### Consequences
@@ -96,7 +96,7 @@ it divides the building of the room in simpler and smaller steps (createWalls(),
     <img src="screenshots/uml/BuilderPattern.png">
 </p>
 
-<p align="center"> <b><i>Fig. 8 - Builder pattern design</i></b></p>
+<p align="center"> <b><i>Fig. 3 - Builder pattern design</i></b></p>
 <br>
 
 #### Consequences
@@ -127,7 +127,7 @@ the necessary methods from the Lanterna library.
     <img src="screenshots/uml/GUI.png">
 </p>
 
-<p align="center"> <b><i>Fig. 9 - Simplified LanternaGUI design</i></b></p>
+<p align="center"> <b><i>Fig. 4 - Simplified LanternaGUI design</i></b></p>
 <br>
 
 ### Game states
@@ -200,7 +200,24 @@ Below are screenshots of two separate implementations, following TDD:
 
 #### Case 1
 
+<p align="center">
+    <img src="screenshots/testing/LanternaGUICommit1.png">
+</p>
+
+<p align="center"> <b><i>Fig. 7 - Comitting the Interface + Tests for the LanternaGUI Class</i></b></p> 
+<br>
+
+<p align="center">
+    <img src="screenshots/testing/LanternaGUICommit2.png">
+</p>
+
+<p align="center"> <b><i>Fig. 8 - Comitting the Implementations for the LanternaGUI Class</i></b></p> 
+<br>
+
+
 #### Case 2
+
+fig9 e fig10
 
 ### Branches and Workflow
 
@@ -209,7 +226,7 @@ A feature had a corresponding branch where it was developed and tested.
 
 Below is a screenshot of our branches:
 
-
+fig11
 
 
 ### Test Coverage and PIT Testing
@@ -219,6 +236,8 @@ Below is a screenshot of our branches:
 </p>
 <p align="center"> <b><i>Fig. 10 - Test coverage </i></b>
 <br>
+
+fig12 13 14 15 16 efig 17
 
 Insert PIT report here
 
