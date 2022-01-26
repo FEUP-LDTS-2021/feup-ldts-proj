@@ -214,10 +214,21 @@ Below are screenshots of two separate implementations, following TDD:
 <p align="center"> <b><i>Fig. 8 - Comitting the Implementations for the LanternaGUI Class</i></b></p> 
 <br>
 
-
 #### Case 2
 
-fig9 e fig10
+<p align="center">
+    <img src="screenshots/testing/BulletCommit1.png">
+</p>
+
+<p align="center"> <b><i>Fig. 9 - Comitting the Interface + Tests for the BulletViewer Class</i></b></p> 
+<br>
+
+<p align="center">
+    <img src="screenshots/testing/BulletCommit2.png">
+</p>
+
+<p align="center"> <b><i>Fig. 10 - Comitting the Implementations for the BulletViewer Class</i></b></p> 
+<br>
 
 ### Branches and Workflow
 
@@ -226,7 +237,20 @@ A feature had a corresponding branch where it was developed and tested.
 
 Below is a screenshot of our branches:
 
-fig11
+<p align="center">
+    <img src="screenshots/testing/Branches.png">
+</p>
+
+<p align="center"> <b><i>Fig. 11 - Comitting the Implementations for the BulletViewer Class</i></b></p> 
+<br>
+
+<ul>
+<li><b>master - </b> final branch with fully implemented features</li>
+<li><b>feature/controller - </b> branch where we added the Controllers for each entity of our game</li>
+<li><b>feature/newmonsters - </b> branch where we added new types of Monsters</li>
+<li><b>refactoring - </b> branch where we refactored our code</li>
+<li><b>simplified-font - </b> branch where we switched the font of our Game</li>
+</ul>
 
 
 ### Test Coverage and PIT Testing
