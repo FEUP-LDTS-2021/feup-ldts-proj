@@ -327,6 +327,9 @@ and can be found at</i> ``test/feup.ldts.proj/controller/game/elements/bullets/M
 It is important to mention that some portions of code developed
 in the practical Labs were reused in our project.
 
+The development of this report followed an example report provided
+by our professors. Note that some UML designs follow the example report UML's (e.g, the MVC UML).
+
 We were also guided by professor <a href="https://github.com/arestivo"> André Restivo </a> and his projects and work, more remarkably:
 <ul>
 <li> <a href="https://github.com/arestivo/hero-solid"> Hero SOLID</a></li>
