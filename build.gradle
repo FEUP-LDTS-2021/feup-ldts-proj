@@ -12,7 +12,6 @@ pitest {
     junit5PluginVersion = '0.12'
 }
 
-
 group 'feup.ldts.proj'
 version '1.0-SNAPSHOT'
 
@@ -25,11 +24,8 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.7.7'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.1'
-    testImplementation 'net.jqwik:jqwik:1.5.1'
 }
 
 test {
-    useJUnitPlatform {
-        includeEngines ('junit-jupiter', 'jqwik')
-    }
+    useJUnitPlatform()
 }

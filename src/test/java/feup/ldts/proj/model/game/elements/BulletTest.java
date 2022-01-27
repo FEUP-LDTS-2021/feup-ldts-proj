@@ -1,8 +1,6 @@
 package feup.ldts.proj.model.game.elements;
 
-import feup.ldts.proj.Game;
 import feup.ldts.proj.model.game.Position;
-import feup.ldts.proj.model.game.elements.Element;
 import feup.ldts.proj.model.game.elements.bullets.Bullet;
 import feup.ldts.proj.model.game.elements.bullets.PlayerBullet;
 import org.junit.jupiter.api.Assertions;

@@ -2,7 +2,6 @@ package feup.ldts.proj.model.game.room;
 
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
-import feup.ldts.proj.model.game.room.RoomBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

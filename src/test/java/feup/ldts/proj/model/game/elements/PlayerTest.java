@@ -1,7 +1,6 @@
 package feup.ldts.proj.model.game.elements;
 
 import feup.ldts.proj.model.game.Position;
-import feup.ldts.proj.model.game.elements.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ public class PlayerTest {
     @Test
     public void decreaseHPTest() {
         player.decreaseHP(1);
-        Assertions.assertEquals(9, player.getHP());
+        Assertions.assertEquals(19, player.getHP());
 
         player.decreaseHP(500);
         Assertions.assertEquals(0, player.getHP());
@@ -44,7 +43,7 @@ public class PlayerTest {
     @Test
     public void healHPTest() {
         player.decreaseHP(5);
-        Assertions.assertEquals(5, player.getHP());
+        Assertions.assertEquals(15, player.getHP());
 
         player.healHP(100);
         Assertions.assertEquals(player.getMaxHP(), player.getHP());

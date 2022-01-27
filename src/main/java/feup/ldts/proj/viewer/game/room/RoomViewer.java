@@ -15,7 +15,6 @@ import java.util.List;
 public class RoomViewer {
     private final GUI gui;
 
-
     public RoomViewer(GUI gui) {
         this.gui = gui;
     }

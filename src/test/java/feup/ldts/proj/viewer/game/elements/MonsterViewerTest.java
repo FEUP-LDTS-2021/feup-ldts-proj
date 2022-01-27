@@ -31,26 +31,26 @@ public class MonsterViewerTest {
 
     @Test
     public void getMonsterColorTest() {
-        Assertions.assertEquals(Game.Colors.get("Red"), viewer.getColor(monster));
+        Assertions.assertEquals(Game.Colors.get("ZombieDarkGreen"), viewer.getColor(monster));
 
         monster.setHP(3);
-        Assertions.assertEquals(Game.Colors.get("Pink"), viewer.getColor(monster));
+        Assertions.assertEquals(Game.Colors.get("ZombieGreen"), viewer.getColor(monster));
 
         monster.setHP(1);
-        Assertions.assertEquals(Game.Colors.get("Purple"), viewer.getColor(monster));
+        Assertions.assertEquals(Game.Colors.get("ZombieLightGreen"), viewer.getColor(monster));
     }
 
     @Test
     public void drawMonsterTest() {
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Red"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("ZombieDarkGreen"));
 
         monster.setHP(3);
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Pink"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("ZombieGreen"));
 
         monster.setHP(1);
         viewer.draw(monster, gui);
-        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("Purple"));
+        Mockito.verify(gui, Mockito.times(1)).drawCharacter(1, 1,'"' ,Game.Colors.get("ZombieLightGreen"));
     }
 }

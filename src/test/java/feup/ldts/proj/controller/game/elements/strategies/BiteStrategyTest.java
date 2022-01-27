@@ -5,14 +5,11 @@ import feup.ldts.proj.controller.game.elements.strategies.movement.RandomMovemen
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.elements.monsters.Monster;
-import feup.ldts.proj.model.game.elements.monsters.Skeleton;
 import feup.ldts.proj.model.game.elements.monsters.Zombie;
 import feup.ldts.proj.model.game.room.Room;
 import feup.ldts.proj.model.game.room.RoomBuilder;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.io.FileNotFoundException;

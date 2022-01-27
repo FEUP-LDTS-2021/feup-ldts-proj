@@ -1,6 +1,5 @@
 package feup.ldts.proj.controller.game.elements;
 
-import feup.ldts.proj.controller.game.elements.PlayerController;
 import feup.ldts.proj.model.game.Position;
 import feup.ldts.proj.model.game.elements.Player;
 import feup.ldts.proj.model.game.room.Room;
@@ -46,5 +45,4 @@ public class PlayerControllerTest {
         playerController.shoot();
         Assertions.assertFalse(room.getPlayerBullets().isEmpty());
     }
-
 }
