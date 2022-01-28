@@ -101,7 +101,7 @@ it divides the building of the room in simpler and smaller steps (```createWalls
 <p align="center"> <b><i>Fig. 3 - Builder pattern design</i></b></p>
 <br>
 
-<i> Check the code <a href="src/main/java/feup.ldts.proj/model/room"> here </a> </i>
+<i> Check the code <a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0806/tree/master/src/main/java/feup/ldts/proj/model/game/room"> here </a> </i>
 
 #### Consequences
 
@@ -134,7 +134,7 @@ the necessary methods from the Lanterna library.
 <p align="center"> <b><i>Fig. 4 - Simplified LanternaGUI design</i></b></p>
 <br>
 
-<i> Check the code <a href="src/main/java/feup.ldts.proj/gui"> here </a> </i>
+<i> Check the code <a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0806/tree/master/src/main/java/feup/ldts/proj/gui"> here </a> </i>
 
 ### Game states
 
@@ -163,7 +163,7 @@ events, like defeating the boss or walking on top of a WeaponItem.
 <p align="center"> <b><i>Fig. 5 - State design pattern</i></b></p>
 <br>
 
-<i> Check the code <a href="src/main/java/feup.ldts.proj/states"> here </a> </i>
+<i> Check the code <a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0806/tree/master/src/main/java/feup/ldts/proj/states"> here </a> </i>
 
 ### Observers and Listeners
 
@@ -194,7 +194,7 @@ decayed. In this way, the pattern allowed us to solve the problems we had.
 <p align="center"> <b><i>Fig. 6 - Observer design pattern</i></b></p>
 <br>
 
-<i> Check the code <a href="src/main/java/feup.ldts.proj/controller/game/elements/observers"> here </a> </i>
+<i> Check the code <a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0806/tree/master/src/main/java/feup/ldts/proj/controller/game/elements/observers"> here </a> </i>
 
 ### Strategies
 
@@ -221,7 +221,7 @@ attack and move, which are flexible to being changed and allows us to easily add
 <p align="center"> <b><i>Fig. 7 - Strategy design pattern</i></b></p>
 <br>
 
-<i> Check the code <a href="src/main/java/feup.ldts.proj/controller/game/elements/strategies"> here </a> </i>
+<i> Check the code <a href="https://github.com/FEUP-LDTS-2021/ldts-project-assignment-g0806/tree/master/src/main/java/feup/ldts/proj/controller/game/elements/strategies"> here </a> </i>
 
 
 ## Known Code Smells and Refactoring Suggestions

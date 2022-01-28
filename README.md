@@ -74,7 +74,7 @@ This project was designed by:
 <img src="docs/screenshots/game/TimePotion.png">
 </p>
 <p align="center">
-<b><i>Gif 7. - Time Potion</i></b>
+<b><i>Fig 7. - Time Potion</i></b>
 </p>
 <br/>
 
