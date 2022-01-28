@@ -19,43 +19,85 @@ This project was designed by:
 <li>Pedro Miguel Ramalho, up202004715@fe.up.pt</li>
 </ul>
 
-## Screenshots and GIFS
+## Screenshots
 <p align="center">
-<img src="docs/gifs/controls/PlayerMovement.gif">
+<img src="docs/screenshots/game/MainMenu.png">
 </p>
 <p align="center">
-<b><i>Gif 1. - Player moving and colliding with walls </i></b>
-</p>
-<br/>
-
-<p align="center">
-<img src="docs/gifs/controls/PlayerShooting.gif">
-</p>
-<p align="center">
-<b><i>Gif 2. - Player shooting bullets that vanish because they reached max range</i></b>
+<b><i>Fig 1. - Main Menu </i></b>
 </p>
 <br/>
 
 <p align="center">
-<img src="docs/gifs/controls/OpeningCrossingPassage.gif">
+<img src="docs/screenshots/game/InitialRoom.png">
 </p>
 <p align="center">
-<b><i>Gif 3. - Player opening and crossing a passage (to a different depth)</i></b>
-</p>
-<br/>
-
-<p align="center">
-<img src="docs/gifs/controls/PlayerDeathAndRespawn.gif">
-</p>
-<p align="center">
-<b><i>Gif 4. - Player dying and respawning </i></b>
+<b><i>Fig 2. - Initial Room</i></b>
 </p>
 <br/>
 
 <p align="center">
-<img src="docs/gifs/controls/KillingMonster.gif">
+<img src="docs/screenshots/game/ShootingBullets.png">
 </p>
 <p align="center">
-<b><i>Gif 5. - Player slaying a monster</i></b>
+<b><i>Fig 3. - Player shooting bullets </i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/NewRoom.png">
+</p>
+<p align="center">
+<b><i>Fig 4. - Different room </i></b>
+<br>
+<i>The Player enters a new Room upon colliding with a Passage</i>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/MaxHealthPotion.png">
+</p>
+<p align="center">
+<b><i>Fig 5. - Max Health Potion</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/HealingPotion.png">
+</p>
+<p align="center">
+<b><i>Fig 6. - Healing Potion</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/TimePotion.png">
+</p>
+<p align="center">
+<b><i>Gif 7. - Time Potion</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/WeaponItem.png">
+</p>
+<p align="center">
+<b><i>Fig 8. - A Weapon dropped by a Monster</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/BossAttack.png">
+</p>
+<p align="center">
+<b><i>Fig 9. - The final Boss</i></b>
+</p>
+<br/>
+
+<p align="center">
+<img src="docs/screenshots/game/BossRoom.png">
+</p>
+<p align="center">
+<b><i>Fig 10. - Victory Menu</i></b>
 </p>
 <br/>

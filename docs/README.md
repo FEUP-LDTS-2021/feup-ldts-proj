@@ -101,6 +101,8 @@ it divides the building of the room in simpler and smaller steps (```createWalls
 <p align="center"> <b><i>Fig. 3 - Builder pattern design</i></b></p>
 <br>
 
+<i> Check the code <a href="src/main/java/feup.ldts.proj/model/room"> here </a> </i>
+
 #### Consequences
 
 By following this pattern we are avoiding tight relationships between the creation and the concrete product of a Room,
@@ -132,6 +134,8 @@ the necessary methods from the Lanterna library.
 <p align="center"> <b><i>Fig. 4 - Simplified LanternaGUI design</i></b></p>
 <br>
 
+<i> Check the code <a href="src/main/java/feup.ldts.proj/gui"> here </a> </i>
+
 ### Game states
 
 #### Problem in Context
@@ -158,6 +162,8 @@ events, like defeating the boss or walking on top of a WeaponItem.
 
 <p align="center"> <b><i>Fig. 5 - State design pattern</i></b></p>
 <br>
+
+<i> Check the code <a href="src/main/java/feup.ldts.proj/states"> here </a> </i>
 
 ### Observers and Listeners
 
@@ -188,6 +194,8 @@ decayed. In this way, the pattern allowed us to solve the problems we had.
 <p align="center"> <b><i>Fig. 6 - Observer design pattern</i></b></p>
 <br>
 
+<i> Check the code <a href="src/main/java/feup.ldts.proj/controller/game/elements/observers"> here </a> </i>
+
 ### Strategies
 
 #### Problem in Context
@@ -212,6 +220,9 @@ attack and move, which are flexible to being changed and allows us to easily add
 
 <p align="center"> <b><i>Fig. 7 - Strategy design pattern</i></b></p>
 <br>
+
+<i> Check the code <a href="src/main/java/feup.ldts.proj/controller/game/elements/strategies"> here </a> </i>
+
 
 ## Known Code Smells and Refactoring Suggestions
 
