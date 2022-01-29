@@ -18,7 +18,7 @@ public class Player extends Element {
     public Player(Position position) {
         super(position);
         this.maxHP = 20;
-        this.weapon = new Weapon(10, 10, 10);
+        this.weapon = new Weapon(4, 4, 3);
         this.facingDirection = Element.Direction.DOWN;
         HP = maxHP;
         timeLeft = 180;
